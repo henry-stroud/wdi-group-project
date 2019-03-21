@@ -1,6 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
+
 import './style.scss'
+
+
+import Header from './components/headandFoot/header'
+import Footer from './components/headandFoot/footer'
+import Register from './components/register'
+import Home from './components/home'
+import Login from './components/login'
+
 
 class App extends React.Component {
   constructor() {
@@ -10,9 +20,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1> Dead bird for sale. Not going cheep </h1>
-      </div>
+      <Browser>
+        <div>
+          <Header />
+          <Route path="/" component={Login} />
+          <Footer />
+        </div>
+      </Browser>
     )
   }
 }
