@@ -30,6 +30,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route path="/search" component={GameSearch}/>
 
           </Switch>
           <Footer />
