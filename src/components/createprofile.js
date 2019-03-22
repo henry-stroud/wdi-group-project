@@ -7,13 +7,29 @@ import { BrowserRouter as Browser } from 'react-router-dom'
 class CreateProfile extends React.Component {
   constructor(){
     super()
+
+    this.state = {}
+
   }
 
   componentDidMount() {
     axios.get('/api/games')
-      .then(res => console.log(res))
+      .then(res => res.data.map(games => ({ value: games._id, label: games.name })))
+      .then(games => this.setState({ games }))
       .catch(err => console.log(err))
   }
+
+  // componentDidMount() {
+  //   axios.get('/api/games')
+  //     .then(res => console.log(res))
+  //     .catch(err => console.log(err))
+  // }
+  //
+  // handleChange() {
+  //   const myGames = []
+  //
+  //
+  // }
 
   render(){
     return(
@@ -32,12 +48,12 @@ class CreateProfile extends React.Component {
                 // options={this.state.games}
               />
               <div className="mygames">
-                <input></input>
-                <input></input>
-                <input></input>
-                <input></input>
-                <input></input>
-                <input></input>
+                <img  />
+                <img  />
+                <img  />
+                <img  />
+                <img  />
+                <img  />
               </div>
             </div>
 
