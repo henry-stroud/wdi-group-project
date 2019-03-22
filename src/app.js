@@ -10,7 +10,7 @@ import Footer from './components/headandFoot/footer'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 import Home from './components/home'
-
+import NoMatch from './components/noMatch'
 
 
 class App extends React.Component {
@@ -28,6 +28,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
+            <Route component={NoMatch} />
           </Switch>
           <Footer />
         </div>
