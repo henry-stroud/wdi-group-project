@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
 class News extends React.Component {
   constructor(){
@@ -10,9 +9,7 @@ class News extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.getNews()
-  }
+
 
   getNews() {
     console.log('getting the news')
@@ -20,6 +17,11 @@ class News extends React.Component {
       .then(res => this.setState({ articles: res.data.articles}))
       .catch(err => this.setState({ error: err.messsage }))
   }
+
+  componentDidMount() {
+    this.getNews()
+  }
+
   render() {
     console.log(this.state)
     return(
@@ -27,7 +29,7 @@ class News extends React.Component {
         {!this.state.articles && <p> ...getting the news...</p>}
         {this.state.articles && this.state.articles.map(article => (
           <div key={article._id} className="newscard">
-            <h1> <a href="`{article.url}`"> {article.title} </a> </h1>
+            <h1> <a href={`${article.url}`}> {article.title} </a> </h1>
             <img src={article.urlToImage} atl={article.title} />
             <p> {article.description} </p>
           </div>
