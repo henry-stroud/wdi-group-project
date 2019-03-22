@@ -10,6 +10,9 @@ import Footer from './components/headandFoot/footer'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 import Home from './components/home'
+import GameSearch from './components/gameSearch'
+import News from './components/news'
+
 
 
 class App extends React.Component {
@@ -24,9 +27,12 @@ class App extends React.Component {
         <div>
           <Header />
           <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/" component={GameSearch}/>
+            <Route path="/" component={News}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
-            <Route exact path="/" component={Home}/>
+
           </Switch>
           <Footer />
         </div>
