@@ -10,8 +10,6 @@ import Footer from './components/headandFoot/footer'
 import Register from './components/auth/register'
 import Login from './components/auth/login'
 import Home from './components/home'
-import GameSearch from './components/gameSearch'
-import News from './components/news'
 
 
 
