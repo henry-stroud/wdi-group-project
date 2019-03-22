@@ -12,13 +12,26 @@ class GameSearch extends React.Component {
       errors: {},
       games: []
     }
+
+    this.gameSearch = this.gameSearch.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+
   }
 
   //ADD DATA FROM GAMES WE'RE PULLING HERE TO USE IN SELECT BOX
-  componentDidMount() {
-    axios.get('/api/games')
+  gameSearch() {
+    axios.post('/api/games', this.state.query)
+      .then(result => {
+        console.log(result)
+
+      })
       .then(res => console.log(res))
       .catch(err => console.log(err))
+  }
+
+  handleChange() {
+    console.log('hello')
+    this.setState({ query: this.search.value })
   }
 
   render() {
@@ -29,7 +42,7 @@ class GameSearch extends React.Component {
           <Select
             className="gameSearchBar"
             games={this.state.games}
-            //HANDE CHANGE HERE PLEASE
+            onChange={this.handleChange}
           />
           <button className="gameSearchButton"> Go discover </button>
         </div>
