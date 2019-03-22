@@ -1,6 +1,6 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
-// import axios from 'axios'
+import axios from 'axios'
 import Select from 'react-select'
 
 class GameSearch extends React.Component {
@@ -14,14 +14,12 @@ class GameSearch extends React.Component {
     }
   }
 
-
   //ADD DATA FROM GAMES WE'RE PULLING HERE TO USE IN SELECT BOX
-  // componentDidMount() {
-  //   axios.get('')
-  //     .then(res => res.data.map(cat => ({ value: game._id, label: game.name })))
-  //     .then(game => this.setState({ game }))
-  //     .catch(err => console.log(err))
-  // }
+  componentDidMount() {
+    axios.get('/api/games')
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
 
   render() {
     return(
