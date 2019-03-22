@@ -15,7 +15,6 @@ main {
   background-image: url("https://wallpapercave.com/wp/junYN7V.png");
   background-size: cover;
   display: flex;
-  flex-direction: column;
 }
 
 // HEADER STYLING
@@ -126,38 +125,58 @@ header {
 
 //NEWS AND SEARCH
 
-.main-gameSearch {
-  border-top: 2px dashed papayawhip;
+.homeChange {
+  height: 80vh;
   display: flex;
+  justify-content: center;
+  align-content: center;
+  align-self: flex-end;
+  width: 10%;
+  background-color: rgba(50, 50, 50, 0.9);
+  h1 {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+    padding: auto;
+  }
+}
+
+
+.contains-news-gameSearch {
   align-self: flex-start;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(50, 50, 50, 0.7);
   width: 95%;
-  height: 40vh;
-  .contains-gameSearch {
-    max-width: 30%;
-    align-self: center;
-    justify-content: center;
-    button {
-      margin: 20px 40%;;
-    }
-    h2 {
-      margin: 20px;
-      color: papayawhip;
+  .contains-news {
+    margin: 0;
+    display: flex;
+    width: 100%;
+    align-self: flex-start;
+    background-color: rgba(50, 50, 50, 0.7);
+    height: 40vh;
+    overflow: auto;
+    .newscard {
+      width: 200px;
     }
   }
-
-}
-
-.contains-news {
-  display: flex;
-  align-self: flex-start;
-  background-color: rgba(50, 50, 50, 0.7);
-  width: 95%;
-  height: 40vh;
-  overflow-y: scroll;
-  .newscard {
-    width: 200px;
+  .main-gameSearch {
+    border-top: 2px dashed papayawhip;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(50, 50, 70, 0.7);
+    width: 100%;
+    height: 40vh;
+    .contains-gameSearch {
+      max-width: 30%;
+      align-self: center;
+      justify-content: center;
+      button {
+        margin: 20px 40%;;
+      }
+      h2 {
+        margin: 20px;
+        color: papayawhip;
+      }
+    }
   }
 }

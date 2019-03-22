@@ -28,8 +28,6 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route path="/" component={GameSearch}/>
-            <Route path="/" component={News}/>
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
 

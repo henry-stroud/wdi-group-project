@@ -12,9 +12,15 @@ const Home = () => {
     <Browser>
       <div>
         <main>
-          <News />
-          <GameSearch />
+          <div className="contains-news-gameSearch">
+            <News />
+            <GameSearch />
+          </div>
+          <div className="homeChange">
+            <h1> TO SOCIAL </h1>
+          </div>
         </main>
+
       </div>
     </Browser>
   )
