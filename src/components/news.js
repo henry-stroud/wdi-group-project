@@ -27,8 +27,8 @@ class News extends React.Component {
     return(
       <div className="contains-news">
         {!this.state.articles && <p> ...getting the news...</p>}
-        {this.state.articles && this.state.articles.map(article => (
-          <div key={article._id} className="newscard">
+        {this.state.articles && this.state.articles.map((article, i ) => (
+          <div key={i} className="newscard">
             <h1> <a href={`${article.url}`}> {article.title} </a> </h1>
             <img src={article.urlToImage} atl={article.title} />
             <p> {article.description} </p>

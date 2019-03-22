@@ -124,7 +124,6 @@ header {
 }
 
 //NEWS AND SEARCH
-
 .homeChange {
   height: 80vh;
   display: flex;
@@ -154,9 +153,10 @@ header {
     align-self: flex-start;
     background-color: rgba(50, 50, 50, 0.7);
     height: 40vh;
-    overflow: auto;
+    overflow-y: scroll;
     .newscard {
       width: 200px;
+      max-height: 40vh;
     }
   }
   .main-gameSearch {
