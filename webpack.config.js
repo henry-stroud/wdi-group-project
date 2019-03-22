@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/app.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve('dist')
+    path: path.resolve('dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -20,7 +21,14 @@ module.exports = {
     hot: true,
     open: true,
     port: 8000,
-    watchContentBase: true
+    watchContentBase: true,
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        secure: false
+      }
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

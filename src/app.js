@@ -7,9 +7,9 @@ import './style.scss'
 
 import Header from './components/headandFoot/header'
 import Footer from './components/headandFoot/footer'
-import Register from './components/register'
+import Register from './components/auth/register'
+import Login from './components/auth/login'
 import Home from './components/home'
-import Login from './components/login'
 
 
 class App extends React.Component {
@@ -23,7 +23,11 @@ class App extends React.Component {
       <Browser>
         <div>
           <Header />
-          <Route path="/" component={Login} />
+          <Switch>
+            <Route path="/register" component={Register}/>
+            <Route path="/login" component={Login}/>
+            <Route exact path="/" component={Home}/>
+          </Switch>
           <Footer />
         </div>
       </Browser>

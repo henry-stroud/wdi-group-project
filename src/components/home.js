@@ -1,20 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
-
-import Header from '../components/headandFoot/header'
-import Footer from '../components/headandFoot/footer'
 
 
 const Home = () => {
   return(
-    <Browser>
+    <main>
       <div>
-        <News />
-        <GameForum />
-        <Social />
-        <Videos />
       </div>
-    </Browser>
+    </main>
   )
 }
 

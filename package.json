@@ -1,14 +1,35 @@
 {
   "name": "basic-react-webpack-setup",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "webpack-dev-server --mode=development"
+    "start:server": "nodemon",
+    "start:client": "webpack-dev-server --mode=development",
+    "seed": "node db/seeds.js",
+    "start": "concurrently \"nodemon\" \"webpack-dev-server --mode=development\""
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "bulma": "^0.7.4",
+    "concurrently": "^4.1.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "http": "^0.0.0",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.19",
+    "mongoose-unique-validator": "^2.0.2",
+    "promise": "^8.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-router-dom": "^4.3.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
@@ -22,11 +43,5 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-router-dom": "^5.0.0"
   }
 }
