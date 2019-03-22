@@ -1,42 +1,37 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class News extends React.Component {
   constructor(){
     super()
+
+    this.state = {}
+
   }
 
+  componentDidMount() {
+    this.getNews()
+  }
+
+  getNews() {
+    console.log('getting the news')
+    axios.get('api/news')
+      .then(res => this.setState({ articles: res.data.articles}))
+      .catch(err => this.setState({ error: err.messsage }))
+  }
   render() {
+    console.log(this.state)
     return(
       <div className="contains-news">
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
-        <div className="newscard">
-          <h1> NEWS STORY! </h1>
-          <p> Xixiasaurus is a genus of troodontid dinosaur that lived during the Late Cretaceous. The only known specimen (a partial skull, jaw with teeth, and forelimb) was discovered in Xixia County, Henan Province, in central China, and was given a species description in 2010. Xixiasaurus is estimated to have been 1.5 metres (5 ft) long and to have weighed 8kg. </p>
-        </div>
+        {!this.state.articles && <p> ...getting the news...</p>}
+        {this.state.articles && this.state.articles.map(article => (
+          <div key={article._id} className="newscard">
+            <h1> <a href="`{article.url}`"> {article.title} </a> </h1>
+            <img src={article.urlToImage} atl={article.title} />
+            <p> {article.description} </p>
+          </div>
+        ))}
       </div>
     )
   }
