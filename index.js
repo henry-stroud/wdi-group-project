@@ -6,13 +6,13 @@ const router = require('./config/routes')
 const errorHandler = require('./lib/errorHandler')
 const app = express()
 
-
 mongoose.connect(dbURI, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
 app.use(express.static(`${__dirname}`))
 
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 
 app.use('/api', router)
 

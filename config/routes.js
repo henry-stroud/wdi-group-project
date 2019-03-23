@@ -3,10 +3,6 @@ const router = require('express').Router()
 const auth = require('../controllers/auth')
 const rp = require('request-promise')
 const axios = require('axios')
-const bodyParser = require('body-parser')
-
-
-router.use(bodyParser.json())
 
 router.post('/register', auth.register)
 router.post('/login', auth.login)
@@ -28,7 +24,6 @@ function getNews(req, res) {
 router.get('/news', getNews)
 
 router.post('/games', (req, res) => {
-  console.log(req.body)
   axios({
     url: 'https://api-v3.igdb.com/games',
     method: 'POST',
@@ -37,9 +32,11 @@ router.post('/games', (req, res) => {
       'user-key': `${igdbApiKey}`,
       'Content-Type': 'text/plain'
     },
-    data: `search "${req.body}"; fields name,artworks,videos;`
+    data: `search "${req.body.game}"; fields name,summary,artworks,videos;`
   })
-    .then(games => res.json(games.data))
+    .then(games => {
+      res.json(games.data)
+    })
     .catch(err => console.error(err))
 })
 

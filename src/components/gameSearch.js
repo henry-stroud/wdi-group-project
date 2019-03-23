@@ -1,7 +1,6 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
 import axios from 'axios'
-import Select from 'react-select'
 
 class GameSearch extends React.Component {
   constructor(){
@@ -13,24 +12,24 @@ class GameSearch extends React.Component {
       games: []
     }
 
-    this.gameSearch = this.gameSearch.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
+    this.handleClick = this.handleClick.bind(this)
   }
-
-  //ADD DATA FROM GAMES WE'RE PULLING HERE TO USE IN SELECT BOX
-
-  gameSearch() {
-    axios.post('/api/games', this.state.query)
-      .then(res => res.data.map(game => ({ value: game.id, label: game.name})))
-      .then(games => this.setState({ games }))
-      .catch(err => console.log(err))
-  }
-
 
   handleChange({ target: { value } }) {
-    this.setState({...this.state, query: value }, () => console.log(this.state))
-    this.gameSearch()
+    this.setState({...this.state, query: value })
+  }
+
+  handleClick(e) {
+    e.preventDefault()
+    axios.post('/api/games', {game: this.state.query})
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
+        // res.data.map(game => ({ value: game.id, label: game.name})))
+      // .then(games => this.setState({ games }))
+      // .catch(err => console.log(err))
   }
 
   render() {
@@ -44,7 +43,8 @@ class GameSearch extends React.Component {
             onChange={this.handleChange}
             options={games}
           />
-          <button className="gameSearchButton"> Go discover </button>
+          <button className="gameSearchButton"
+            onClick={this.handleClick}> Go discover </button>
         </div>
       </div>
     )

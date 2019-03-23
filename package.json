@@ -5,8 +5,7 @@
   "scripts": {
     "start:server": "nodemon",
     "start:client": "webpack-dev-server --mode=development",
-    "seed": "node db/seeds.js",
-    "start": "concurrently \"nodemon\" \"webpack-dev-server --mode=development\""
+    "seed": "node db/seeds.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -23,6 +22,7 @@
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
     "mongoose-unique-validator": "^2.0.2",
+    "multer": "^1.4.1",
     "promise": "^8.0.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
