@@ -33,6 +33,7 @@ router.post('/games', (req, res) => {
       'Content-Type': 'text/plain'
     },
     data: `search "${req.body.game}"; fields name,summary,artworks,videos;`
+
   })
     .then(games => {
       res.json(games.data)

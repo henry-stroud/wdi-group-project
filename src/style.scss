@@ -27,6 +27,30 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  .contains-loggedin {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .userloggedin {
+      margin: 20px;
+      align-self: center;
+      a {
+        text-decoration: none;
+        color: inherit;
+        a:hover {
+        text-decoration: underline;
+        }
+      }
+    }
+    .avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      align-self: center;
+      margin: 20px;
+    }
+  }
   .navbar {
     width: 30%;
     display: flex;
@@ -146,6 +170,7 @@ header {
   flex-direction: column;
   width: 95%;
   .contains-news {
+    border-top: 2px dashed papayawhip;
     margin: 0;
     display: flex;
     width: 100%;
@@ -171,7 +196,6 @@ header {
     }
   }
   .main-gameSearch {
-    border-top: 2px dashed papayawhip;
     display: flex;
     justify-content: center;
     background-color: rgba(50, 50, 70, 0.7);
@@ -255,6 +279,87 @@ header {
       height: 70%;
       background-color: whitesmoke;
     }
+  }
+}
+
+.contains-gameForum {
+  background-color: rgba(50, 50, 70, 0.7);
+  height: 80vh;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  .gameForum-left {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    color: papayawhip;
+    .contains-gameInfo {
+      height: 50%;
+      display: flex;
+      flex-direction: row;
+      .gameDetails {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        text-align: center;
+      }
+      .gameCover img {
+        align-self: center;
+        height: 240px;
+        width: 150px;
+      }
+    }
+    .contains-ratings {
+      height: 25%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      .yourRating, .ourRating {
+        border: 2px solid papayawhip;
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        color: papayawhip;
+        text-align: center;
+
+      }
+    }
+    .contains-screenshots {
+      height: 25%;
+      width: 100%;
+      border: 2px solid papayawhip;
+    }
+
+  }
+  .gameForum-right {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    color: papayawhip;
+    .addcomment {
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      button {
+        width: 50%;
+        margin: 0 auto;
+
+
+      }
+      input {
+        height: 40%;
+        margin-bottom: 10%;
+      }
+    }
+    .commentsfeed {
+      height: 50%;
+      border: 2px solid papayawhip;
+    }
+
   }
 
 }
