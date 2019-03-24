@@ -19,7 +19,7 @@ class GameForum extends React.Component {
             <div className="gameForum-left">
               <div className="contains-gameInfo">
                 <div className="gameCover">
-                  <img src="" alt="" />
+                  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg/220px-Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg" alt="" />
                 </div>
                 <div className="gameDetails">
                   <h2>Halo: Combat Evolved</h2>
@@ -29,8 +29,12 @@ class GameForum extends React.Component {
                 </div>
               </div>
               <div className="contains-ratings">
-                <div className="ourRating"></div>
-                <div className="yourRating"></div>
+                <div className="ourRating">
+                  <h1>4.3</h1>
+                </div>
+                <div className="yourRating">
+                  <h1>4.7</h1>
+                </div>
                 <select className="rateGame">
                   <option> 1 </option>
                   <option> 2 </option>
@@ -42,7 +46,7 @@ class GameForum extends React.Component {
               <div className="contains-screenshots">
               </div>
             </div>
-            
+
             <div className="gameForum-right">
               <form className="addcomment">
                 <input
