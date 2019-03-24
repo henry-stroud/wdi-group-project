@@ -29,7 +29,7 @@ class News extends React.Component {
         {!this.state.articles && <p> ...getting the news...</p>}
         {this.state.articles && this.state.articles.map((article, i ) => (
           <div key={i} className="newscard">
-            <h4> <a href={`${article.url}`}> {article.title} </a> </h4>
+            <h4> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h4>
             <img src={article.urlToImage} atl={article.title} />
             <p> {article.description} </p>
           </div>

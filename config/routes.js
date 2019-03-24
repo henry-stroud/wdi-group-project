@@ -32,7 +32,7 @@ function searchGames(req, res) {
       'user-key': `${igdbApiKey}`,
       'Content-Type': 'text/plain'
     },
-    data: 'search "pubg"; fields name,artworks,videos;'
+    data: 'search "`assassin\'s creed`"; fields name,artworks,videos;'
   })
     .then(games => res.json(games.data))
     .catch(err => console.error(err))

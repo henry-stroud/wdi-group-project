@@ -146,6 +146,7 @@ header {
   flex-direction: column;
   width: 95%;
   .contains-news {
+    border-top: 2px dashed papayawhip;
     margin: 0;
     display: flex;
     width: 100%;
@@ -171,7 +172,6 @@ header {
     }
   }
   .main-gameSearch {
-    border-top: 2px dashed papayawhip;
     display: flex;
     justify-content: center;
     background-color: rgba(50, 50, 70, 0.7);
