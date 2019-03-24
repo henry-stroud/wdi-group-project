@@ -16,9 +16,8 @@ class Chat extends React.Component {
 
     this.socket = io('localhost:4000')
 
-    this.sendMessage = (lastMessage) => {
-      this.socket.emit('sendMessage', {...lastMessage})
-      this.setState({ message: '' })
+    this.sendMessage = (allMessages) => {
+      this.socket.emit('sendMessage', (allMessages))
     }
 
     this.socket.on('receiveMessage', function(data){
@@ -26,7 +25,7 @@ class Chat extends React.Component {
     })
 
     const addMessage = data => {
-      this.setState({ messages: [...this.state.messages, data]})
+      this.setState({ messages: data })
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -42,7 +41,7 @@ class Chat extends React.Component {
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
-    this.setState({ data, errors }, () => console.log(this.state))
+    this.setState({ data, errors })
   }
 
 
@@ -50,8 +49,8 @@ class Chat extends React.Component {
     e.preventDefault()
     axios.post('/api/messages', this.state.data, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then(() => axios.get('/api/messages'))
-      .then((res)=> this.setState({...this.state, messages: res.data}), () => console.log(this.state))
-      .then(() => this.sendMessage(this.state.messages.slice(-1)[0]))
+      .then((res)=> this.setState({...this.state, messages: res.data}))
+      .then(() => this.sendMessage(this.state.messages))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
