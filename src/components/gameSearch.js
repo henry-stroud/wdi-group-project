@@ -1,19 +1,22 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
 import axios from 'axios'
+import Popup from '../components/popup'
 
 class GameSearch extends React.Component {
   constructor(){
     super()
 
     this.state = {
+      isOpen: false,
       data: {},
       errors: {},
-      games: []
+      results: []
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.closePopup = this.closePopup.bind(this)
   }
 
   handleChange({ target: { value } }) {
@@ -23,17 +26,27 @@ class GameSearch extends React.Component {
   handleClick(e) {
     e.preventDefault()
     axios.post('/api/games', {game: this.state.query})
-      .then(res => {
-        console.log(res.data)
+      .then(games => {
+        console.log(games.data)
+        this.setState({results: games.data})
+        this.openPopup()
       })
       .catch(err => console.log(err))
-        // res.data.map(game => ({ value: game.id, label: game.name})))
-      // .then(games => this.setState({ games }))
-      // .catch(err => console.log(err))
+  }
+
+  openPopup (){
+    this.setState({
+      isOpen: true
+    })
+  }
+
+  closePopup () {
+    this.setState({
+      isOpen: false
+    })
   }
 
   render() {
-    const { games } = this.state
     return(
       <div className="main-gameSearch">
         <div className="contains-gameSearch">
@@ -41,15 +54,20 @@ class GameSearch extends React.Component {
           <input
             className="gameSearchBar"
             onChange={this.handleChange}
-            options={games}
           />
           <button className="gameSearchButton"
-            onClick={this.handleClick}> Go discover </button>
+            onClick={this.handleClick}> Go discover
+          </button>
+
+          <Popup
+            show={this.state.isOpen}
+            games={this.state.results}
+            onClose={this.closePopup}>
+          </Popup>
         </div>
       </div>
     )
   }
-
 }
 
 export default GameSearch
