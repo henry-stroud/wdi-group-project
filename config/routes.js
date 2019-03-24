@@ -3,6 +3,10 @@ const router = require('express').Router()
 const auth = require('../controllers/auth')
 const rp = require('request-promise')
 const axios = require('axios')
+const message = require('../controllers/messages')
+const secureRoute = require('../lib/secureRoute')
+
+
 
 router.post('/register', auth.register)
 router.post('/login', auth.login)
@@ -32,7 +36,7 @@ router.post('/games', (req, res) => {
       'user-key': `${igdbApiKey}`,
       'Content-Type': 'text/plain'
     },
-    data: `search "${req.body.game}"; fields name,summary,artworks,videos;`
+    data: `search "${req.body.game}"; fields *; exclude age_ratings,alternative_names,collection,external_games,franchise,franchises,game_engines,game_modes,keywords,multiplayer_modes,rating,rating_count,tags,websites,category;`
 
   })
     .then(games => {
@@ -40,5 +44,29 @@ router.post('/games', (req, res) => {
     })
     .catch(err => console.error(err))
 })
+
+router.post('/game-videos', (req, res) => {
+  axios({
+    url: 'https://api-v3.igdb.com/game_videos',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': `${igdbApiKey}`,
+      'Content-Type': 'text/plain'
+    },
+    data: 'fields *; where game = 27789;'
+
+  })
+    .then(videos => {
+      res.json(videos.data)
+    })
+    .catch(err => console.error(err))
+})
+
+
+router.route('/messages')
+  .get(message.index)
+  .post(secureRoute, message.create)
+
 
 module.exports = router

@@ -9,8 +9,6 @@ class News extends React.Component {
 
   }
 
-
-
   getNews() {
     console.log('getting the news')
     axios.get('api/news')
