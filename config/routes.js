@@ -68,5 +68,9 @@ router.route('/messages')
   .get(message.index)
   .post(secureRoute, message.create)
 
+router.route('/users')
+  .post(secureRoute, auth.addAvatar)
+
+
 
 module.exports = router

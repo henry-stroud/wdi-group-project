@@ -36,7 +36,22 @@ function login (req, res) {
     .catch(err => res.status(422).json(err))
 }
 
+function addAvatar( req, res ) {
+  req.body.user = req.currentUser
+  User
+    .findById(req.body.user._id)
+    .then(user => {
+      if (!user) return res.status(404).json({
+        message: 'Not Found'})
+      Object.assign(user, req.body)
+      return user.save()
+    })
+    .then(movie => res.status(200).json(movie))
+    .catch((err) => res.json(err))
+}
+
 module.exports = {
   register,
-  login
+  login,
+  addAvatar
 }

@@ -1,17 +1,14 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const profileSchema = new mongoose.Schema({
-  avatar: { type: String, required: true },
-  favoriteGames: [{ type: String, requried: true}]
-})
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true},
   email: { type: String, required: true, unique: true},
   password: { type: String, required: true},
-  profile: [ profileSchema ],
-  color: {type: String}
+  color: {type: String},
+  avatar: { type: String },
+  favoriteGames: [{ type: String }]
 
 })
 

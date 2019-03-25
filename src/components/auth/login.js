@@ -40,7 +40,7 @@ class Login extends React.Component {
   render() {
     return (
       <main>
-        <div className="contains-loginForm">
+        <div className="contains-loginForm animated flipInY">
           <form onSubmit={this.handleSubmit} className="loginForm">
             <input className="loginFormInput"
               name="email"

@@ -49,7 +49,7 @@ class Register extends React.Component {
   render() {
     return (
       <main>
-        <div className="contains-registerForm">
+        <div className="contains-registerForm animated flipInY">
           <form onSubmit={this.handleSubmit} className="registerForm">
             <input className={`registerInput ${this.state.errors.email ? 'error': ''}`}
               name="email"

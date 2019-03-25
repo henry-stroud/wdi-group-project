@@ -3,32 +3,76 @@ import axios from 'axios'
 import Select from 'react-select'
 import { BrowserRouter as Browser } from 'react-router-dom'
 
+import Auth from '../lib/auth'
+
+
+const fileStackKey = process.env.REACT_APP_FILE_STACK_API
+
+import * as filestack from 'filestack-js'
+const client = filestack.init(fileStackKey)
+console.log(fileStackKey)
+console.log(client)
 
 class CreateProfile extends React.Component {
   constructor(){
     super()
 
-    this.state = { data: {
+    this.state = {
       avatar: '',
       favoriteGames: []
     }
-    }
+
+    this.handleClick = this.handleClick.bind(this)
 
   }
 
-  // componentDidMount() {
-  //   axios.get('/api/games')
-  //     .then(res => res.data.map(games => ({ value: games._id, label: games.name })))
-  //     .then(games => this.setState({ games }))
-  //     .catch(err => console.log(err))
+  addUserImage() {
+    const options = {
+      accept: ['image/*'],
+      onFileUploadFinished: file => {
+        this.setState({...this.state, avatar: file.url}, () => this.pushAvatarToBackEnd(this.state))
+      }
+    }
+    client.picker(options).open()
+  }
+
+  pushAvatarToBackEnd (avatarLink) {
+    console.log(this.state)
+    axios.post('api/users', avatarLink, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then((res) => this.setState(res.data))
+      .then(console.log(this.state))
+
+  }
+
+
+  // addUserImage() {
+  //   const options = {
+  //     'displayMode': 'inline',
+  //     'container': '.mygames',
+  //     'maxFiles': 4,
+  //     'accept': [
+  //       'image/jpeg',
+  //       'image/jpg',
+  //       'image/png',
+  //       'image/bmp',
+  //       'image/gif',
+  //       'application/pdf'
+  //     ],
+  //     'storeTo': {
+  //       'container': 'devportal-customers-assets',
+  //       'path': 'user-uploads/',
+  //       'region': 'us-east-1'
+  //     },
+  //     'fromSources': [
+  //       'local_file_system'
+  //     ],
+  //     'uploadInBackground': false
+  //   }
+  //
+  //   const picker = client.picker(options)
+  //   picker.open()
   // }
 
-  //
-  // handleChange() {
-  //   const myGames = []
-  //
-  //
-  // }
 
   handleSubmit (e) {
     e.preventDefault()
@@ -38,14 +82,23 @@ class CreateProfile extends React.Component {
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
+  handleClick() {
+    this.addUserImage()
+  }
+
   render(){
+    {this.state && console.log(this.state)}
     return(
       <Browser>
         <main>
           <div className="contains-createProfile">
             <div className="userDetails">
-              <img className="avatar" src="https://gaming-logo-maker.com/wp-content/uploads/2018/11/avatar-maker-minecraft-character-02-300x300.gif" />
+              <img className="avatar" src={this.state.avatar} />
               <h4 className="userName"> bubblesaurus90 </h4>
+              <button
+                onClick={this.handleClick}>
+                Upload photo
+              </button>
             </div>
 
             <div className="chooseGame">
@@ -55,12 +108,12 @@ class CreateProfile extends React.Component {
                 // options={this.state.games}
               />
               <div className="mygames">
-                <div>  </div>
-                <img  />
-                <img  />
-                <img  />
-                <img  />
-                <img  />
+                <div> My Game 1 </div>
+                <div> My Game 2 </div>
+                <div> My Game 3 </div>
+                <div> My Game 4 </div>
+                <div> My Game 5 </div>
+                <div> My Game 6 </div>
               </div>
             </div>
 
