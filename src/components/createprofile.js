@@ -8,28 +8,35 @@ class CreateProfile extends React.Component {
   constructor(){
     super()
 
-    this.state = {}
+    this.state = { data: {
+      avatar: '',
+      favoriteGames: []
+    }
+    }
 
-  }
-
-  componentDidMount() {
-    axios.get('/api/games')
-      .then(res => res.data.map(games => ({ value: games._id, label: games.name })))
-      .then(games => this.setState({ games }))
-      .catch(err => console.log(err))
   }
 
   // componentDidMount() {
   //   axios.get('/api/games')
-  //     .then(res => console.log(res))
+  //     .then(res => res.data.map(games => ({ value: games._id, label: games.name })))
+  //     .then(games => this.setState({ games }))
   //     .catch(err => console.log(err))
   // }
+
   //
   // handleChange() {
   //   const myGames = []
   //
   //
   // }
+
+  handleSubmit (e) {
+    e.preventDefault()
+    axios.post('api/register', this.state.data)
+      .then(res => console.log(res))
+      .then(() => this.props.history.push('/login'))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
+  }
 
   render(){
     return(
@@ -58,7 +65,7 @@ class CreateProfile extends React.Component {
             </div>
 
             <div className="comments-complete">
-              <h3> Your comments will appear here on you profile! </h3>
+              <h3> Your comments will appear here on you profile.</h3>
               <div className="comments"> </div>
               <button className="completeProfile">Complete profile!</button>
             </div>
