@@ -11,7 +11,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
       username: 'bhm',
       email: 'bhm@email.com',
       password: 'pass',
-      passwordConfirmation: 'pass'
+      passwordConfirmation: 'pass',
+      color: '#' + (Math.random()*0xFFFFFF<<0).toString(16)
+
     }
   ])
     .then(users => console.log(`${users.length} users created`))

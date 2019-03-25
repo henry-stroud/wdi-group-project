@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const { secret } = require('../config/environment')
 
 function register(req, res) {
+  req.body.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
   User
     .create(req.body)
     .then(user => {

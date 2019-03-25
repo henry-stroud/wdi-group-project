@@ -70,11 +70,13 @@ class Chat extends React.Component {
           handleSubmit={this.handleSubmit}
           data={this.state.data}/>
         {!this.state.messages && <p> ...loading the chatbox...</p>}
-        {this.state.messages && this.state.messages.map((message, i) =>
-          <div className ="chatbox" key={i}>
-            <small>{message.user.username}: <span>{message.message}</span> </small>
-          </div>
-        )}
+        <div className = "chatBox">
+          {this.state.messages && this.state.messages.map((message, i) =>
+            <div className ="messages" key={i}>
+              <small><span style={{color: `${message.user.color}`}}>{message.user.username}</span>: <span>{message.message}</span> </small>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
