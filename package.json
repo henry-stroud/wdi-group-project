@@ -18,6 +18,7 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
+    "filestack-js": "^2.0.2",
     "http": "^0.0.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
