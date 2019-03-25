@@ -1,20 +1,28 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 class Popup extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {}
+  }
+
+
   render() {
     if(!this.props.show) {
       return null
     }
-    const items = this.props.games.map((item) =>
-      <li key={item.id}>{item.name}</li>
-    )
-
     return (
       <div className="popup-backdrop">
         <div className="popup">
           <button className="popup-close" onClick={this.props.onClose}>Cancel</button>
           <ul>
-            {items}
+            {this.props.games.map((item) =>
+              <li key={item.id}>
+                <Link to='/gameforum'>{item.name}</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
@@ -22,4 +30,4 @@ class Popup extends React.Component {
   }
 }
 
-export default Popup
+export default withRouter(Popup)

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Browser, Route, Switch, withRouter } from 'react-router-dom'
 
 import './style.scss'
 
@@ -28,10 +28,10 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/gameforum" component={GameForum} />
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route path="/createprofile" component={CreateProfile} />
-            <Route path="/gameforum" component={GameForum} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />

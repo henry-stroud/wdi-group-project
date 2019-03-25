@@ -1,7 +1,7 @@
 import React from 'react'
-// import ReactDOM from 'react-dom'
 import axios from 'axios'
 import Popup from '../components/popup'
+import {withRouter} from 'react-router-dom'
 
 class GameSearch extends React.Component {
   constructor(){
@@ -60,6 +60,7 @@ class GameSearch extends React.Component {
           </button>
 
           <Popup
+            withRouter={withRouter}
             show={this.state.isOpen}
             games={this.state.results}
             onClose={this.closePopup}>
