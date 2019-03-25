@@ -32,6 +32,7 @@ class CreateProfile extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleClickButton = this.handleClickButton.bind(this)
     this.closePopup = this.closePopup.bind(this)
+    this.handleClickButton = this.handleClickButton.bind(this)
 
   }
 
