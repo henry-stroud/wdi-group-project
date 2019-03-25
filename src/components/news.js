@@ -24,10 +24,10 @@ class News extends React.Component {
     console.log(this.state)
     return(
       <div className="contains-news">
-        {!this.state.articles && <p> ...getting the news...</p>}
+        {!this.state.articles && <h1> ...getting the news...</h1>}
         {this.state.articles && this.state.articles.map((article, i ) => (
           <div key={i} className="newscard">
-            <h4> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h4>
+            <h2> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h2>
             <img src={article.urlToImage} atl={article.title} />
             <p> {article.description} </p>
           </div>

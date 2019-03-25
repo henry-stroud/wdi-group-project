@@ -32,8 +32,8 @@ class Home extends React.Component {
           <main>
             {this.state.toSocial === false ?
               <div className="contains-news-gameSearch">
-                <GameSearch />
                 <News />
+                <GameSearch />
               </div>
               :
               <div className="contains-news-gameSearch">

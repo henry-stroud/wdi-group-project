@@ -20,8 +20,8 @@ main {
 // HEADER STYLING
 
 header {
-  background-color: mistyrose;
-  color: cadetblue;
+  background-color: #6078EA;
+  color: whitesmoke;
   width: 100%;
   height: 15vh;
   display: flex;
@@ -60,11 +60,12 @@ header {
     margin-right: 50px;
     a {
       text-decoration: none;
-      color: cadetblue;
+      text-shadow: 0.5px 0.5px 0.5px black;
+      color: whitesmoke;
     }
     a:hover {
       text-decoration: underline;
-      color: cadetblue;
+      color: whitesmoke;
     }
   }
   .contains-titleLogo {
@@ -72,16 +73,15 @@ header {
     align-self: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     img {
-      height: 90px;
-      width: 120px;
-      border-radius: 50%;
-      padding: 20px;
+      height: 125px;
+      width: 125px;
     }
     h1 {
       padding: 20px 20px 20px 70px;
       font-size: 40px;
+      text-shadow:  1px 1px 1px black;
     }
   }
 }
@@ -92,8 +92,8 @@ header {
     justify-content: center;
     align-items: center;
     height: 5vh;
-    background-color: mistyrose;
-    color: cadetblue;
+    background-color: #6078EA;
+    color: whitesmoke;
     width: 100%;
   }
 
@@ -113,11 +113,11 @@ header {
     margin: 10px;
   }
   p {
-    color: cadetblue;
+    color: whitesmoke;
     text-align: center;
     a {
       text-decoration: none;
-      color: cadetblue;
+      color: whitesmoke;
     }
     a:hover {
       text-decoration: underline;
@@ -157,6 +157,8 @@ header {
   width: 10%;
   background-color: rgba(50, 50, 50, 0.9);
   h1 {
+    color: whitesmoke;
+    text-shadow:  1px 1px 1px #6078EA ;
     writing-mode: vertical-rl;
     text-orientation: upright;
     text-align: center;
@@ -166,33 +168,37 @@ header {
 
 .contains-news-gameSearch {
   align-self: flex-start;
-  justify-content: center;
-  flex-direction: column;
   width: 95%;
   .contains-news {
-    border-top: 2px dashed cadetblue;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    align-self: flex-start;
+    border-bottom: 1px dashed whitesmoke;
     background-color: rgba(50, 50, 50, 0.7);
+    display: flex;
+    flex-direction: row;
     height: 40vh;
-    overflow-y: scroll;
+    overflow-x: scroll;
     .newscard {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-content: center;
-      width: 300px;
-      height: 40vh;
-      h4, a {
+      font-family: inherit;
+      min-width: 500px;
+      height: 30vh;
+      margin: auto;
+      padding: 10px;
+      text-align: center;
+      border-left: 1px dashed whitesmoke;
+      h2, a, p {
+        text-decoration: none;
+        color: whitesmoke;
         margin: 0;
-        padding: 0;
+        padding: 20px;
       }
       img {
-        width: 50px;
-        height: 50px;
+        float: right;
+        width: 200px;
+        height: 150px;
       }
+    }
+    h1 {
+      color: whitesmoke;
+      text-align: center;
     }
   }
   .main-gameSearch {
@@ -210,7 +216,7 @@ header {
       }
       h2 {
         margin: 20px;
-        color: cadetblue;
+        color: whitesmoke;
       }
     }
   }
@@ -242,7 +248,7 @@ header {
     width: 40%;
     h2 {
       text-align: center;
-      color: cadetblue;
+      color: whitesmoke;
     }
     .chooseMyGames {
       margin: 20px;
@@ -273,7 +279,7 @@ header {
 
     }
     h3 {
-      color: cadetblue;
+      color: whitesmoke;
       text-align: left;
 
     }
@@ -297,7 +303,7 @@ header {
     display: flex;
     flex-direction: column;
     width: 50%;
-    color: cadetblue;
+    color: whitesmoke;
     .contains-gameInfo {
       height: 50%;
       display: flex;
@@ -321,11 +327,11 @@ header {
       flex-direction: row;
       justify-content: space-around;
       .yourRating, .ourRating {
-        border: 2px solid cadetblue;
+        border: 2px solid whitesmoke;
         border-radius: 50%;
         height: 100px;
         width: 100px;
-        color: cadetblue;
+        color: whitesmoke;
         text-align: center;
 
       }
@@ -333,7 +339,7 @@ header {
     .contains-screenshots {
       height: 25%;
       width: 100%;
-      border: 2px solid cadetblue;
+      border: 2px solid whitesmoke;
     }
 
   }
@@ -342,7 +348,7 @@ header {
     display: flex;
     flex-direction: column;
     width: 50%;
-    color: cadetblue;
+    color: whitesmoke;
     .addcomment {
       height: 50%;
       display: flex;
@@ -360,7 +366,7 @@ header {
     }
     .commentsfeed {
       height: 50%;
-      border: 2px solid cadetblue;
+      border: 2px solid whitesmoke;
     }
 
   }
