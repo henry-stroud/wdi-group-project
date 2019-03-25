@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 import Auth from '../../lib/auth'
 
@@ -12,14 +13,25 @@ class Header extends React.Component {
     this.logout = this.logout.bind(this)
   }
 
+  componentDidMount() {
+    this.getProfile()
+  }
+
   logout() {
     Auth.logout()
     this.props.history.push('/')
   }
 
 
+  getProfile() {
+    axios.get('api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then((user) => this.setState({...this.state, data: user.data}))
+  }
+
+
 
   render() {
+    {this.state && console.log(this.state.data)}
     return (
       <div>
         <header>
@@ -34,9 +46,9 @@ class Header extends React.Component {
           }
           {Auth.isAuthenticated() &&
             <div className="contains-loggedin">
-              <img className="avatar" src="https://gaming-logo-maker.com/wp-content/uploads/2018/11/avatar-maker-minecraft-character-02-300x300.gif" alt=""/>
+              <img className="avatar" src={this.state.data.avatar} alt=""/>
               <div className="userloggedin">
-                <Link to='/viewprofile'> <h4> bubblesaurus90 </h4> </Link>
+                <Link to='/viewprofile'> <h4> {this.state.data.username} </h4> </Link>
                 <h5> currently playing... </h5>
                 <a onClick={this.logout}>Logout</a>
               </div>

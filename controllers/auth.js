@@ -46,12 +46,27 @@ function addAvatar( req, res ) {
       Object.assign(user, req.body)
       return user.save()
     })
-    .then(movie => res.status(200).json(movie))
+    .then(user => res.status(200).json(user))
     .catch((err) => res.json(err))
 }
+
+function getProfile( req, res ) {
+  req.body.user = req.currentUser
+  User
+    .findById(req.body.user._id)
+    .then(user => {
+      if (!user) return res.status(404).json({
+        message: 'Not Found'})
+      return user
+    })
+    .then(user => res.status(200).json(user))
+    .catch((err) => res.json(err))
+}
+
 
 module.exports = {
   register,
   login,
-  addAvatar
+  addAvatar,
+  getProfile
 }

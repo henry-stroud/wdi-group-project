@@ -69,6 +69,7 @@ router.route('/messages')
   .post(secureRoute, message.create)
 
 router.route('/users')
+  .get(secureRoute, auth.getProfile)
   .post(secureRoute, auth.addAvatar)
 
 
