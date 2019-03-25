@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Browser, Route, Switch, withRouter } from 'react-router-dom'
+import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
 
 import './style.scss'
 

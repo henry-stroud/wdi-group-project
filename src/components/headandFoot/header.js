@@ -16,8 +16,8 @@ class Header extends React.Component {
             <Link to="/">Home</Link>
             <Link to="/register">Register</Link>
             <Link to="/login">Log In</Link>
-            <Link to="/gameforum">Game Forum</Link>
-            <Link to="/createprofile">View Profile</Link>
+            <Link to="/gameforum">Games</Link>
+            <Link to="/createprofile">Profile</Link>
           </nav>
           <div className="contains-titleLogo">
             <h1>Player Connect</h1>

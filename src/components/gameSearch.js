@@ -71,4 +71,4 @@ class GameSearch extends React.Component {
   }
 }
 
-export default GameSearch
+export default withRouter(GameSearch) 

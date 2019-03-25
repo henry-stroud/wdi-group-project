@@ -2,6 +2,7 @@ import React from 'react'
 // import ReactDOM from 'react-dom'
 // import { BrowserRouter as Browser } from 'react-router-dom'
 // import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 
 class GameForum extends React.Component {
@@ -62,4 +63,4 @@ class GameForum extends React.Component {
 }
 
 
-export default GameForum
+export default withRouter(GameForum)

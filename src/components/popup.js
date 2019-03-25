@@ -5,7 +5,9 @@ class Popup extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
+    this.state = {
+      data: {}
+    }
   }
 
 
@@ -22,10 +24,12 @@ class Popup extends React.Component {
               <li key={item.id}>
                 <Link to='/gameforum'>{item.name}</Link>
               </li>
+
             )}
           </ul>
         </div>
       </div>
+
     )
   }
 }
