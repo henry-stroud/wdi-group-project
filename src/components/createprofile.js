@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Select from 'react-select'
+import Popup from '../components/popup'
 import { BrowserRouter as Browser } from 'react-router-dom'
 
 import Auth from '../lib/auth'
@@ -17,14 +18,22 @@ class CreateProfile extends React.Component {
   constructor(){
     super()
 
-    this.state = {
+    this.state = { data: {
+      isOpen: false,
+      data: {},
+      errors: {},
+      results: [],
       avatar: '',
       favoriteGames: []
     }
+    }
 
+    this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.closePopup = this.closePopup.bind(this)
 
   }
+
 
   addUserImage() {
     const options = {
@@ -42,36 +51,38 @@ class CreateProfile extends React.Component {
       .then((res) => this.setState(res.data))
       .then(console.log(this.state))
 
+
+
+  }
+
+  handleChange({ target: { value } }) {
+    this.setState({...this.state, query: value })
+  }
+
+  handleClickButton(e) {
+    e.preventDefault()
+    axios.post('/api/games', {game: this.state.query})
+      .then(games => {
+        console.log(games.data)
+        this.setState({results: games.data})
+        this.openPopup()
+      })
+      .catch(err => console.log(err))
+  }
+
+  openPopup (){
+    this.setState({
+      isOpen: true
+    })
+  }
+
+  closePopup () {
+    this.setState({
+      isOpen: false
+    })
   }
 
 
-  // addUserImage() {
-  //   const options = {
-  //     'displayMode': 'inline',
-  //     'container': '.mygames',
-  //     'maxFiles': 4,
-  //     'accept': [
-  //       'image/jpeg',
-  //       'image/jpg',
-  //       'image/png',
-  //       'image/bmp',
-  //       'image/gif',
-  //       'application/pdf'
-  //     ],
-  //     'storeTo': {
-  //       'container': 'devportal-customers-assets',
-  //       'path': 'user-uploads/',
-  //       'region': 'us-east-1'
-  //     },
-  //     'fromSources': [
-  //       'local_file_system'
-  //     ],
-  //     'uploadInBackground': false
-  //   }
-  //
-  //   const picker = client.picker(options)
-  //   picker.open()
-  // }
 
 
   handleSubmit (e) {
@@ -103,10 +114,22 @@ class CreateProfile extends React.Component {
 
             <div className="chooseGame">
               <h2> What are your top 6 games right now? </h2>
-              <Select
+              <input
                 className="chooseMyGames"
-                // options={this.state.games}
+                onChange={this.handleChange}
               />
+              <button className="gameSearchButton"
+                onClick={this.handleClickButton}> Search
+              </button>
+              <Popup
+                show={this.state.isOpen}
+                games={this.state.results}
+                onClose={this.closePopup}>
+              </Popup>
+
+
+
+
               <div className="mygames">
                 <div> My Game 1 </div>
                 <div> My Game 2 </div>

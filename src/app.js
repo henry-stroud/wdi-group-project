@@ -29,10 +29,10 @@ class App extends React.Component {
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route path="/gameforum" component={GameForum} />
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route path="/createprofile" component={CreateProfile} />
-            <Route path="/gameforum" component={GameForum} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />

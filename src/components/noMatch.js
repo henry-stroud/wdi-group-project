@@ -9,7 +9,7 @@ class NoMatch extends React.Component {
   render() {
     return (
       <main>
-        <h2>Error 404 Suckaaa</h2>
+        <h2>Error 404 Not Found</h2>
       </main>
     )
   }
