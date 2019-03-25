@@ -364,8 +364,13 @@ header {
 
 }
 
-.chatbox {
+.messages {
   span {
     color: white;
   }
+}
+
+.chatBox {
+  display: flex;
+  flex-direction: column;
 }
