@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Select from 'react-select'
+
 import Popup from '../components/popup'
 import { BrowserRouter as Browser } from 'react-router-dom'
 
@@ -30,6 +30,7 @@ class CreateProfile extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleClickButton = this.handleClickButton.bind(this)
     this.closePopup = this.closePopup.bind(this)
 
   }

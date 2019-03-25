@@ -42,7 +42,9 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+ReactDOM.render((
+  <Browser>
+    <Route component={App} />
+  </Browser>),
+document.getElementById('root')
 )

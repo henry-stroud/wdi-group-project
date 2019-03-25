@@ -9,7 +9,12 @@ class GameForum extends React.Component {
   constructor(){
     super()
 
+    console.log(this.props)
     this.state = {}
+  }
+
+  componentDidMount () {
+    console.log(this.props.location.state)
   }
 
   render(){
@@ -22,7 +27,11 @@ class GameForum extends React.Component {
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg/220px-Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg" alt="" />
               </div>
               <div className="gameDetails">
-                <h2>Halo: Combat Evolved</h2>
+                <h2>
+                  {this.props.location.state}
+                  {this.state.name}
+                  hi
+                </h2>
                 <h5>12th November 2004</h5>
                 <h5>Action / Sci Fi / FPS</h5>
                 <p> Master chief is a badass motherfucker and he does all kinda cool shit untill the flood comes along and fucks up everybody.</p>

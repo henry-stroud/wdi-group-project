@@ -10,7 +10,6 @@ class Popup extends React.Component {
     }
   }
 
-
   render() {
     if(!this.props.show) {
       return null
@@ -22,9 +21,12 @@ class Popup extends React.Component {
           <ul>
             {this.props.games.map((item) =>
               <li key={item.id}>
-                <Link to='/gameforum'>{item.name}</Link>
+                <Link
+                  to={{
+                    pathname: '/gameforum'
+                  }}
+                  onClick={()=>history.push('/gameforum',{name: 'test'})}>{item.name}</Link>
               </li>
-
             )}
           </ul>
         </div>

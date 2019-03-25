@@ -60,7 +60,6 @@ class GameSearch extends React.Component {
           </button>
 
           <Popup
-            withRouter={withRouter}
             show={this.state.isOpen}
             games={this.state.results}
             onClose={this.closePopup}>
@@ -71,4 +70,4 @@ class GameSearch extends React.Component {
   }
 }
 
-export default withRouter(GameSearch) 
+export default withRouter(GameSearch)
