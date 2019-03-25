@@ -55,7 +55,7 @@ class CreateProfile extends React.Component {
                 // options={this.state.games}
               />
               <div className="mygames">
-                {this.state.favoriteGames[0]}<  />
+                <div>  </div>
                 <img  />
                 <img  />
                 <img  />
