@@ -18,7 +18,7 @@ class ViewProfile extends React.Component{
     this.state = {data: {
       username: '',
       avatar: '',
-      favoriteGames: [],
+      favouriteGames: [],
       errors: {}
     }}
     this.handleClick = this.handleClick.bind(this)
@@ -73,12 +73,12 @@ class ViewProfile extends React.Component{
           <div className="chooseGame">
             <h2> My top 6 games </h2>
             <div className="mygames">
-              <div> {this.state.data.favoriteGames[0]} </div>
-              <div> {this.state.data.favoriteGames[1]} </div>
-              <div> {this.state.data.favoriteGames[2]} </div>
-              <div> {this.state.data.favoriteGames[3]} </div>
-              <div> {this.state.data.favoriteGames[4]} </div>
-              <div> {this.state.data.favoriteGames[5]} </div>
+              <div> {this.state.data.favouriteGames[0]} </div>
+              <div> {this.state.data.favouriteGames[1]} </div>
+              <div> {this.state.data.favouriteGames[2]} </div>
+              <div> {this.state.data.favouriteGames[3]} </div>
+              <div> {this.state.data.favouriteGames[4]} </div>
+              <div> {this.state.data.favouriteGames[5]} </div>
             </div>
           </div>
 
