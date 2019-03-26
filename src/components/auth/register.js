@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-import CreateProfile from '../../components/createprofile'
+import Auth from '../../lib/auth'
 
 class Register extends React.Component {
   constructor() {
@@ -37,8 +37,11 @@ class Register extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     axios.post('api/register', this.state.data)
-      .then(res => console.log(res))
-      .then(() => this.props.history.push('/createprofile'))
+      .then(res => {
+        Auth.setToken(res.data.token)
+        this.props.history.push('/createprofile')
+        console.log(res.data)
+      })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 

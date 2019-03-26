@@ -8,7 +8,7 @@ class Login extends React.Component {
     super()
 
     this.state = {
-      data: { email: '', password: '' },
+      data: { username: '', password: '' },
       error: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -43,9 +43,9 @@ class Login extends React.Component {
         <div className="contains-loginForm animated flipInY">
           <form onSubmit={this.handleSubmit} className="loginForm">
             <input className="loginFormInput"
-              name="email"
-              placeholder="email"
-              value={this.state.data.email}
+              name="username"
+              placeholder="username"
+              value={this.state.data.username}
               onChange={this.handleChange}
             />
             <input className="loginFormInput"
