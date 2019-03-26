@@ -13,6 +13,11 @@ class GameForum extends React.Component {
     this.state = {}
   }
 
+  getComments(){
+    axios.post('/api/comments')
+      .then((res => this.setState({...this.state, comments: res.data })))
+  }
+
   getCoverPhoto() {
     axios.post('api/game-covers', {game: this.state.game})
       .then(games => {
@@ -24,6 +29,7 @@ class GameForum extends React.Component {
 
   componentDidMount() {
     this.setState({...this.state, game: this.props.location.state.game.id}, () => this.getCoverPhoto())
+    this.getComments()
   }
 
   render() {
@@ -75,6 +81,7 @@ class GameForum extends React.Component {
               <button> Post comment </button>
             </form>
             <div className="commentsfeed">
+
             </div>
           </div>
         </div>

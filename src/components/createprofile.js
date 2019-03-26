@@ -5,7 +5,6 @@ import Popup from '../components/popup'
 
 import Auth from '../lib/auth'
 
-
 const fileStackKey = process.env.REACT_APP_FILE_STACK_API
 
 import * as filestack from 'filestack-js'
@@ -120,9 +119,6 @@ class CreateProfile extends React.Component {
               games={this.state.results}
               onClose={this.closePopup}>
             </Popup>
-
-
-
 
             <div className="mygames">
               <div> My Game 1 </div>
