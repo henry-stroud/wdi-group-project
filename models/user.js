@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
+const favouriteGamesSchema = new mongoose.Schema({
+  gameId: { type: Number },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  createdAt: { type: Date, default: Date.now }
+})
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true},
@@ -8,8 +13,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true},
   color: {type: String},
   avatar: { type: String },
-  favoriteGames: [{ type: String }]
-
+  favouriteGames: [favouriteGamesSchema]
 })
 
 userSchema.plugin(require('mongoose-unique-validator'))

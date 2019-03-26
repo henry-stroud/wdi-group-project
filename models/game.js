@@ -11,7 +11,6 @@ const commentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 })
 
-
 const gameSchema = new mongoose.Schema({
   gameId: { type: String },
   name: { type: String },

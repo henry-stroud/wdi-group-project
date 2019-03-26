@@ -109,8 +109,11 @@ router.route('/messages')
 
 router.route('/users')
   .get(secureRoute, auth.getProfile)
-  .post(secureRoute, auth.addAvatar)
+  .post(secureRoute, auth.addToProfile)
 
+router.route('/users/favouritegames')
+  .post(secureRoute, auth.FavouriteGameCreateRoute)
+  .delete(secureRoute, auth.FavouriteGameDeleteRoute)
 
 
 module.exports = router

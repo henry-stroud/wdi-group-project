@@ -55,7 +55,7 @@ class Header extends React.Component {
           }
           <div className="contains-titleLogo">
             <h1>player connect</h1>
-            <img src="../../../assets/logo-orange.png" alt="playerconnect logo"/>
+            <Link to='/'><img src="../../../assets/logo-orange.png" alt="playerconnect logo"/></Link>
           </div>
 
         </header>
