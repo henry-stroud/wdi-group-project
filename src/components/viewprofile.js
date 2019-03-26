@@ -60,7 +60,7 @@ class ViewProfile extends React.Component{
   render(){
     return(
       <main>
-        <div className="contains-createProfile">
+        <div className="contains-createProfile animated zoomIn">
           <div className="userDetails">
             <img className="avatar" src={this.state.data.avatar} />
             <button

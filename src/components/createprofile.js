@@ -80,9 +80,6 @@ class CreateProfile extends React.Component {
     })
   }
 
-
-
-
   handleSubmit (e) {
     e.preventDefault()
     axios.post('api/register', this.state.data)

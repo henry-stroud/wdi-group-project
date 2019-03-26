@@ -19,7 +19,9 @@ const userRatingSchema = new mongoose.Schema({
 
 const commentSchema = new mongoose.Schema({
   userId: { type: String },
-  userComment: { type: String }
+  userComment: { type: String },
+  createdAt: { type: Date, default: Date.now }
+
 })
 
 gameSchema.virtual('avgRating')

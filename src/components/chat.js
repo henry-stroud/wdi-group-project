@@ -63,7 +63,7 @@ class Chat extends React.Component {
   render() {
     {this.state.messages && console.log(this.state.messages)}
     return(
-      <div className="contains-news">
+      <div className="contains-news  animated fadeIn">
         <MessagesForm
           errors={this.state.errors}
           handleChange={this.handleChange}
