@@ -9,6 +9,7 @@ import News from '../components/news'
 import Chat from '../components/chat'
 import Videos from '../components/videos'
 
+
 import Auth from '../lib/auth'
 
 class Home extends React.Component {

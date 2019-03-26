@@ -9,8 +9,8 @@ const commentSchema = new mongoose.Schema({
   userId: { type: String },
   userComment: { type: String },
   createdAt: { type: Date, default: Date.now }
-
 })
+
 
 const gameSchema = new mongoose.Schema({
   gameId: { type: String },
@@ -23,6 +23,7 @@ const gameSchema = new mongoose.Schema({
   userRating: [ userRatingSchema ],
   userComment: [ commentSchema ]
 })
+
 
 
 gameSchema.virtual('avgRating')

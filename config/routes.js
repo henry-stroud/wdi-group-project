@@ -4,7 +4,7 @@ const auth = require('../controllers/auth')
 const rp = require('request-promise')
 const axios = require('axios')
 const message = require('../controllers/messages')
-const comments = require('..controllers/comments')
+const comments = require('../controllers/comments')
 const secureRoute = require('../lib/secureRoute')
 
 router.post('/register', auth.register)
