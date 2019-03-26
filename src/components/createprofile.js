@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import Popup from '../components/popup'
+import PopupProfilePage from '../components/popupProfilePage'
 
 import Auth from '../lib/auth'
 
@@ -21,8 +21,7 @@ class CreateProfile extends React.Component {
       data: {},
       errors: {},
       results: [],
-      avatar: '',
-      favoriteGames: []
+      avatar: ''
     }
     }
 
@@ -31,6 +30,7 @@ class CreateProfile extends React.Component {
     this.handleClickButton = this.handleClickButton.bind(this)
     this.closePopup = this.closePopup.bind(this)
     this.handleClickButton = this.handleClickButton.bind(this)
+    this.handleClickGames = this.handleClickGames.bind(this)
 
   }
 
@@ -58,7 +58,7 @@ class CreateProfile extends React.Component {
 
   handleClickButton(e) {
     e.preventDefault()
-    axios.post('/api/games', {game: this.state.query})
+    axios.post('/api/games', { game: this.state.query})
       .then(games => {
         console.log(games.data)
         this.setState({results: games.data})
@@ -91,6 +91,13 @@ class CreateProfile extends React.Component {
     this.addUserImage()
   }
 
+  handleClickGames(item) {
+    this.setState({...this.state, gameId: item.id }, () => axios.post('api/users/favouritegames', this.state, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then((res) => this.setState({...this.state, newdata: res.data }))
+      .then(console.log(this.state)))
+
+  }
+
   render(){
     {this.state && console.log(this.state)}
     return(
@@ -114,14 +121,14 @@ class CreateProfile extends React.Component {
             <button className="gameSearchButton"
               onClick={this.handleClickButton}> Search
             </button>
-            <Popup
+            <PopupProfilePage
               show={this.state.isOpen}
               games={this.state.results}
+              handleClickGames={this.handleClickGames}
               onClose={this.closePopup}>
-            </Popup>
-
+            </PopupProfilePage>
             <div className="mygames">
-              <div> My Game 1 </div>
+              <div>My Game 1</div>
               <div> My Game 2 </div>
               <div> My Game 3 </div>
               <div> My Game 4 </div>
@@ -129,7 +136,6 @@ class CreateProfile extends React.Component {
               <div> My Game 6 </div>
             </div>
           </div>
-
           <div className="comments-complete">
             <h3> Your comments will appear here on you profile.</h3>
             <div className="comments"> </div>

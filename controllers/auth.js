@@ -36,7 +36,7 @@ function login (req, res) {
     .catch(err => res.status(422).json(err))
 }
 
-function addAvatar( req, res ) {
+function addToProfile( req, res ) {
   req.body.user = req.currentUser
   User
     .findById(req.body.user._id)
@@ -63,10 +63,37 @@ function getProfile( req, res ) {
     .catch((err) => res.json(err))
 }
 
+function FavouriteGameCreateRoute(req, res) {
+  req.body.user = req.currentUser
+  User
+    .findById(req.body.user._id)
+    .then(user => {
+      user.favouriteGames.push(req.body)
+      return user.save()
+    })
+    .then(user => res.json(user))
+    .catch((err) => res.json(err))
+}
+
+function FavouriteGameDeleteRoute(req, res) {
+  req.body.user = req.currentUser
+  User
+    .findById(req.body.user._id)
+    .then(user => {
+      const comment = user.favouriteGames.id(req.params.commentId)
+      comment.remove()
+      return user.save()
+    })
+    .then(cheese => res.json(cheese))
+    .catch((err) => res.json(err))
+}
+
 
 module.exports = {
   register,
   login,
-  addAvatar,
-  getProfile
+  addToProfile,
+  getProfile,
+  FavouriteGameDeleteRoute,
+  FavouriteGameCreateRoute
 }
