@@ -12,7 +12,8 @@ mongoose.connect(dbURI, { useNewUrlParser: true }, (err, db) => {
           email: 'bhm@email.com',
           password: 'pass',
           passwordConfirmation: 'pass',
-          color: '#' + (Math.random()*0xFFFFFF<<0).toString(16)
+          color: '#' + (Math.random()*0xFFFFFF<<0).toString(16),
+          avatar: '../src/assets/charlie2.jpg'
 
         }
       ])

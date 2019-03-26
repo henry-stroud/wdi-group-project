@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import Popup from '../components/popup'
-import { BrowserRouter as Browser } from 'react-router-dom'
 
 import Auth from '../lib/auth'
 
