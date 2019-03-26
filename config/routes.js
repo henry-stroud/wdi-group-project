@@ -4,9 +4,8 @@ const auth = require('../controllers/auth')
 const rp = require('request-promise')
 const axios = require('axios')
 const message = require('../controllers/messages')
+const comments = require('..controllers/comments')
 const secureRoute = require('../lib/secureRoute')
-
-
 
 router.post('/register', auth.register)
 router.post('/login', auth.login)
@@ -82,6 +81,27 @@ router.post('/game-covers', (req, res) => {
     .catch(err => console.error(err))
 })
 
+
+//I DON'T KNOW WHAT IM DOING
+// router.post('/accessgame', (req, res) => {
+//   axios({
+//     url: 'http://localhost:4000/',
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'user-key': `${igdbApiKey}`,
+//       'Content-Type': 'text/plain'
+//     }
+//   })
+//     .then(game => {
+//       console.log(game)
+//     })
+//     .catch(err => console.log(err))
+// })
+
+router.route('/comments')
+  .get(comments.index)
+  .post(secureRoute, comments.create)
 
 router.route('/messages')
   .get(message.index)

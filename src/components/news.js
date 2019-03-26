@@ -23,10 +23,10 @@ class News extends React.Component {
   render() {
     console.log(this.state)
     return(
-      <div className="contains-news">
+      <div className="contains-news animated fadeIn">
         {!this.state.articles && <h1> ...getting the news...</h1>}
         {this.state.articles && this.state.articles.map((article, i ) => (
-          <div key={i} className="newscard">
+          <div key={i} className="newscard animated fadeIn">
             <h2> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h2>
             <img src={article.urlToImage} atl={article.title} />
             <p> {article.description} </p>

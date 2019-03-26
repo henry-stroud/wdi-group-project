@@ -48,9 +48,8 @@ class Header extends React.Component {
             <div className="contains-loggedin">
               <img className="avatar" src={this.state.data.avatar} alt=""/>
               <div className="userloggedin">
-                <Link to='/viewprofile'> <h4> {this.state.data.username} </h4> </Link>
-                <h5> currently playing... </h5>
-                <a onClick={this.logout}>Logout</a>
+                <Link to='/viewprofile'> <h2> {this.state.data.username} </h2> </Link>
+                <a onClick={this.logout}>logOut</a>
               </div>
             </div>
           }

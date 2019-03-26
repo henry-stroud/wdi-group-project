@@ -51,9 +51,6 @@ class CreateProfile extends React.Component {
     axios.post('api/users', avatarLink, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((res) => this.setState(res.data))
       .then(console.log(this.state))
-
-
-
   }
 
   handleChange({ target: { value } }) {
@@ -82,9 +79,6 @@ class CreateProfile extends React.Component {
       isOpen: false
     })
   }
-
-
-
 
   handleSubmit (e) {
     e.preventDefault()
