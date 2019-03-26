@@ -59,9 +59,9 @@ class Home extends React.Component {
           }
           {Auth.isAuthenticated() && <div className="homeChange" onClick={this.handleClick}>
             {this.state.toSocial === false ?
-              <h1> TO SOCIAL </h1>
+              <h1> VIDEOS & CHAT </h1>
               :
-              <h1> TO HOME </h1>
+              <h1> NEWS & GAMES </h1>
             }
           </div>
           }
