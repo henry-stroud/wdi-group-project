@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Browser, Route, Switch } from 'react-router-dom'
+import Favicon from 'react-favicon'
 
 
 import './style.scss'
@@ -26,6 +27,7 @@ class App extends React.Component {
     return (
       <Browser>
         <div>
+          <Favicon url="http://oflisback.github.io/react-favicon/public/img/github.ico" />
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
@@ -42,9 +44,7 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render((
-  <Browser>
-    <Route component={App} />
-  </Browser>),
-document.getElementById('root')
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
 )
