@@ -111,6 +111,9 @@ router.route('/users')
   .get(secureRoute, auth.getProfile)
   .post(secureRoute, auth.addToProfile)
 
+router.route('/allusers')
+  .get(auth.getAllUsers)
+
 router.route('/users/favouritegames')
   .post(secureRoute, auth.FavouriteGameCreateRoute)
   .delete(secureRoute, auth.FavouriteGameDeleteRoute)

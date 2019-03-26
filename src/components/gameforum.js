@@ -19,6 +19,7 @@ class GameForum extends React.Component {
   }
 
   getCoverPhoto() {
+    console.log(this.state.game)
     axios.post('api/game-covers', {game: this.state.game})
       .then(games => {
         console.log(games.data)

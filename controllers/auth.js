@@ -53,13 +53,25 @@ function addToProfile( req, res ) {
 function getProfile( req, res ) {
   req.body.user = req.currentUser
   User
-    .findById(req.body.user._id)
+    .findOne({ _id: req.body.user._id})
     .then(user => {
       if (!user) return res.status(404).json({
         message: 'Not Found'})
       return user
     })
     .then(user => res.status(200).json(user))
+    .catch((err) => res.json(err))
+}
+
+function getAllUsers( req, res ) {
+  User
+    .find()
+    .then(users => {
+      if (!users) return res.status(404).json({
+        message: 'Not Found'})
+      return users
+    })
+    .then(users => res.status(200).json(users))
     .catch((err) => res.json(err))
 }
 
@@ -95,5 +107,6 @@ module.exports = {
   addToProfile,
   getProfile,
   FavouriteGameDeleteRoute,
-  FavouriteGameCreateRoute
+  FavouriteGameCreateRoute,
+  getAllUsers
 }
