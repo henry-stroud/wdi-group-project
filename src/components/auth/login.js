@@ -61,7 +61,7 @@ class Login extends React.Component {
               {this.state.error && <small className="tinyError">{this.state.error}</small>}
             </div>
           </form>
-          <p> Not signed up? Click <Link to='/register'>here</Link> to register! </p>
+          <p> Not signed up? Click <Link to='/register'><span>here</span></Link> to register! </p>
         </div>
       </main>
     )
