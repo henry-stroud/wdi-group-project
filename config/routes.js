@@ -63,6 +63,25 @@ router.post('/game-videos', (req, res) => {
     .catch(err => console.error(err))
 })
 
+router.post('/game-covers', (req, res) => {
+  console.log(req.body)
+  axios({
+    url: 'https://api-v3.igdb.com/covers',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': `${igdbApiKey}`,
+      'Content-Type': 'text/plain'
+    },
+    data: `fields *; where game = ${req.body.game};`
+
+  })
+    .then(videos => {
+      res.json(videos.data)
+    })
+    .catch(err => console.error(err))
+})
+
 
 router.route('/messages')
   .get(message.index)
