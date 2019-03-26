@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Select from 'react-select'
 import Popup from '../components/popup'
 import { BrowserRouter as Browser } from 'react-router-dom'
 
@@ -101,54 +100,52 @@ class CreateProfile extends React.Component {
   render(){
     {this.state && console.log(this.state)}
     return(
-      <Browser>
-        <main>
-          <div className="contains-createProfile">
-            <div className="userDetails">
-              <img className="avatar" src={this.state.avatar} />
-              <h4 className="userName"> bubblesaurus90 </h4>
-              <button
-                onClick={this.handleClick}>
+      <main>
+        <div className="contains-createProfile">
+          <div className="userDetails">
+            <img className="avatar" src={this.state.avatar} />
+            <h4 className="userName"> bubblesaurus90 </h4>
+            <button
+              onClick={this.handleClick}>
                 Upload photo
-              </button>
-            </div>
+            </button>
+          </div>
 
-            <div className="chooseGame">
-              <h2> What are your top 6 games right now? </h2>
-              <input
-                className="chooseMyGames"
-                onChange={this.handleChange}
-              />
-              <button className="gameSearchButton"
-                onClick={this.handleClickButton}> Search
-              </button>
-              <Popup
-                show={this.state.isOpen}
-                games={this.state.results}
-                onClose={this.closePopup}>
-              </Popup>
-
-
+          <div className="chooseGame">
+            <h2> What are your top 6 games right now? </h2>
+            <input
+              className="chooseMyGames"
+              onChange={this.handleChange}
+            />
+            <button className="gameSearchButton"
+              onClick={this.handleClickButton}> Search
+            </button>
+            <Popup
+              show={this.state.isOpen}
+              games={this.state.results}
+              onClose={this.closePopup}>
+            </Popup>
 
 
-              <div className="mygames">
-                <div> My Game 1 </div>
-                <div> My Game 2 </div>
-                <div> My Game 3 </div>
-                <div> My Game 4 </div>
-                <div> My Game 5 </div>
-                <div> My Game 6 </div>
-              </div>
-            </div>
 
-            <div className="comments-complete">
-              <h3> Your comments will appear here on you profile.</h3>
-              <div className="comments"> </div>
-              <button className="completeProfile">Complete profile!</button>
+
+            <div className="mygames">
+              <div> My Game 1 </div>
+              <div> My Game 2 </div>
+              <div> My Game 3 </div>
+              <div> My Game 4 </div>
+              <div> My Game 5 </div>
+              <div> My Game 6 </div>
             </div>
           </div>
-        </main>
-      </Browser>
+
+          <div className="comments-complete">
+            <h3> Your comments will appear here on you profile.</h3>
+            <div className="comments"> </div>
+            <button className="completeProfile">Complete profile!</button>
+          </div>
+        </div>
+      </main>
     )
   }
 }

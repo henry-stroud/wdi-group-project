@@ -14,6 +14,7 @@ import Home from './components/home'
 import NoMatch from './components/noMatch'
 import CreateProfile from './components/createprofile'
 import GameForum from './components/gameforum'
+import ViewProfile from './components/viewprofile'
 
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route path="/register" component={Register}/>
             <Route path="/login" component={Login}/>
             <Route path="/createprofile" component={CreateProfile} />
+            <Route path="/viewprofile" component={ViewProfile} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />
