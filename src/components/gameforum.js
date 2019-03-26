@@ -24,14 +24,14 @@ class GameForum extends React.Component {
               </div>
               <div className="gameDetails">
                 <h2>{game.name}</h2>
-                <h5>12th November 2004</h5>
-                <h5>Action / Sci Fi / FPS</h5>
-                <p> Master chief is a badass motherfucker and he does all kinda cool shit untill the flood comes along and fucks up everybody.</p>
+                <h5>Released: {game.first_release_date}</h5>
+                <h5>{game.genres}</h5>
+                <p> {game.summary}</p>
               </div>
             </div>
             <div className="contains-ratings">
               <div className="ourRating">
-                <h1>4.3</h1>
+                <h1>{game.rating}</h1>
               </div>
               <div className="yourRating">
                 <h1>4.7</h1>
@@ -45,6 +45,7 @@ class GameForum extends React.Component {
               </select>
             </div>
             <div className="contains-screenshots">
+              {game.screenshots}
             </div>
           </div>
           <div className="gameForum-right">
