@@ -22,9 +22,14 @@ class Popup extends React.Component {
           <ul>
             {this.props.games.map((item) =>
               <li key={item.id}>
-                <Link to='/gameforum'>{item.name}</Link>
+                <Link
+                  to={{
+                    pathname: '/gameforum',
+                    state: {
+                      game: item
+                    }
+                  }}>{item.name}</Link>
               </li>
-
             )}
           </ul>
         </div>

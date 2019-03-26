@@ -13,16 +13,17 @@ class GameForum extends React.Component {
   }
 
   render(){
+    const game = this.props.location.state.game
     return(
       <main>
         <div className="contains-gameForum">
           <div className="gameForum-left">
             <div className="contains-gameInfo">
               <div className="gameCover">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg/220px-Halo_-_Combat_Evolved_%28XBox_version_-_box_art%29.jpg" alt="" />
+                <img src= {game.cover} alt="game cover" />
               </div>
               <div className="gameDetails">
-                <h2>Halo: Combat Evolved</h2>
+                <h2>{game.name}</h2>
                 <h5>12th November 2004</h5>
                 <h5>Action / Sci Fi / FPS</h5>
                 <p> Master chief is a badass motherfucker and he does all kinda cool shit untill the flood comes along and fucks up everybody.</p>
