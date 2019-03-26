@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Browser } from 'react-router-dom'
+import {withRouter } from 'react-router-dom'
 
 
 // import Header from '../components/headandFoot/header'
@@ -27,32 +27,29 @@ class Home extends React.Component {
 
   render() {
     return(
-      <Browser>
-        <div>
-          <main>
-            {this.state.toSocial === false ?
-              <div className="contains-news-gameSearch">
-                <News />
-                <GameSearch />
-              </div>
-              :
-              <div className="contains-news-gameSearch">
-                <Chat />
-                <Videos />
-              </div>
-            }
-            <div className="homeChange" onClick={this.handleClick}>
-              {this.state.toSocial === false ?
-                <h1> TO SOCIAL </h1>
-                :
-                <h1> TO HOME </h1>
-              }
+      <div>
+        <main>
+          {this.state.toSocial === false ?
+            <div className="contains-news-gameSearch">
+              <News />
+              <GameSearch />
             </div>
-          </main>
-
-        </div>
-      </Browser>
+            :
+            <div className="contains-news-gameSearch">
+              <Chat />
+              <Videos />
+            </div>
+          }
+          <div className="homeChange" onClick={this.handleClick}>
+            {this.state.toSocial === false ?
+              <h1> TO SOCIAL </h1>
+              :
+              <h1> TO HOME </h1>
+            }
+          </div>
+        </main>
+      </div>
     )
   }
 }
-export default Home
+export default withRouter(Home)
