@@ -4,29 +4,48 @@ import React from 'react'
 // import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
+import axios from 'axios'
 
 class GameForum extends React.Component {
-  constructor(){
+  constructor() {
     super()
 
     this.state = {}
   }
 
-  render(){
+  getCoverPhoto() {
+    axios.post('api/game-covers', {game: this.state.game})
+      .then(games => {
+        console.log(games.data)
+        this.setState({...this.state, results: games.data})
+      })
+      .catch(err => console.log(err))
+  }
+
+  componentDidMount() {
+    this.setState({...this.state, game: this.props.location.state.game.id}, () => this.getCoverPhoto())
+  }
+
+  render() {
     const game = this.props.location.state.game
+    const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
     return(
       <main>
         <div className="contains-gameForum">
           <div className="gameForum-left">
             <div className="contains-gameInfo">
               <div className="gameCover">
-                <img src= {game.cover} alt="game cover" />
+                <img src= {this.state.results ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${this.state.results[0].image_id}.jpg` : ''} alt="game cover" />
               </div>
               <div className="gameDetails">
                 <h2>{game.name}</h2>
-                <h5>Released: {game.first_release_date}</h5>
+                <h5>Released: &nbsp;
+                  {releaseDate.getDate().toString()}/
+                  {(releaseDate.getMonth() + 1).toString()}/
+                  {releaseDate.getFullYear().toString()}
+                </h5>
                 <h5>{game.genres}</h5>
-                <p> {game.summary}</p>
+                <p> {game.summary}</p>.
               </div>
             </div>
             <div className="contains-ratings">

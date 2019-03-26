@@ -48,8 +48,8 @@ class GameSearch extends React.Component {
 
   render() {
     return(
-      <div className="main-gameSearch">
-        <div className="contains-gameSearch">
+      <div className="main-gameSearch animated fadeIn">
+        <div className="contains-gameSearch animated fadeIn">
           <h2> Search a game and get involved! </h2>
           <input
             className="gameSearchBar"

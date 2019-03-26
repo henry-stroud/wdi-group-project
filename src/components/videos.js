@@ -24,10 +24,10 @@ class Videos extends React.Component {
   render() {
     console.log(this.state)
     return(
-      <div className="contains-news">
+      <div className="contains-news animated fadeIn">
         {!this.state.videos && <p> ...getting video feed...</p>}
         {this.state.videos && this.state.videos.map((video, i ) => (
-          <div className="embeddedVideos" key={i}>
+          <div className="embeddedVideos animated fadeIn" key={i}>
             <iframe width="560" height="250" src={`https://www.youtube.com/embed/${video.video_id}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           </div>
         ))}
