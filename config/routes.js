@@ -6,8 +6,6 @@ const axios = require('axios')
 const message = require('../controllers/messages')
 const secureRoute = require('../lib/secureRoute')
 
-
-
 router.post('/register', auth.register)
 router.post('/login', auth.login)
 
@@ -62,6 +60,24 @@ router.post('/game-videos', (req, res) => {
     })
     .catch(err => console.error(err))
 })
+
+// router.post('/accessgame', (req, res) => {
+//   axios({
+//     url: '',
+//     method: 'POST',
+//     headers: {
+//       'Accept': 'application/json',
+//       'user-key': `${igdbApiKey}`,
+//       'Content-Type': 'text/plain'
+//     }
+//   })
+//     .then(game => {
+//       console.log(game)
+//     })
+//     .catch(err => console.log(err))
+// })
+
+
 
 
 router.route('/messages')

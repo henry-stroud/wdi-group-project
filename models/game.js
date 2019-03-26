@@ -10,7 +10,16 @@ const gameSchema = new mongoose.Schema({
   summary: { type: String },
   userRating: [ userRatingSchema ],
   userComment: [ commentSchema ]
+})
 
+const userRatingSchema = new mongoose.Schema({
+  userId: { type: String },
+  userRating: { type: Number, min: 0, max: 100}
+})
+
+const commentSchema = new mongoose.Schema({
+  userId: { type: String },
+  userComment: { type: String }
 })
 
 gameSchema.virtual('avgRating')
@@ -19,17 +28,6 @@ gameSchema.virtual('avgRating')
       return acc + cv
     }, 0) / this.userRating.length)
   })
-
-const userRatingSchema = new mongoose.Schema({
-  userId: { type: String },
-  userRating: { type: Number, min: 0, max: 100}
-
-})
-
-const commentSchema = new mongoose.Schema({
-  userId: { type: String },
-  userComment: { type: String }
-})
 
 gameSchema.set('toJSON', { virtuals: true })
 
