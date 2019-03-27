@@ -1,4 +1,5 @@
 import React from 'react'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Footer = () => {
   return(
@@ -9,6 +10,8 @@ const Footer = () => {
         <i className="fab fa-twitter-square"></i>
       </span>
       <p> Brought to you by BHM </p>
+
+
     </footer>
   )
 }
