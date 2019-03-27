@@ -43,7 +43,6 @@ function createComment(req, res) {
 function createRating(req, res) {
   console.log(req.body)
   req.body.user = req.currentUser
-  console.log(req.body.user)
   Game
     .findOne({ gameId: req.body.gameId})
     .then(game => {

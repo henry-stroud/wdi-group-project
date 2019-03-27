@@ -366,6 +366,11 @@ header {
     flex-direction: column;
     width: 50%;
     color: whitesmoke;
+    .starsRating {
+      .checked {
+        color: orange;
+      }
+    }
     .addcomment {
       height: 50%;
       display: flex;
@@ -373,8 +378,6 @@ header {
       button {
         width: 50%;
         margin: 0 auto;
-
-
       }
       input {
         height: 40%;

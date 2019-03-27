@@ -4,6 +4,8 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 
+import StarRatings from 'react-star-ratings'
+
 import Auth from '../lib/auth'
 
 class GameForum extends React.Component {
@@ -18,6 +20,7 @@ class GameForum extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.changeRating = this.changeRating.bind(this)
   }
 
   getCoverPhoto() {
@@ -87,6 +90,16 @@ class GameForum extends React.Component {
     this.setState({ data, errors }, () => console.log(this.state))
   }
 
+  changeRating( newRating ) {
+    this.setState({...this.state, rating: newRating}, () => this.pushUserRating())
+  }
+
+  pushUserRating() {
+    axios.post('/localgames/ratings', { userRating: this.state.rating, gameId: this.props.location.state.specificGame.gameId }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
+
   render() {
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
@@ -124,13 +137,28 @@ class GameForum extends React.Component {
 
                 </h1>
               </div>
-              <select className="rateGame">
-                <option> 1 </option>
-                <option> 2 </option>
-                <option> 3 </option>
-                <option> 4 </option>
-                <option> 5 </option>
-              </select>
+              <div className="rateGame">
+                <StarRatings
+                  rating={this.state.rating}
+                  starRatedColor="gold"
+                  changeRating={this.changeRating}
+                  numberOfStars={5}
+                  name='rating'
+                  starDimension="30px"
+                  starSpacing="10px"
+                />
+                <div className="criticRating">
+                  <StarRatings
+                    rating={rating && rating.toFixed(1)/20}
+                    starRatedColor="darkblue"
+                    starDimension="40px"
+                    starSpacing="15px"
+                    starDimension="30px"
+                    starSpacing="10px"
+                  />
+                </div>
+              </div>
+
             </div>
             <div className="contains-screenshots">
               screenshots: {(this.state.screenshots && this.state.screenshots.length) && this.state.screenshots.map((screenshots, index) => <p key={index}><img src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${screenshots.image_id}.jpg`}/></p>)}
@@ -146,6 +174,7 @@ class GameForum extends React.Component {
               />
               <button> Post comment </button>
             </form>
+
             <div className="commentsfeed">
               <div className = "chatBox">
                 {this.state.gameComments && this.state.gameComments.map((comment, i) =>

@@ -135,7 +135,7 @@ router.route('/users/favouritegames')
 router.route('/localgames')
   .post(games.getGame)
 
-router.route('/localgames/specific')  
+router.route('/localgames/specific')
   .post(games.getAllGames)
 
 router.route('/localgames/comments')
@@ -143,6 +143,5 @@ router.route('/localgames/comments')
 
 router.route('/localgames/ratings')
   .post(secureRoute, games.createRating)
-
 
 module.exports = router
