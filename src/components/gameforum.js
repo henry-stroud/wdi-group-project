@@ -1,9 +1,7 @@
 import React from 'react'
 // import ReactDOM from 'react-dom'
 // import { BrowserRouter as Browser } from 'react-router-dom'
-// import axios from 'axios'
 import {withRouter} from 'react-router-dom'
-
 import axios from 'axios'
 
 class GameForum extends React.Component {
@@ -19,23 +17,36 @@ class GameForum extends React.Component {
   }
 
   getCoverPhoto() {
-    console.log(this.state.game)
-    axios.post('api/game-covers', {game: this.state.game})
+    axios.post('api/game-covers', {game: this.state.game.id})
       .then(games => {
-        console.log(games.data)
         this.setState({...this.state, results: games.data})
       })
       .catch(err => console.log(err))
   }
 
+  getGenres() {
+    axios.post('api/game-genres', {genreId: this.state.game.genres})
+      .then(genres => {
+        this.setState({...this.state, genres: genres.name})
+      })
+      .catch(err => console.log(err))
+  }
+
+
   componentDidMount() {
-    this.setState({...this.state, game: this.props.location.state.game.id}, () => this.getCoverPhoto())
-    this.getComments()
+    this.setState({...this.state, game: this.props.location.state.game}, () => {
+      this.getCoverPhoto()
+      this.getComments()
+      this.getGenres()
+    })
+    console.log('state')
+    console.log(this.state)
   }
 
   render() {
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
+
     return(
       <main>
         <div className="contains-gameForum">
@@ -51,8 +62,8 @@ class GameForum extends React.Component {
                   {(releaseDate.getMonth() + 1).toString()}/
                   {releaseDate.getFullYear().toString()}
                 </h5>
-                <h5>{game.genres}</h5>
-                <p> {game.summary}</p>
+                <h5>genres</h5>
+                <p>{game.summary}</p>
               </div>
             </div>
             <div className="contains-ratings">
@@ -60,7 +71,9 @@ class GameForum extends React.Component {
                 <h1>{game.rating}</h1>
               </div>
               <div className="yourRating">
-                <h1>4.7</h1>
+                <h1>
+
+                </h1>
               </div>
               <select className="rateGame">
                 <option> 1 </option>

@@ -172,7 +172,7 @@ header {
   align-self: flex-start;
   width: 95%;
   .contains-news {
-    border-bottom: 1px dashed whitesmoke;
+    border-bottom: 1px dashed #C24D2C;
     background-color: rgba(50, 50, 50, 0.7);
     display: flex;
     flex-direction: row;
@@ -185,7 +185,7 @@ header {
       margin: auto;
       padding: 10px;
       text-align: center;
-      border-left: 1px dashed whitesmoke;
+      border-left: 1px dashed #C24D2C;
       h2, a, p {
         text-decoration: none;
         color: whitesmoke;
@@ -230,7 +230,7 @@ header {
     align-self: center;
     height: 100%;
     margin: 0 10px;
-    border-left: 1px dashed whitesmoke;
+    border-left: 1px dashed #C24D2C;
   }
 }
 
@@ -407,9 +407,15 @@ header {
   }
 }
 
-.gameDetails p {
-    width: 350px;
+.gameDetails {
+  display: flex;
+    p {
+    width: 600px;
     height: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
+    text-align: justify;
+    max-width: 80%;
+    align-self: center;
+  }
 }

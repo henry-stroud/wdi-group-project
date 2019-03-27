@@ -63,7 +63,6 @@ router.post('/game-videos', (req, res) => {
 })
 
 router.post('/game-covers', (req, res) => {
-  console.log(req.body)
   axios({
     url: 'https://api-v3.igdb.com/covers',
     method: 'POST',
@@ -80,6 +79,26 @@ router.post('/game-covers', (req, res) => {
     })
     .catch(err => console.error(err))
 })
+
+router.post('/game-genres', (req, res) => {
+  axios({
+    url: 'https://api-v3.igdb.com/genres',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': `${igdbApiKey}`,
+      'Content-Type': 'text/plain'
+    },
+    data: `fields *; where id = (${req.body.genreId});`
+
+  })
+    .then(genres => {
+      res.json(genres.data)
+    })
+    .catch(err => console.error(err))
+})
+
+
 
 
 //I DON'T KNOW WHAT IM DOING
