@@ -52,7 +52,7 @@ class GameForum extends React.Component {
                   {releaseDate.getFullYear().toString()}
                 </h5>
                 <h5>{game.genres}</h5>
-                <p> {game.summary}</p>.
+                <p> {game.summary}</p>
               </div>
             </div>
             <div className="contains-ratings">
