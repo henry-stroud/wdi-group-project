@@ -1,24 +1,18 @@
 const mongoose = require('mongoose')
 
 const userRatingSchema = new mongoose.Schema({
-  userId: { type: String },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
   userRating: { type: Number, min: 0, max: 100}
 })
 
 const commentSchema = new mongoose.Schema({
-  userId: { type: String },
-  userComment: { type: String },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  text: { type: String },
   createdAt: { type: Date, default: Date.now }
 })
 
 const gameSchema = new mongoose.Schema({
-  gameId: { type: String },
-  name: { type: String },
-  rating: { type: Number },
-  cover: { type: String },
-  firstReleaseDate: { type: Number },
-  screenshots: [],
-  summary: { type: String },
+  gameId: { type: Number },
   userRating: [ userRatingSchema ],
   userComment: [ commentSchema ]
 })

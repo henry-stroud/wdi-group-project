@@ -4,71 +4,111 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 
+import Auth from '../lib/auth'
+
 class GameForum extends React.Component {
   constructor() {
     super()
 
-    this.state = {}
-  }
+    this.state = {
+      data: {
+        liveComment: ''
+      }
+    }
 
-  getComments(){
-    axios.post('/api/comments')
-      .then((res => this.setState({...this.state, comments: res.data })))
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   getCoverPhoto() {
+    console.log(this.state.game)
     axios.post('api/game-covers', {game: this.state.game.id})
       .then(games => {
-        this.setState({...this.state, results: games.data})
+        this.setState({...this.state, results: games.data}, console.log(this.state.results, 'hello'))
       })
       .catch(err => console.log(err))
   }
 
   getGenres() {
-    axios.post('api/game-genres', {genreId: this.state.game.genres})
-      .then(genres => {
-        this.setState({...this.state, genres: genres.name})
-      })
-      .catch(err => console.log(err))
+    console.log(this.state.game.genres)
+    if (this.state.game.genres) {
+      const newGenres = `(${[...this.state.game.genres].toString()})`
+      console.log(newGenres)
+      axios.post('api/game-genres', {genreId: newGenres})
+        .then(genres => {
+          this.setState({...this.state, genres: genres.data}, () => console.log(this.state.genres, 'genres'))
+        })
+        .catch(err => console.log(err))
+    } else
+      return
+  }
+
+  getScreenshots() {
+    if (this.state.game.screenshots) {
+      console.log(this.state.game.screenshots)
+      const newScreenshots = `(${[...this.state.game.screenshots].toString()})`
+      console.log(newScreenshots)
+      axios.post('api/game-screenshots', { screenshotsId: newScreenshots})
+        .then(screenshots => {
+          this.setState({...this.state, screenshots: screenshots.data}, () => console.log(this.state.screenshots, 'screenshots'))
+        })
+        .catch(err => console.log(err))
+    } else
+      return
   }
 
 
   componentDidMount() {
     this.setState({...this.state, game: this.props.location.state.game}, () => {
       this.getCoverPhoto()
-      this.getComments()
       this.getGenres()
+      this.getScreenshots()
     })
     console.log('state')
     console.log(this.state)
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post('api/localgames/comments', {text: this.state.data.liveComment, gameId: this.props.location.state.specificGame.gameId}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then((res)=> this.setState({...this.state, comments: res.data}, () => console.log(this.state)))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
+  }
+
+  handleChange({ target: { name, value }}) {
+    const data = {...this.state.data, [name]: value}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data, errors }, () => console.log(this.state))
+  }
+
   render() {
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
-
+    const screenshots = this.state.screenshots
+    {screenshots && console.log(screenshots)}
     return(
       <main>
         <div className="contains-gameForum">
           <div className="gameForum-left">
             <div className="contains-gameInfo">
               <div className="gameCover">
-                <img src= {this.state.results ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${this.state.results[0].image_id}.jpg` : ''} alt="game cover" />
+                <img src= {(this.state.results && this.state.results.length)  ? `https://images.igdb.com/igdb/image/upload/t_cover_big/${this.state.results[0].image_id}.jpg` : '' } alt="no game cover" />
               </div>
               <div className="gameDetails">
-                <h2>{game.name}</h2>
+                <h2>{game.name && game.name}</h2>
                 <h5>Released: &nbsp;
-                  {releaseDate.getDate().toString()}/
-                  {(releaseDate.getMonth() + 1).toString()}/
-                  {releaseDate.getFullYear().toString()}
+                  {releaseDate && releaseDate.getDate().toString()}/
+                  {releaseDate && (releaseDate.getMonth() + 1).toString()}/
+                  {releaseDate && releaseDate.getFullYear().toString()}
                 </h5>
-                <h5>genres</h5>
-                <p>{game.summary}</p>
+                {(this.state.genres && this.state.genres.length) && this.state.genres.map((genre, index) => <small key={index}>{genre.name}</small>)}
+
+                <p>{game.summary && game.summary}</p>
               </div>
             </div>
             <div className="contains-ratings">
               <div className="ourRating">
-                <h1>{game.rating}</h1>
+                <h1>{game.rating && game.rating}</h1>
               </div>
               <div className="yourRating">
                 <h1>
@@ -84,12 +124,15 @@ class GameForum extends React.Component {
               </select>
             </div>
             <div className="contains-screenshots">
-              {game.screenshots}
+              screenshots: {(this.state.screenshots && this.state.screenshots.length) && this.state.screenshots.map((screenshots, index) => <p key={index}><img src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${screenshots.image_id}.jpg`}/></p>)}
             </div>
           </div>
           <div className="gameForum-right">
-            <form className="addcomment">
+            <form onSubmit={this.handleSubmit} className="addcomment">
               <input
+                name="liveComment"
+                onChange={this.handleChange}
+                value={this.state.data.liveComment || ''}
                 placeholder="what do you think?..."
               />
               <button> Post comment </button>

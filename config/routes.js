@@ -4,8 +4,8 @@ const auth = require('../controllers/auth')
 const rp = require('request-promise')
 const axios = require('axios')
 const message = require('../controllers/messages')
-const comments = require('../controllers/comments')
 const secureRoute = require('../lib/secureRoute')
+const games = require('../controllers/games')
 
 router.post('/register', auth.register)
 router.post('/login', auth.login)
@@ -89,7 +89,7 @@ router.post('/game-genres', (req, res) => {
       'user-key': `${igdbApiKey}`,
       'Content-Type': 'text/plain'
     },
-    data: `fields *; where id = (${req.body.genreId});`
+    data: `fields *; where id = ${req.body.genreId};`
 
   })
     .then(genres => {
@@ -98,29 +98,24 @@ router.post('/game-genres', (req, res) => {
     .catch(err => console.error(err))
 })
 
+router.post('/game-screenshots', (req, res) => {
+  console.log(req.body.screenshotsId)
+  axios({
+    url: 'https://api-v3.igdb.com/screenshots',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': `${igdbApiKey}`,
+      'Content-Type': 'text/plain'
+    },
+    data: `fields *; where id = ${req.body.screenshotsId};`
 
-
-
-//I DON'T KNOW WHAT IM DOING
-// router.post('/accessgame', (req, res) => {
-//   axios({
-//     url: 'http://localhost:4000/',
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'user-key': `${igdbApiKey}`,
-//       'Content-Type': 'text/plain'
-//     }
-//   })
-//     .then(game => {
-//       console.log(game)
-//     })
-//     .catch(err => console.log(err))
-// })
-
-router.route('/comments')
-  .get(comments.index)
-  .post(secureRoute, comments.create)
+  })
+    .then(screenshots => {
+      res.json(screenshots.data)
+    })
+    .catch(err => console.error(err))
+})
 
 router.route('/messages')
   .get(message.index)
@@ -136,6 +131,15 @@ router.route('/allusers')
 router.route('/users/favouritegames')
   .post(secureRoute, auth.FavouriteGameCreateRoute)
   .delete(secureRoute, auth.FavouriteGameDeleteRoute)
+
+router.route('/localgames')
+  .post(games.getGame)
+
+router.route('/localgames/comments')
+  .post(secureRoute, games.createComment)
+
+router.route('/localgames/ratings')
+  .post(secureRoute, games.createRating)
 
 
 module.exports = router

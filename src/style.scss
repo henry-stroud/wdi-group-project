@@ -349,9 +349,14 @@ header {
       }
     }
     .contains-screenshots {
+      display: flex;
+      flex-direction: row;
       height: 25%;
       width: 100%;
       border: 2px solid whitesmoke;
+      img {
+        width: 100%;
+      }
     }
 
   }

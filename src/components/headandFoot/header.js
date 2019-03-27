@@ -17,12 +17,6 @@ class Header extends React.Component {
     this.getProfile()
   }
 
-  componentDidUpdate() {
-    this.getProfile()
-  }
-
-
-
   logout() {
     Auth.logout()
     this.props.history.push('/')
