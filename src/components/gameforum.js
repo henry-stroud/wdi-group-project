@@ -57,12 +57,17 @@ class GameForum extends React.Component {
       return
   }
 
+  getUserComments() {
+    axios.post('/api/localgames', { gameId: this.props.location.state.specificGame.gameId})
+      .then((res) => this.setState({...this.state, gameComments: res.data.userComment}, () => console.log(this.state.gameComments, 'gamecomments')))
+  }
 
   componentDidMount() {
     this.setState({...this.state, game: this.props.location.state.game}, () => {
       this.getCoverPhoto()
       this.getGenres()
       this.getScreenshots()
+      this.getUserComments()
     })
     console.log('state')
     console.log(this.state)
@@ -71,7 +76,8 @@ class GameForum extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     axios.post('api/localgames/comments', {text: this.state.data.liveComment, gameId: this.props.location.state.specificGame.gameId}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((res)=> this.setState({...this.state, comments: res.data}, () => console.log(this.state)))
+      .then((res)=> this.setState({...this.state, comments: res.data, data: { liveComment: ''}}, () => console.log(this.state)))
+      .then(() => this.getUserComments())
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
@@ -85,7 +91,10 @@ class GameForum extends React.Component {
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
     const screenshots = this.state.screenshots
+    const rating = this.props.location.state.game.aggregated_rating
+    {rating && console.log(rating, 'rating')}
     {screenshots && console.log(screenshots)}
+    {this.state.gameComments && console.log(this.state.gameComments)}
     return(
       <main>
         <div className="contains-gameForum">
@@ -108,7 +117,7 @@ class GameForum extends React.Component {
             </div>
             <div className="contains-ratings">
               <div className="ourRating">
-                <h1>{game.rating && game.rating}</h1>
+                <h1>{rating && rating.toFixed(1)}</h1>
               </div>
               <div className="yourRating">
                 <h1>
@@ -138,7 +147,13 @@ class GameForum extends React.Component {
               <button> Post comment </button>
             </form>
             <div className="commentsfeed">
-
+              <div className = "chatBox">
+                {this.state.gameComments && this.state.gameComments.map((comment, i) =>
+                  <div className ="messages" key={i}>
+                    <small><span style={{color: `${comment.user.color}`}}>{comment.user.username}</span>: <span>{comment.text}</span> </small>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

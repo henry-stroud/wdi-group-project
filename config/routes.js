@@ -135,6 +135,9 @@ router.route('/users/favouritegames')
 router.route('/localgames')
   .post(games.getGame)
 
+router.route('/localgames/specific')  
+  .post(games.getAllGames)
+
 router.route('/localgames/comments')
   .post(secureRoute, games.createComment)
 
