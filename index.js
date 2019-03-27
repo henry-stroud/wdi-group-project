@@ -31,3 +31,5 @@ io.on('connection', (socket) => {
     io.emit('receiveMessage', data)
   })
 })
+
+module.exports = app
