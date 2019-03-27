@@ -92,7 +92,6 @@ class ViewProfile extends React.Component {
           <div className="comments-complete">
             <h3> Your comments will appear here on you profile.</h3>
             <div className="comments"> </div>
-            <button className="completeProfile">Complete profile!</button>
           </div>
         </div>
         }

@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { Link, withRouter } from 'react-router-dom'
+
 
 import PopupProfilePage from '../components/popupProfilePage'
 
@@ -124,15 +126,16 @@ class CreateProfile extends React.Component {
 
           <div className="chooseGame">
             <h2> What are your top 6 games right now? </h2>
-            <input
+            {this.state.favGames.length < 6 && <input
               className="chooseMyGames"
               onChange={this.handleChange}
-            />
-            <button className="gameSearchButton"
+            />}
+            {this.state.favGames.length < 6 && <button className="gameSearchButton"
               onClick={this.handleClickButton}> Search
-            </button>
+            </button>}
             <PopupProfilePage
               show={this.state.isOpen}
+              favGames={this.state.favGames}
               games={this.state.results}
               handleClickGames={this.handleClickGames}
               onClose={this.closePopup}>
@@ -148,7 +151,7 @@ class CreateProfile extends React.Component {
           <div className="comments-complete">
             <h3> Your comments will appear here on you profile.</h3>
             <div className="comments"> </div>
-            <button className="completeProfile">Complete profile!</button>
+            {(this.state.favGames.length >= 6 && this.state.avatar) && <Link to="/"><button className="completeProfile">Complete profile!</button></Link>}
           </div>
         </div>
       </main>
@@ -157,5 +160,4 @@ class CreateProfile extends React.Component {
 }
 
 
-
-export default CreateProfile
+export default withRouter(CreateProfile)
