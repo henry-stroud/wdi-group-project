@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Popup from '../components/popup'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class GameSearch extends React.Component {
   constructor(){

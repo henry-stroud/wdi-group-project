@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true},
   color: {type: String},
   avatar: { type: String },
-  favouriteGames: [favouriteGamesSchema]
+  favouriteGames: [ favouriteGamesSchema ]
 })
 
 userSchema.plugin(require('mongoose-unique-validator'))

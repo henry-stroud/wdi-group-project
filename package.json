@@ -23,6 +23,7 @@
     "file-loader": "^3.0.1",
     "filestack-js": "^2.0.2",
     "http": "^0.0.0",
+    "immutability-helper": "^3.0.0",
     "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.19",
     "mongoose-unique-validator": "^2.0.2",

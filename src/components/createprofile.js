@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { Link, withRouter } from 'react-router-dom'
+
 
 import PopupProfilePage from '../components/popupProfilePage'
 
@@ -9,20 +11,22 @@ const fileStackKey = process.env.REACT_APP_FILE_STACK_API
 
 import * as filestack from 'filestack-js'
 const client = filestack.init(fileStackKey)
-console.log(fileStackKey)
-console.log(client)
+
 
 class CreateProfile extends React.Component {
   constructor(){
     super()
 
-    this.state = { data: {
-      isOpen: false,
-      data: {},
-      errors: {},
-      results: [],
-      avatar: ''
-    }
+    this.state = {
+      favGames: [],
+      data: {
+        isOpen: false,
+        data: {},
+        errors: {},
+        results: [],
+        avatar: '',
+        cover: ''
+      }
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -46,7 +50,6 @@ class CreateProfile extends React.Component {
   }
 
   pushAvatarToBackEnd (avatarLink) {
-    console.log(this.state)
     axios.post('api/users', avatarLink, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((res) => this.setState(res.data))
       .then(console.log(this.state))
@@ -60,7 +63,6 @@ class CreateProfile extends React.Component {
     e.preventDefault()
     axios.post('/api/games', { game: this.state.query})
       .then(games => {
-        console.log(games.data)
         this.setState({results: games.data})
         this.openPopup()
       })
@@ -93,13 +95,23 @@ class CreateProfile extends React.Component {
 
   handleClickGames(item) {
     this.setState({...this.state, gameId: item.id }, () => axios.post('api/users/favouritegames', this.state, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((res) => this.setState({...this.state, newdata: res.data }))
-      .then(console.log(this.state)))
-
+      .then((res) => this.setState({...this.state, newdata: res.data }, () => this.getCoverPhoto())))
   }
 
+
+  getCoverPhoto() {
+    axios.post('api/game-covers', { game: this.state.gameId})
+      .then(cover => {
+        this.setState({...this.state, cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.data[0].image_id}.jpg`}, () => this.setState(prevState => ({
+          favGames: [...prevState.favGames, this.state.cover]
+        })))
+      })
+      .catch(err => console.log(err))
+  }
+
+
   render(){
-    {this.state && console.log(this.state)}
+    {this.state.favGames && console.log(this.state.favGames)}
     return(
       <main>
         <div className="contains-createProfile">
@@ -114,32 +126,32 @@ class CreateProfile extends React.Component {
 
           <div className="chooseGame">
             <h2> What are your top 6 games right now? </h2>
-            <input
+            {this.state.favGames.length < 6 && <input
               className="chooseMyGames"
               onChange={this.handleChange}
-            />
-            <button className="gameSearchButton"
+            />}
+            {this.state.favGames.length < 6 && <button className="gameSearchButton"
               onClick={this.handleClickButton}> Search
-            </button>
+            </button>}
             <PopupProfilePage
               show={this.state.isOpen}
+              favGames={this.state.favGames}
               games={this.state.results}
               handleClickGames={this.handleClickGames}
               onClose={this.closePopup}>
             </PopupProfilePage>
             <div className="mygames">
-              <div>My Game 1</div>
-              <div> My Game 2 </div>
-              <div> My Game 3 </div>
-              <div> My Game 4 </div>
-              <div> My Game 5 </div>
-              <div> My Game 6 </div>
+              {this.state.favGames && this.state.favGames.map((cover, index) =>
+                <div className="eachGame" key={index}>
+                  <img src={cover} alt="gamecover"/>
+                </div>
+              )}
             </div>
           </div>
           <div className="comments-complete">
             <h3> Your comments will appear here on you profile.</h3>
             <div className="comments"> </div>
-            <button className="completeProfile">Complete profile!</button>
+            {(this.state.favGames.length >= 6 && this.state.avatar) && <Link to="/"><button className="completeProfile">Complete profile!</button></Link>}
           </div>
         </div>
       </main>
@@ -148,4 +160,4 @@ class CreateProfile extends React.Component {
 }
 
 
-export default CreateProfile
+export default withRouter(CreateProfile)
