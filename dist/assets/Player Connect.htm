@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8000/ -->
+<html lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="./Player Connect_files/animate.css">
+    
+    <link rel="stylesheet" href="./Player Connect_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./Player Connect_files/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="./Player Connect_files/css" rel="stylesheet">
+    <link href="./Player Connect_files/css(1)" rel="stylesheet">
+    <title>Player Connect</title>
+  <style type="text/css">body {
+  font-family: 'Audiowide', cursive;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+main {
+  width: 100%;
+  height: 80vh;
+  background-image: url(/002f9e6fa89dfea4d9624d5cf8c8fe99.jpg);
+  background-size: cover;
+  display: flex; }
+
+header {
+  background-color: rgba(0, 0, 0, 0.87);
+  color: whitesmoke;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+  header .contains-loggedin {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+    header .contains-loggedin .userloggedin {
+      margin: 20px;
+      align-self: center; }
+      header .contains-loggedin .userloggedin a {
+        text-decoration: none;
+        color: whitesmoke;
+        text-shadow: 1px 1px 1px #673AB7;
+        cursor: pointer; }
+      header .contains-loggedin .userloggedin a:hover {
+        color: whitesmoke;
+        text-shadow: 1px 1px 1px #C24D2C; }
+    header .contains-loggedin .avatar {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      align-self: center;
+      box-shadow: 2px 2px 2px #673AB7;
+      margin: 20px; }
+  header .navbar {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-self: center;
+    margin-right: 50px;
+    font-size: 18px; }
+    header .navbar a {
+      text-decoration: none;
+      text-shadow: 0.5px 0.5px 0.5px #673AB7;
+      color: whitesmoke; }
+    header .navbar a:hover {
+      color: whitesmoke;
+      text-shadow: 0.5px 0.5px 0.5px #C24D2C; }
+  header .contains-title {
+    display: flex;
+    justify-content: flex-start;
+    width: 33%; }
+    header .contains-title h1 {
+      padding: 20px 20px 20px 70px;
+      font-size: 40px;
+      text-shadow: 4px 4px 2px #673AB7;
+      margin: auto 0; }
+  header .contains-logo {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; }
+    header .contains-logo img {
+      max-height: 130px;
+      max-width: 130px; }
+
+footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 5vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: whitesmoke;
+  width: 100%; }
+  footer p {
+    padding-right: 20px; }
+  footer .socialMediaIcons {
+    display: flex; }
+    footer .socialMediaIcons i {
+      margin: auto 20px;
+      font-size: 20px; }
+
+.contains-loginForm, .contains-registerForm {
+  align-self: center;
+  background-color: rgba(50, 50, 50, 0.7);
+  display: flex;
+  margin: auto;
+  height: 300px;
+  width: 400px;
+  flex-direction: column;
+  border: 2px solid #673AB7;
+  border-radius: 5px; }
+  .contains-loginForm button, .contains-registerForm button {
+    margin-top: 5px;
+    color: whitesmoke;
+    outline: none;
+    border-radius: 20px;
+    background: #673AB7;
+    border: 1px solid #673AB7;
+    font-size: 12px;
+    cursor: pointer;
+    align-self: center;
+    width: 40%; }
+  .contains-loginForm .registerInput, .contains-registerForm .registerInput {
+    width: 75%;
+    outline: none;
+    border-radius: 20px;
+    height: 25px;
+    border: 3px solid #673AB7;
+    font-size: 12px;
+    padding-left: 10px;
+    margin: 10px; }
+  .contains-loginForm p, .contains-registerForm p {
+    color: whitesmoke;
+    text-align: center;
+    padding-bottom: 7px; }
+    .contains-loginForm p a, .contains-registerForm p a {
+      text-decoration: none;
+      color: #C24D2C; }
+    .contains-loginForm p a:hover, .contains-registerForm p a:hover {
+      text-decoration: underline;
+      color: #C24D2C; }
+  .contains-loginForm .loginForm, .contains-loginForm .registerForm, .contains-registerForm .loginForm, .contains-registerForm .registerForm {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; }
+    .contains-loginForm .loginForm .loginFormInput, .contains-loginForm .registerForm .loginFormInput, .contains-registerForm .loginForm .loginFormInput, .contains-registerForm .registerForm .loginFormInput {
+      width: 75%;
+      outline: none;
+      border-radius: 20px;
+      height: 25px;
+      border: 3px solid #673AB7;
+      font-size: 12px;
+      padding-left: 10px;
+      margin: 12px; }
+
+.tinyError {
+  font-size: 110%;
+  color: red; }
+
+.error {
+  box-shadow: 0 0 10px red; }
+
+.homeChange {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-self: flex-end;
+  width: 5%;
+  background-color: rgba(50, 50, 50, 0.9);
+  cursor: pointer; }
+  .homeChange h1 {
+    color: whitesmoke;
+    text-shadow: 2px 2px 1px #673AB7;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+    padding: auto; }
+  .homeChange h1:hover {
+    color: whitesmoke;
+    text-shadow: 2px 2px 2px #C24D2C; }
+
+.contains-news-gameSearch {
+  font-size: 14px;
+  align-self: center;
+  width: 95%; }
+  .contains-news-gameSearch .contains-news {
+    border-bottom: 1px dashed whitesmoke;
+    background-color: rgba(50, 50, 50, 0.7);
+    display: flex;
+    flex-direction: row;
+    height: 40vh;
+    overflow-x: scroll;
+    overflow-y: hidden; }
+    .contains-news-gameSearch .contains-news .newscard {
+      font-family: inherit;
+      min-width: 500px;
+      height: 30vh;
+      margin: auto;
+      padding: 10px;
+      text-align: center;
+      border-left: 1px dashed whitesmoke; }
+      .contains-news-gameSearch .contains-news .newscard h2, .contains-news-gameSearch .contains-news .newscard a, .contains-news-gameSearch .contains-news .newscard p {
+        text-decoration: none;
+        color: whitesmoke;
+        margin: 0;
+        padding: 20px; }
+      .contains-news-gameSearch .contains-news .newscard img {
+        float: right;
+        width: 200px;
+        height: 150px; }
+    .contains-news-gameSearch .contains-news h1 {
+      color: whitesmoke;
+      text-align: center; }
+  .contains-news-gameSearch .main-gameSearch {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(50, 50, 70, 0.7);
+    width: 100%;
+    height: 40vh; }
+    .contains-news-gameSearch .main-gameSearch h2 {
+      text-align: center; }
+    .contains-news-gameSearch .main-gameSearch .gameSearchBar {
+      width: 100%;
+      outline: none;
+      border-radius: 20px;
+      height: 30px;
+      border: 3px solid #673AB7;
+      font-size: 20px;
+      padding-left: 10px;
+      font-family: inherit; }
+    .contains-news-gameSearch .main-gameSearch .gameSearchButton {
+      outline: none;
+      border-radius: 20px;
+      color: whitesmoke;
+      background: #673AB7;
+      border: 3px solid #673AB7;
+      font-size: 12px;
+      cursor: pointer; }
+    .contains-news-gameSearch .main-gameSearch .contains-gameSearch {
+      max-width: 30%;
+      align-self: center;
+      justify-content: center; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch button {
+        text-align: center;
+        margin: 20px 40%; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch h2 {
+        margin: 20px;
+        color: whitesmoke; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch .popup {
+        border: 1px solid #673AB7;
+        border-radius: 20px;
+        color: whitesmoke;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100px;
+        width: 100%; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch li {
+        cursor: pointer;
+        list-style-type: none; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch li:hover {
+        color: #C24D2C; }
+      .contains-news-gameSearch .main-gameSearch .contains-gameSearch .popup-close {
+        display: flex;
+        cursor: pointer; }
+
+.embeddedVideos {
+  height: 100%; }
+  .embeddedVideos iframe {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0 10px;
+    border-left: 1px dashed whitesmoke; }
+
+.contains-createProfile {
+  background-color: rgba(50, 50, 70, 0.7);
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+  .contains-createProfile .userDetails {
+    height: 80%;
+    width: 20%; }
+    .contains-createProfile .userDetails button {
+      margin-top: 5px;
+      color: whitesmoke;
+      outline: none;
+      border-radius: 20px;
+      background-color: rgba(50, 50, 70, 0.7);
+      font-size: 12px;
+      cursor: pointer;
+      align-self: center;
+      width: 40%; }
+    .contains-createProfile .userDetails button:hover {
+      border: 1px solid #673AB7; }
+    .contains-createProfile .userDetails h2 {
+      text-align: center;
+      text-shadow: 2px 2px 1px #673AB7; }
+    .contains-createProfile .userDetails h2, .contains-createProfile .userDetails h3 {
+      color: whitesmoke;
+      font-family: inherit; }
+    .contains-createProfile .userDetails img {
+      width: 200px;
+      height: 200px; }
+  .contains-createProfile .chooseGame {
+    height: 80%;
+    margin: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    width: 40%; }
+    .contains-createProfile .chooseGame h2 {
+      text-align: center;
+      color: whitesmoke; }
+    .contains-createProfile .chooseGame .chooseMyGames {
+      margin: 20px; }
+    .contains-createProfile .chooseGame .mygames {
+      border-top: 1px dashed whitesmoke;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      overflow-y: scroll;
+      margin: 0 auto; }
+      .contains-createProfile .chooseGame .mygames .eachGame img {
+        border-radius: 2px;
+        height: 180px;
+        width: 129px;
+        margin: 10px;
+        box-shadow: 1px 1px 1px black; }
+  .contains-createProfile .comments-complete {
+    height: 80%;
+    width: 20%; }
+    .contains-createProfile .comments-complete button {
+      border-radius: 10px;
+      margin: 10px auto;
+      height: 30px;
+      width: 80%; }
+    .contains-createProfile .comments-complete h3 {
+      color: whitesmoke;
+      text-align: left; }
+    .contains-createProfile .comments-complete .comments {
+      align-self: center;
+      height: 70%;
+      background-color: whitesmoke; }
+
+.contains-gameForum {
+  display: flex;
+  background-color: rgba(50, 50, 50, 0.7);
+  height: 80vh;
+  width: 90%;
+  margin: 0 auto;
+  flex-direction: column;
+  border: 0; }
+  .contains-gameForum .contains-screenshots {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    height: 30vh;
+    width: 100%; }
+    .contains-gameForum .contains-screenshots div {
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll; }
+      .contains-gameForum .contains-screenshots div p {
+        height: 100%;
+        padding: 20px; }
+        .contains-gameForum .contains-screenshots div p img {
+          border-radius: 3%; }
+  .contains-gameForum .forumSplit {
+    display: flex;
+    flex-direction: row;
+    height: 50vh; }
+    .contains-gameForum .forumSplit .overlay {
+      background-color: rgba(255, 20, 60, 0.4);
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border-radius: 2%; }
+      .contains-gameForum .forumSplit .overlay .locked {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+        .contains-gameForum .forumSplit .overlay .locked .lock {
+          font-size: 70px;
+          color: black;
+          text-shadow: 2px 2px 2px #673AB7; }
+      .contains-gameForum .forumSplit .overlay .commentsfeed {
+        display: flex;
+        padding: 20px 20px 0 20px;
+        height: 40%; }
+        .contains-gameForum .forumSplit .overlay .commentsfeed .chatBox {
+          background-color: rgba(20, 20, 20, 0.7);
+          height: 100%;
+          width: 100%;
+          border-radius: 1%;
+          overflow-y: scroll;
+          align-self: center;
+          margin: 0 auto; }
+      .contains-gameForum .forumSplit .overlay form {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 40%; }
+        .contains-gameForum .forumSplit .overlay form button {
+          margin-top: 5px;
+          outline: none;
+          border-radius: 20px;
+          background: #C24D2C;
+          border: 3px solid #C24D2C;
+          font-size: 10px;
+          cursor: pointer;
+          align-self: center;
+          width: 40%; }
+        .contains-gameForum .forumSplit .overlay form input {
+          width: 100%;
+          background-color: rgba(20, 20, 20, 0.7);
+          outline: none;
+          border-radius: 20px;
+          height: 80%;
+          border: 3px solid grey;
+          font-size: 20px;
+          padding-left: 10px; }
+    .contains-gameForum .forumSplit .gameForum-right {
+      width: 40%;
+      display: flex;
+      flex-direction: column; }
+      .contains-gameForum .forumSplit .gameForum-right .commentsfeed {
+        display: flex;
+        padding: 20px 20px 0 20px;
+        height: 40%; }
+        .contains-gameForum .forumSplit .gameForum-right .commentsfeed .chatBox {
+          background-color: rgba(20, 20, 20, 0.7);
+          height: 100%;
+          width: 100%;
+          border-radius: 1%;
+          overflow-y: scroll;
+          align-self: center;
+          margin: 0 auto; }
+      .contains-gameForum .forumSplit .gameForum-right form {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 40%; }
+        .contains-gameForum .forumSplit .gameForum-right form button {
+          margin-top: 5px;
+          outline: none;
+          border-radius: 20px;
+          background: #C24D2C;
+          border: 3px solid #C24D2C;
+          font-size: 10px;
+          cursor: pointer;
+          align-self: center;
+          width: 40%; }
+        .contains-gameForum .forumSplit .gameForum-right form input {
+          width: 100%;
+          outline: none;
+          border-radius: 20px;
+          height: 80%;
+          border: 3px solid #673AB7;
+          font-size: 20px;
+          padding-left: 10px; }
+    .contains-gameForum .forumSplit .gameForum-left {
+      display: flex;
+      flex-direction: column;
+      width: 60%; }
+      .contains-gameForum .forumSplit .gameForum-left .contains-ratings {
+        text-align: center;
+        height: 40%;
+        width: 100%;
+        margin-bottom: 0; }
+        .contains-gameForum .forumSplit .gameForum-left .contains-ratings .rateGame, .contains-gameForum .forumSplit .gameForum-left .contains-ratings .criticRating {
+          padding-right: 10px; }
+      .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo {
+        display: flex;
+        flex-direction: row;
+        height: 60%;
+        width: 100%;
+        padding: 20px; }
+        .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameCover img {
+          border-radius: 3%;
+          height: 220px;
+          width: 157px; }
+        .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameDetails {
+          display: flex;
+          flex-direction: column;
+          text-align: center; }
+          .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameDetails h2 {
+            font-size: 19px;
+            font-weight: 700;
+            text-shadow: 0.5 0.5 0.5 #673AB7; }
+          .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameDetails h5, .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameDetails small, .contains-gameForum .forumSplit .gameForum-left .contains-gameInfo .gameDetails p {
+            display: flex;
+            flex-direction: row;
+            padding-top: 10px;
+            margin: 0;
+            display: inline;
+            font-weight: lighter; }
+
+.messages span {
+  color: white; }
+
+.chat {
+  width: 50%;
+  display: flex;
+  justfy-content: center; }
+  .chat .button {
+    font-family: inherit;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 10px auto;
+    height: 30px;
+    width: 25%;
+    background: #673AB7;
+    color: whitesmoke;
+    border: 2px solid #673AB7;
+    outline: none; }
+  .chat textarea {
+    font-family: inherit;
+    margin-top: 20px;
+    width: 500px;
+    height: 200px;
+    outline: none;
+    border-radius: 20px;
+    border: 3px solid #673AB7;
+    font-size: 20px;
+    padding-left: 10px;
+    word-break: break-all; }
+
+.chatBox {
+  font-size: 24px;
+  width: 50%;
+  overflow-y: scroll; }
+
+.gameDetails {
+  display: flex; }
+  .gameDetails p {
+    width: 600px;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    text-align: justify;
+    max-width: 80%;
+    align-self: center; }
+</style><link type="image/x-icon" rel="icon" href="http://oflisback.github.io/react-favicon/public/img/github.ico"></head>
+  <body>
+    <div id="root"><div><div><header><div class="contains-loggedin"><img class="avatar" alt=""><div class="userloggedin"><a href="http://localhost:8000/viewprofile"> <h2> elmo </h2> </a><a>logOut</a></div></div><div class="contains-title"><h1>player connect</h1></div><div class="contains-logo"><a href="http://localhost:8000/"><img src="./Player Connect_files/logofinal.png" alt="playerconnect logo"></a></div></header></div><div><main><div class="contains-news-gameSearch"><div class="contains-news  animated fadeIn"><form><input class="input " name="message" placeholder="Message" value=""><button class="button is-info">Submit</button></form><div class="chatBox"></div></div><div class="contains-news animated fadeIn"><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/4rG9noTfb4A.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/6TOSV3-7hzU.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/RU_AcN_72K8.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/_pUdwuh2GrU.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/m0Tnp-3W3z4.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/y0DhWQM40XQ.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/b2dc3YK2HVo.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div><div class="embeddedVideos animated fadeIn"><iframe width="560" height="250" src="./Player Connect_files/CDKmbLlH0ek.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div></div></div><div class="homeChange"><h1> NEWS &amp; GAMES </h1></div></main></div><footer class="footer"><span class="socialMediaIcons"><i class="fab fa-facebook-square"></i><i class="fab fa-instagram"></i><i class="far fa-smile"></i><i class="fab fa-twitter-square"></i><i class="fab fa-twitch"></i><i class="fab fa-reddit-square"></i></span><p> Brought to you by BHM </p></footer></div></div>
+  <script type="text/javascript" src="./Player Connect_files/bundle.js"></script>
+
+</body></html>

@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <Browser>
         <div>
-          <Favicon url="http://oflisback.github.io/react-favicon/public/img/github.ico" />
+          <Favicon url="./assets/logo-purple.png" />
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>

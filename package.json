@@ -6,7 +6,9 @@
     "start:server": "nodemon",
     "start:client": "webpack-dev-server --mode=development",
     "seed": "node db/seeds.js",
-    "test": "mocha test/**/*_spec.js --require test/spec_helper --recursive --exit"
+    "test": "mocha test/**/*_spec.js --require test/spec_helper --recursive --exit",
+    "start": "node index",
+    "build": "webpack -p"
   },
   "license": "MIT",
   "dependencies": {

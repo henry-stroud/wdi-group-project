@@ -10,14 +10,16 @@ const app = express()
 mongoose.connect(dbURI, { useNewUrlParser: true })
 mongoose.set('useCreateIndex', true)
 
-app.use(express.static(`${__dirname}`))
+app.use(express.static(`${__dirname}/dist`))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
 app.use('/api', router)
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
 app.use(errorHandler)
+
 
 const server = app.listen(port, () => console.log(`App is listening on port ${port}`))
 
