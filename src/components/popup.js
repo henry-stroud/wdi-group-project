@@ -15,9 +15,9 @@ class Popup extends React.Component {
   }
 
   handleClick(item) {
-    console.log(item.id)
-    axios.post('api/localgames', { gameId: item.id })
-      .then((res)=> this.setState({...this.state, specificGame: res.data }, () => this.setState({...this.state, redirect: !this.state.redirect}, () => console.log(this.state.specificGame, 'hello'))))
+    console.log('look here donut', item)
+    axios.post('api/localgames', { gameId: item.id, name: item.name })
+      .then((res)=> this.setState({...this.state, specificGame: res.data, game: item }, () => this.setState({...this.state, redirect: !this.state.redirect}, () => console.log(this.state.specificGame, 'MILES'))))
       .catch((err) => console.log(err))
   }
 
@@ -26,10 +26,10 @@ class Popup extends React.Component {
     if(!this.props.show) {
       return null
     }
+    {this.props.games && console.log(this.props.games)}
     return (
       <div className="popup-backdrop">
         <div className="popup">
-          <button className="popup-close" onClick={this.props.onClose}>Cancel</button>
           <ul>
             {this.props.games.map((item) =>
               <li key={item.id} onClick={() => this.handleClick(item)}>
@@ -37,13 +37,14 @@ class Popup extends React.Component {
                   to={{
                     pathname: '/gameforum',
                     state: {
-                      game: item,
+                      game: this.state.game,
                       specificGame: this.state.specificGame
                     }
                   }}></Redirect>}{item.name}
               </li>
             )}
           </ul>
+          <button className="popup-close" onClick={this.props.onClose}>Cancel</button>
         </div>
       </div>
 

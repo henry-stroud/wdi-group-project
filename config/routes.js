@@ -134,6 +134,7 @@ router.route('/users/favouritegames')
 
 router.route('/localgames')
   .post(games.getGame)
+  .get(games.gamesIndex)
 
 router.route('/localgames/specific')
   .post(games.getAllGames)

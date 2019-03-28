@@ -14,6 +14,8 @@ const commentSchema = new mongoose.Schema({
 
 const gameSchema = new mongoose.Schema({
   gameId: { type: Number },
+  name: {type: String },
+  color: {type: String},
   userRating: [ userRatingSchema ],
   userComment: [ commentSchema ]
 })
@@ -32,5 +34,4 @@ commentSchema.plugin(require('mongoose-autopopulate'))
 userRatingSchema.plugin(require('mongoose-autopopulate'))
 gameSchema.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model('Comment', commentSchema)
 module.exports = mongoose.model('Game', gameSchema)

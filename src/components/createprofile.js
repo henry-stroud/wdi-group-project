@@ -117,7 +117,7 @@ class CreateProfile extends React.Component {
         <div className="contains-createProfile">
           <div className="userDetails">
             <img className="avatar" src={this.state.avatar} />
-            <h4 className="userName"> bubblesaurus90 </h4>
+            <h4 className="userName"> </h4>
             <button
               onClick={this.handleClick}>
                 Upload photo

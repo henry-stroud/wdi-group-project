@@ -4,9 +4,10 @@ function getGame( req, res ) {
   console.log(req.body.gameId)
   Game
     .findOne({ gameId: req.body.gameId})
-    .populate('commentSchema')
     .then(game => {
       if (!game) {
+        req.body.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+        console.log(req.body)
         return Game
           .create(req.body)
       }
@@ -20,7 +21,14 @@ function getAllGames(req, res) {
   console.log(req.body)
   Game
     .find({gameId: req.body.gameId})
-    .populate('userComment')
+    .then(games => res.json(games))
+    .catch((err) => res.json(err))
+}
+
+function gamesIndex(req, res) {
+  console.log(req.body)
+  Game
+    .find()
     .then(games => res.json(games))
     .catch((err) => res.json(err))
 }
@@ -57,5 +65,6 @@ module.exports = {
   getGame,
   createComment,
   createRating,
-  getAllGames
+  getAllGames,
+  gamesIndex
 }

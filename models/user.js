@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-require('./game')
 
 const favouriteGamesSchema = new mongoose.Schema({
   gameId: { type: Number },
@@ -17,10 +16,6 @@ const userSchema = new mongoose.Schema({
   favouriteGames: [ favouriteGamesSchema ]
 })
 
-
-userSchema.virtual('myPosts', () => {
-  return 'hello'
-})
 
 
 userSchema.plugin(require('mongoose-unique-validator'))

@@ -26,6 +26,7 @@ class ViewProfile extends React.Component {
     this.getProfile()
   }
 
+
   addUserImage() {
     const options = {
       accept: ['image/*'],
@@ -45,16 +46,50 @@ class ViewProfile extends React.Component {
     const array = []
     axios.get('api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((user) => this.setState({...this.state, data: user.data}, () => this.state.data.favouriteGames.map(item => array.push(item.gameId))))
-      .then(() => this.setState({...this.state, favGames: array}, () => console.log(this.state)))
+      .then(() => this.setState({...this.state, favGames: array}, this.getAllGames))
       .then(() => this.state.favGames.map(gameId => this.getCoverPhoto(gameId)))
   }
+
+  getAllGames() {
+    axios.get('api/localgames')
+      .then((res) => {
+        this.setState({ allGames: res.data }, this.mappingFunction)
+      })
+      .catch((err) => console.log(err))
+  }
+
+
+  mappingFunction() {
+    const myComments = []
+    if (this.state.data && this.state.data._id) {
+      const user = this.state.data._id
+      const allGames = this.state.allGames
+      const filteredGames = allGames.filter(games => games.userComment.length)
+      console.log('filteredGames', filteredGames)
+      filteredGames.map(function(game) {
+        game.userComment.map(function(item) {
+          if (item.user._id === user) {
+            console.log(game, 'this is the game',item, 'thisis the item')
+            myComments.push({game: game.name, comment: item, color: game.color})
+          }
+        })
+      })
+      this.setState({myComments}, () => console.log(this.state.myComments, 'BANANAS'))
+    }
+  }
+
+  // getGameInfoFromId(id) {
+  //   axios.get()
+  // }
 
   getCoverPhoto(gameId) {
     axios.post('api/game-covers', { game: gameId})
       .then(cover => {
-        this.setState({...this.state, cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.data[0].image_id}.jpg`}, () => this.setState(prevState => ({
-          favGamesCovers: [...prevState.favGamesCovers, this.state.cover]
-        })))
+        if (cover.data && cover.data.length) {
+          this.setState({...this.state, cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.data[0].image_id}.jpg`}, () => this.setState(prevState => ({
+            favGamesCovers: [...prevState.favGamesCovers, this.state.cover]
+          })))
+        } else return
       })
       .catch(err => console.log(err))
   }
@@ -64,7 +99,6 @@ class ViewProfile extends React.Component {
   }
 
   render(){
-    {this.state && console.log(this.state)}
     return(
       <main>
         {this.state.data &&
@@ -91,7 +125,14 @@ class ViewProfile extends React.Component {
 
           <div className="comments-complete">
             <h3> Your comments will appear here on you profile.</h3>
-            <div className="comments"> </div>
+            <div className="comments">
+              {(this.state.myComments && this.state.myComments.length !== 0) && this.state.myComments.map((comment, i) =>
+                <div className ="messages" key={i}>
+                  <small><span style={{color: `${comment.color}`}}>{comment.game}</span>: <span>{comment.comment.text}</span> </small>
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
         }

@@ -54,6 +54,7 @@ function getProfile( req, res ) {
   req.body.user = req.currentUser
   User
     .findOne({ _id: req.body.user._id})
+    .populate('myComments myRatings')
     .then(user => {
       if (!user) return res.status(404).json({
         message: 'Not Found'})
@@ -66,6 +67,7 @@ function getProfile( req, res ) {
 function getAllUsers( req, res ) {
   User
     .find()
+    .populate('myComments myRatings')
     .then(users => {
       if (!users) return res.status(404).json({
         message: 'Not Found'})

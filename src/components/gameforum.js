@@ -24,22 +24,19 @@ class GameForum extends React.Component {
   }
 
   getCoverPhoto() {
-    console.log(this.state.game)
     axios.post('api/game-covers', {game: this.state.game.id})
       .then(games => {
-        this.setState({...this.state, results: games.data}, console.log(this.state.results, 'hello'))
-      })
+        this.setState({...this.state, results: games.data})
+      }, () => console.log(this.state.results))
       .catch(err => console.log(err))
   }
 
   getGenres() {
-    console.log(this.state.game.genres)
     if (this.state.game.genres) {
       const newGenres = `(${[...this.state.game.genres].toString()})`
-      console.log(newGenres)
       axios.post('api/game-genres', {genreId: newGenres})
         .then(genres => {
-          this.setState({...this.state, genres: genres.data}, () => console.log(this.state.genres, 'genres'))
+          this.setState({...this.state, genres: genres.data})
         })
         .catch(err => console.log(err))
     } else
@@ -48,12 +45,10 @@ class GameForum extends React.Component {
 
   getScreenshots() {
     if (this.state.game.screenshots) {
-      console.log(this.state.game.screenshots)
       const newScreenshots = `(${[...this.state.game.screenshots].toString()})`
-      console.log(newScreenshots)
       axios.post('api/game-screenshots', { screenshotsId: newScreenshots})
         .then(screenshots => {
-          this.setState({...this.state, screenshots: screenshots.data}, () => console.log(this.state.screenshots, 'screenshots'))
+          this.setState({...this.state, screenshots: screenshots.data})
         })
         .catch(err => console.log(err))
     } else
@@ -62,7 +57,7 @@ class GameForum extends React.Component {
 
   getUserComments() {
     axios.post('/api/localgames', { gameId: this.props.location.state.specificGame.gameId})
-      .then((res) => this.setState({...this.state, gameComments: res.data.userComment}, () => console.log(this.state.gameComments, 'gamecomments')))
+      .then((res) => this.setState({...this.state, gameComments: res.data.userComment}))
   }
 
   componentDidMount() {
@@ -72,14 +67,12 @@ class GameForum extends React.Component {
       this.getScreenshots()
       this.getUserComments()
     })
-    console.log('state')
-    console.log(this.state)
   }
 
   handleSubmit(e) {
     e.preventDefault()
     axios.post('api/localgames/comments', {text: this.state.data.liveComment, gameId: this.props.location.state.specificGame.gameId}, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((res)=> this.setState({...this.state, comments: res.data, data: { liveComment: ''}}, () => console.log(this.state)))
+      .then((res)=> this.setState({...this.state, comments: res.data, data: { liveComment: ''}}))
       .then(() => this.getUserComments())
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
@@ -87,7 +80,7 @@ class GameForum extends React.Component {
   handleChange({ target: { name, value }}) {
     const data = {...this.state.data, [name]: value}
     const errors = {...this.state.errors, [name]: ''}
-    this.setState({ data, errors }, () => console.log(this.state))
+    this.setState({ data, errors })
   }
 
   changeRating( newRating ) {
@@ -105,9 +98,6 @@ class GameForum extends React.Component {
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
     const screenshots = this.state.screenshots
     const rating = this.props.location.state.game.aggregated_rating
-    {rating && console.log(rating, 'rating')}
-    {screenshots && console.log(screenshots)}
-    {this.state.gameComments && console.log(this.state.gameComments)}
     return(
       <main>
         <div className="contains-gameForum">
@@ -210,7 +200,7 @@ class GameForum extends React.Component {
                   )}
                 </div>
               </div>
-            </div>      
+            </div>
           }
         </div>
       </main>

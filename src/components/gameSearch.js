@@ -58,7 +58,6 @@ class GameSearch extends React.Component {
           <button className="gameSearchButton"
             onClick={this.handleClick}> Go discover
           </button>
-
           <Popup
             show={this.state.isOpen}
             games={this.state.results}
