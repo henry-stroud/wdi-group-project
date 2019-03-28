@@ -18,7 +18,7 @@ class PopupProfilePage extends React.Component {
     return (
       <div className="popup-backdrop">
         <div className="popup">
-          {this.props.favGames.length < 6 && <button className="popup-close" onClick={this.props.onClose}>Cancel</button>}
+          {this.props.favGames.length < 6 }
           {this.props.favGames.length < 6 && <ul>
             {this.props.games.map((item) =>
               <li onClick={() => this.props.handleClickGames(item)} key={item.id}>
@@ -26,6 +26,7 @@ class PopupProfilePage extends React.Component {
               </li>
             )}
           </ul>}
+          <button className="popup-close" onClick={this.props.onClose}>Cancel</button>
         </div>
       </div>
 
