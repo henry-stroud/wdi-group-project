@@ -1,5 +1,5 @@
 body {
-  font-family: 'ZCOOL XiaoWei', sans-serif;
+  font-family: 'Audiowide', cursive;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ body {
 main {
   width: 100%;
   height: 80vh;
-  background-image: url("https://wallpapercave.com/wp/junYN7V.png");
+  background-image: url('./assets/backgroundImage.jpg');
   background-size: cover;
   display: flex;
 }
@@ -20,8 +20,8 @@ main {
 // HEADER STYLING
 
 header {
-  background-color: #C24D2C;
-  color: #1A2639;
+  background-color: black;
+  color: whitesmoke;
   width: 100%;
   height: 15vh;
   display: flex;
@@ -37,7 +37,7 @@ header {
       align-self: center;
       a {
         text-decoration: none;
-        color: #1F4E5F;
+        color: #C24D2C;
         a:hover {
         text-decoration: underline;
         }
@@ -58,6 +58,7 @@ header {
     justify-content: space-around;
     align-self: center;
     margin-right: 50px;
+    font-size: 18px;
     a {
       text-decoration: none;
       text-shadow: 0.5px 0.5px 0.5px #404040;
@@ -65,37 +66,46 @@ header {
     }
     a:hover {
       text-decoration: underline;
-      color: #1A2639;
+      color: #C24D2C;
     }
   }
   .contains-titleLogo {
-    width: 70%;
-    align-self: center;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     img {
-      height: 125px;
-      width: 125px;
+      height: 130px;
+      width: 130px;
     }
     h1 {
       padding: 20px 20px 20px 70px;
       font-size: 40px;
-      text-shadow:  2px 2px 1px #404040;
+      text-shadow:  4px 4px 2px #673AB7;
+      margin: auto 0;
     }
   }
 }
   //FOOTER STYLING
   footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  background-color: black;
+  color: whitesmoke;
+  width: 100%;
+  .socialMediaIcons {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    height: 5vh;
-    background-color: #C24D2C;
-    color: #1A2639;
-    width: 100%;
+    i {
+      margin: auto 20px;
+      font-size: 20px;
+
+    }
   }
+}
 
   //LOG IN STYLING
   .contains-loginForm, .contains-registerForm {
@@ -106,7 +116,7 @@ header {
   height: 300px;
   width: 400px;
   flex-direction: column;
-  border: 4px solid #C24D2C;
+  border: 2px solid #C24D2C;
   border-radius: 5px;
   .registerInput {
     box-shadow: 2 2 2 white;
@@ -159,7 +169,7 @@ header {
   width: 10%;
   background-color: rgba(50, 50, 50, 0.9);
   h1 {
-    color: whitesmoke;
+    color: #C24D2C;
     text-shadow:  1px 1px 1px black ;
     writing-mode: vertical-rl;
     text-orientation: upright;
@@ -185,7 +195,7 @@ header {
       margin: auto;
       padding: 10px;
       text-align: center;
-      border-left: 1px dashed #C24D2C;
+      border-left: 1px dashed #673AB7;
       h2, a, p {
         text-decoration: none;
         color: whitesmoke;
@@ -209,6 +219,27 @@ header {
     background-color: rgba(50, 50, 70, 0.7);
     width: 100%;
     height: 40vh;
+
+    .gameSearchBar {
+      width: 100%;
+      outline: none;
+      border-radius: 20px;
+      height: 30px;
+      border: 3px solid #673AB7;
+      font-size: 20px;
+      padding-left: 10px;
+    }
+
+    .gameSearchButton {
+      outline: none;
+      border-radius: 20px;
+      background: #C24D2C;
+      border: 3px solid #C24D2C;
+      font-size: 10px;
+      cursor: pointer;
+
+    }
+
     .contains-gameSearch {
       max-width: 30%;
       align-self: center;
@@ -219,6 +250,31 @@ header {
       h2 {
         margin: 20px;
         color: whitesmoke;
+      }
+      .popup {
+        border: 1px solid #673AB7;
+        border-radius: 20px;
+        color: whitesmoke;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 100px;
+        width: 100%;
+
+      }
+      li {
+        cursor: pointer;
+        list-style-type: none;
+
+      }
+      li:hover {
+        color: #C24D2C;
+      }
+
+      .popup-close {
+        display: flex;
+        cursor: pointer;
+
+
       }
     }
   }
@@ -267,15 +323,18 @@ header {
       margin: 20px;
     }
     .mygames {
+      border-top: 1px dashed whitesmoke;
       display: flex;
       flex-flow: row wrap;
       justify-content: space-around;
       overflow-y: scroll;
       margin: 0 auto;
-      div {
-        height: 160px;
-        width: 100px;
+      .eachGame img {
+        border-radius: 2px;
+        height: 200px;
+        width: 142px;
         margin: 10px;
+        box-shadow: 1px 1px 1px black;
       }
     }
   }
@@ -361,36 +420,75 @@ header {
 
   }
   .gameForum-right {
-    padding: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  color: whitesmoke;
+  .starsRating {
+    .checked {
+      color: orange;
+    }
+  }
+  .addcomment {
+    height: 50%;
     display: flex;
     flex-direction: column;
-    width: 50%;
-    color: whitesmoke;
-    .starsRating {
-      .checked {
-        color: orange;
-      }
+    button {
+      width: 50%;
+      margin: 0 auto;
     }
-    .addcomment {
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      button {
-        width: 50%;
-        margin: 0 auto;
-      }
-      input {
-        height: 40%;
-        margin-bottom: 10%;
-      }
+    input {
+      height: 40%;
+      margin-bottom: 10%;
     }
-    .commentsfeed {
-      height: 50%;
-      border: 2px solid whitesmoke;
+  }
+  .commentsfeed {
+    height: 50%;
+    border: 2px solid whitesmoke;
+  }
+}
+.overlay {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  color: whitesmoke;
+  background-color: rgba(255, 20, 60, 0.1);
+  position: relative;
+  .locked {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .lock {
+      font-size: 70px;
+      color: black;
     }
-
+  }
+  .addcomment {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    button {
+      width: 50%;
+      margin: 0 auto;
+    }
+    input {
+      height: 40%;
+      margin-bottom: 10%;
+    }
+  }
+  .commentsfeed {
+    height: 50%;
+    border: 2px solid whitesmoke;
   }
 
+}
 }
 
 .messages {

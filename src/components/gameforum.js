@@ -164,6 +164,7 @@ class GameForum extends React.Component {
               screenshots: {(this.state.screenshots && this.state.screenshots.length) && this.state.screenshots.map((screenshots, index) => <p key={index}><img src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${screenshots.image_id}.jpg`}/></p>)}
             </div>
           </div>
+          {Auth.isAuthenticated() &&
           <div className="gameForum-right">
             <form onSubmit={this.handleSubmit} className="addcomment">
               <input
@@ -185,11 +186,67 @@ class GameForum extends React.Component {
               </div>
             </div>
           </div>
+          }
+          {!Auth.isAuthenticated() &&
+            <div className="overlay">
+              <div className="locked">
+                <i className="fas fa-lock lock"></i>
+              </div>
+              <form onSubmit={this.handleSubmit} className="addcomment">
+                <input
+                  name="liveComment"
+                  onChange={this.handleChange}
+                  value={this.state.data.liveComment || ''}
+                  placeholder="what do you think?..."
+                />
+                <button> Post comment </button>
+              </form>
+              <div className="commentsfeed">
+                <div className = "chatBox">
+                  {this.state.gameComments && this.state.gameComments.map((comment, i) =>
+                    <div className ="messages" key={i}>
+                      <small><span style={{color: `${comment.user.color}`}}>{comment.user.username}</span>: <span>{comment.text}</span> </small>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>      
+          }
         </div>
       </main>
     )
   }
 }
+
+
+{Auth.isAuthenticated() &&
+          <div className="gameForum-right">
+            <form className="addcomment">
+              <input
+                placeholder="what do you think?..."
+              />
+              <button> Post comment </button>
+            </form>
+            <div className="commentsfeed">
+            </div>
+          </div>
+          }
+
+          {!Auth.isAuthenticated() &&
+            <div className="overlay">
+              <div className="locked">
+                <i className="fas fa-lock lock"></i>
+              </div>
+              <form className="addcomment">
+                <input disabled
+                  placeholder="what do you think?..."
+                />
+                <button disabled> Post comment </button>
+              </form>
+              <div className="commentsfeed">
+              </div>
+            </div>
+          }
 
 
 export default withRouter(GameForum)

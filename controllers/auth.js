@@ -66,7 +66,6 @@ function getProfile( req, res ) {
 function getAllUsers( req, res ) {
   User
     .find()
-    .populate('myPosts')
     .then(users => {
       if (!users) return res.status(404).json({
         message: 'Not Found'})
