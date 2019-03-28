@@ -73,7 +73,7 @@ class Chat extends React.Component {
         <div className = "chatBox">
           {this.state.messages && this.state.messages.map((message, i) =>
             <div className ="messages" key={i}>
-              <small><span onClick={() => this.goToUserProfile()} style={{color: `${message.user.color}`}}>{message.user.username}</span>: <span>{message.message}</span> </small>
+              <small><span onClick={() => this.goToUserProfile()} style={{color: `${message.user.color}`}}>{message.user.username}</span><span style={{color: 'white'}}>: </span><span>{message.message}</span> </small>
             </div>
           )}
         </div>

@@ -17,6 +17,12 @@ class Header extends React.Component {
     this.getProfile()
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.location.pathname === '/register' && this.props.location.pathname === '/createprofile') {
+      this.getProfile()
+    }
+  }
+
   logout() {
     Auth.logout()
     this.props.history.push('/')
@@ -40,8 +46,6 @@ class Header extends React.Component {
             <Link to="/">Home</Link>
             <Link to="/register">Register</Link>
             <Link to="/login">Log In</Link>
-            <Link to="/gameforum">Games</Link>
-            <Link to="/createprofile">Profile</Link>
           </nav>
           }
           {Auth.isAuthenticated() &&
@@ -53,9 +57,11 @@ class Header extends React.Component {
               </div>
             </div>
           }
-          <div className="contains-titleLogo">
+          <div className="contains-title">
             <h1>player connect</h1>
-            <Link to='/'><img src="../../../assets/logo-orange.png" alt="playerconnect logo"/></Link>
+          </div>
+          <div className="contains-logo">
+            <Link to='/'><img src="../../../assets/logofinal.png" alt="playerconnect logo"/></Link>
           </div>
 
         </header>

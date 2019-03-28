@@ -1,3 +1,7 @@
+$white: whitesmoke;
+$orange: #C24D2C;
+$purple: #673AB7;
+
 body {
   font-family: 'Audiowide', cursive;
   box-sizing: border-box;
@@ -20,15 +24,15 @@ main {
 // HEADER STYLING
 
 header {
-  background-color: black;
+  background-color: rgba(0,0,0,0.87);
   color: whitesmoke;
   width: 100%;
   height: 15vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   .contains-loggedin {
-    width: 30%;
+    width: 33%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -37,10 +41,14 @@ header {
       align-self: center;
       a {
         text-decoration: none;
-        color: #C24D2C;
-        a:hover {
-        text-decoration: underline;
-        }
+        color: $white;
+        text-shadow: 1px 1px 1px $purple;
+        cursor: pointer;
+      }
+      a:hover {
+      color: $white;
+      text-shadow: 1px 1px 1px $orange;
+
       }
     }
     .avatar {
@@ -48,11 +56,12 @@ header {
       width: 100px;
       border-radius: 50%;
       align-self: center;
+      box-shadow: 2px 2px 2px $purple;
       margin: 20px;
     }
   }
   .navbar {
-    width: 30%;
+    width: 33%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -61,23 +70,19 @@ header {
     font-size: 18px;
     a {
       text-decoration: none;
-      text-shadow: 0.5px 0.5px 0.5px #404040;
-      color: #1A2639;
+      text-shadow: 0.5px 0.5px 0.5px $purple;
+      color: $white;
     }
     a:hover {
-      text-decoration: underline;
-      color: #C24D2C;
+      color: $white;
+      text-shadow: 0.5px 0.5px 0.5px $orange;
+
     }
   }
-  .contains-titleLogo {
-    width: 100%;
+  .contains-title {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    img {
-      height: 130px;
-      width: 130px;
-    }
+    justify-content: flex-start;
+    width:33%;
     h1 {
       padding: 20px 20px 20px 70px;
       font-size: 40px;
@@ -85,20 +90,33 @@ header {
       margin: auto 0;
     }
   }
+  .contains-logo {
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 40px;
+    img {
+      max-height: 150px;
+      max-width: 130px;
+    }
+  }
 }
   //FOOTER STYLING
   footer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   height: 5vh;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
   color: whitesmoke;
   width: 100%;
+  p {
+    padding-right: 20px;
+  }
   .socialMediaIcons {
     display: flex;
-    justify-content: center;
     i {
       margin: auto 20px;
       font-size: 20px;
@@ -116,35 +134,59 @@ header {
   height: 300px;
   width: 400px;
   flex-direction: column;
-  border: 2px solid #C24D2C;
+  border: 2px solid #673AB7;
   border-radius: 5px;
+  button {
+    margin-top: 5px;
+    color: $white;
+    outline: none;
+    border-radius: 20px;
+    background: $purple;
+    border: 1px solid $purple;
+    font-size: 12px;
+    cursor: pointer;
+    align-self: center;
+    width: 40%;
+  }
   .registerInput {
-    box-shadow: 2 2 2 white;
-    height: 20px;
-    width: 180px;
+    width: 75%;
+    outline: none;
+    border-radius: 20px;
+    height: 25px;
+    border: 3px solid #673AB7;
+    font-size: 12px;
+    padding-left: 10px;
     margin: 10px;
   }
   p {
     color: whitesmoke;
     text-align: center;
+    padding-bottom: 7px;
     a {
       text-decoration: none;
-      color: whitesmoke;
+      color: $orange;
     }
     a:hover {
       text-decoration: underline;
+      color: $orange;
+
     }
   }
   .loginForm, .registerForm {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     .loginFormInput, {
-      height: 20px;
-      width: 180px;
-      margin: 15px;
+      width: 75%;
+      outline: none;
+      border-radius: 20px;
+      height: 25px;
+      border: 3px solid #673AB7;
+      font-size: 12px;
+      padding-left: 10px;
+      margin: 12px;
 
     }
   }
@@ -166,28 +208,36 @@ header {
   justify-content: center;
   align-content: center;
   align-self: flex-end;
-  width: 10%;
+  width: 5%;
   background-color: rgba(50, 50, 50, 0.9);
+  cursor: pointer;
   h1 {
-    color: #C24D2C;
-    text-shadow:  1px 1px 1px black ;
+    color: $white;
+    text-shadow:  2px 2px 1px $purple ;
     writing-mode: vertical-rl;
     text-orientation: upright;
     text-align: center;
     padding: auto;
   }
+  h1:hover{
+    color: $white;
+    text-shadow:  2px 2px 2px $orange ;
+  }
 }
 
+
 .contains-news-gameSearch {
-  align-self: flex-start;
+  font-size: 14px;
+  align-self: center;
   width: 95%;
   .contains-news {
-    border-bottom: 1px dashed #C24D2C;
+    border-bottom: 1px dashed $white;
     background-color: rgba(50, 50, 50, 0.7);
     display: flex;
     flex-direction: row;
     height: 40vh;
     overflow-x: scroll;
+    overflow-y: hidden;
     .newscard {
       font-family: inherit;
       min-width: 500px;
@@ -195,7 +245,7 @@ header {
       margin: auto;
       padding: 10px;
       text-align: center;
-      border-left: 1px dashed #673AB7;
+      border-left: 1px dashed $white;
       h2, a, p {
         text-decoration: none;
         color: whitesmoke;
@@ -219,6 +269,9 @@ header {
     background-color: rgba(50, 50, 70, 0.7);
     width: 100%;
     height: 40vh;
+    h2 {
+      text-align: center;
+    }
 
     .gameSearchBar {
       width: 100%;
@@ -228,16 +281,18 @@ header {
       border: 3px solid #673AB7;
       font-size: 20px;
       padding-left: 10px;
+      font-family: inherit;
     }
 
     .gameSearchButton {
+      font-family: inherit;
       outline: none;
       border-radius: 20px;
-      background: #C24D2C;
-      border: 3px solid #C24D2C;
-      font-size: 10px;
+      color: $white;
+      background: $purple;
+      border: 3px solid $purple;
+      font-size: 12px;
       cursor: pointer;
-
     }
 
     .contains-gameSearch {
@@ -245,7 +300,8 @@ header {
       align-self: center;
       justify-content: center;
       button {
-        margin: 20px 40%;;
+        text-align: center;
+        margin: 20px 40%;
       }
       h2 {
         margin: 20px;
@@ -283,10 +339,10 @@ header {
   height: 100%;
   iframe {
     display: flex;
-    align-self: center;
+    align-items: center;
     height: 100%;
     margin: 0 10px;
-    border-left: 1px dashed #C24D2C;
+    border-left: 1px dashed $white;
   }
 }
 
@@ -304,6 +360,30 @@ header {
   .userDetails {
     height: 80%;
     width: 20%;
+    button {
+      margin-top: 5px;
+      color: $white;
+      outline: none;
+      border-radius: 20px;
+      background-color: rgba(50, 50, 70, 0.7);
+      font-size: 12px;
+      cursor: pointer;
+      align-self: center;
+      width: 40%;
+    }
+    button:hover{
+      border: 1px solid $purple;
+    }
+    h2 {
+      text-align: center;
+      text-shadow:  2px 2px 1px $purple ;
+
+
+    }
+    h2, h3 {
+      color:$white;
+      font-family: inherit;
+    }
     img {
       width: 200px;
       height: 200px;
@@ -331,8 +411,8 @@ header {
       margin: 0 auto;
       .eachGame img {
         border-radius: 2px;
-        height: 200px;
-        width: 142px;
+        height: 180px;
+        width: 129px;
         margin: 10px;
         box-shadow: 1px 1px 1px black;
       }
@@ -358,136 +438,203 @@ header {
       align-self: center;
       height: 70%;
       overflow-y: scroll;
+      background-color: rgba(50,50,50,0.7);
+      border-radius: 2%;
+      padding: 15px;
     }
   }
 }
 
 .contains-gameForum {
-  background-color: rgba(50, 50, 70, 0.7);
-  height: 80vh;
+  display: flex;
+  background-color: rgba(50, 50,50, 0.7);
+  height:80vh;
   width: 90%;
   margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  .gameForum-left {
-    padding: 25px;
+  flex-direction: column;
+  border: 0;
+  .contains-screenshots {
     display: flex;
-    flex-direction: column;
-    width: 50%;
-    color: whitesmoke;
-    .contains-gameInfo {
-      height: 50%;
+    flex-direction: row;
+    margin: 0 auto;
+    height: 30vh;
+    width: 100%;
+    div {
       display: flex;
       flex-direction: row;
+      overflow-x: scroll;
+      p {
+        height: 100%;
+        padding: 20px;
+        img {
+          border-radius: 3%;
+        }
+      }
+    }
+  }
+  .forumSplit {
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+  .overlay {
+    background-color: rgba(255, 20, 60, 0.4);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 2%;
+    .locked {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .lock {
+  font-size: 70px;
+  color: black;
+  text-shadow: 2px 2px 2px $purple;
+}
+    }
+    .commentsfeed {
+      display: flex;
+      padding: 20px 20px 0 20px;
+      height: 40%;
+      .chatBox {
+        background-color: rgba(20,20,20, 0.7);
+        height: 100%;
+        width: 100%;
+        border-radius: 1%;
+        overflow-y:scroll;
+        align-self: center;
+        margin: 0 auto;
+      }
+    }
+    form {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 40%;
+      button {
+        margin-top: 5px;
+        outline: none;
+        border-radius: 20px;
+        background: #C24D2C;
+        border: 3px solid #C24D2C;
+        font-size: 10px;
+        cursor: pointer;
+        align-self: center;
+        width: 40%;
+      }
+      input {
+        width: 100%;
+        background-color: rgba(20,20,20, 0.7);
+        outline: none;
+        border-radius: 20px;
+        height: 80%;
+        border: 3px solid grey;
+        font-size: 20px;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .gameForum-right {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    .commentsfeed {
+      display: flex;
+      padding: 20px 20px 0 20px;
+      height: 40%;
+      .chatBox {
+        background-color: rgba(20,20,20, 0.7);
+        height: 100%;
+        width: 100%;
+        border-radius: 1%;
+        overflow-y:scroll;
+        align-self: center;
+        margin: 0 auto;
+      }
+    }
+    form {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 40%;
+      button {
+        margin-top: 5px;
+        outline: none;
+        border-radius: 20px;
+        background: #C24D2C;
+        border: 3px solid #C24D2C;
+        font-size: 10px;
+        cursor: pointer;
+        align-self: center;
+        width: 40%;
+      }
+      textarea {
+        width: 100%;
+        outline: none;
+        border-radius: 20px;
+        height: 80%;
+        border: 3px solid #673AB7;
+        font-size: 20px;
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .gameForum-left {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+
+    .contains-ratings {
+      text-align: center;
+      height: 40%;
+      width: 100%;
+      margin-bottom: 0;
+      .rateGame, .criticRating {
+        padding-right: 10px;
+      }
+    }
+    .contains-gameInfo {
+      display: flex;
+      flex-direction: row;
+      height: 60%;
+      width: 100%;
+      padding: 20px;
+
+      .gameCover img{
+        border-radius: 3%;
+        height: 220px;
+        width: 157px;
+      }
       .gameDetails {
         display: flex;
         flex-direction: column;
-        align-content: center;
         text-align: center;
-      }
-      .gameCover img {
-        align-self: center;
-        height: 240px;
-        width: 150px;
-      }
-    }
-    .contains-ratings {
-      height: 25%;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      .yourRating, .ourRating {
-        border: 2px solid whitesmoke;
-        border-radius: 50%;
-        height: 100px;
-        width: 100px;
-        color: whitesmoke;
-        text-align: center;
+        h2 {
+          font-size: 19px;
+          font-weight: 700;
+          text-shadow: .5 .5 .5 $purple;
+        }
+
+        h5, small, p {
+          display: flex;
+          flex-direction: row;
+          padding-top: 10px;
+          margin: 0;
+          display: inline;
+          font-weight: lighter;
+        }
 
       }
     }
-    .contains-screenshots {
-      display: flex;
-      flex-direction: row;
-      height: 25%;
-      width: 100%;
-      border: 2px solid whitesmoke;
-      img {
-        width: 100%;
-      }
-    }
-
   }
-  .gameForum-right {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  color: whitesmoke;
-  .starsRating {
-    .checked {
-      color: orange;
-    }
-  }
-  .addcomment {
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    button {
-      width: 50%;
-      margin: 0 auto;
-    }
-    input {
-      height: 40%;
-      margin-bottom: 10%;
-    }
-  }
-  .commentsfeed {
-    height: 50%;
-    border: 2px solid whitesmoke;
-  }
-}
-.overlay {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  color: whitesmoke;
-  background-color: rgba(255, 20, 60, 0.1);
-  position: relative;
-  .locked {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .lock {
-      font-size: 70px;
-      color: black;
-    }
-  }
-  .addcomment {
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    button {
-      width: 50%;
-      margin: 0 auto;
-    }
-    input {
-      height: 40%;
-      margin-bottom: 10%;
-    }
-  }
-  .commentsfeed {
-    height: 50%;
-    border: 2px solid whitesmoke;
-  }
-
 }
 }
 
@@ -496,21 +643,58 @@ header {
     color: white;
   }
 }
+.chat {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  margin: 20px;
+  h1 {
+    color: $white;
+    font-family: inherit;
+    text-shadow: 1px 1px 1px $purple;
+    margin-bottom: 5px;
+  }
+
+  .button {
+    font-family: inherit;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 30px;
+    width: 25%;
+    background: $purple;
+    color: $white;
+    border: 2px solid $purple;
+    outline: none;
+    margin: 0 auto;
+  }
+  textarea {
+    font-family: inherit;
+    width: 500px;
+    height: 200px;
+    outline: none;
+    border-radius: 20px;
+    border: 3px solid #673AB7;
+    margin: auto;
+    font-size: 20px;
+    word-break: break-all;
+  }
+
+}
 
 .chatBox {
-  display: flex;
-  flex-direction: column;
-}
-
-.contains-registerForm {
-  span {
-    color: #C24D2C;
-  }
-}
-.contains-loginForm{
-  span {
-    color: #C24D2C;
-  }
+  background-color: rgba(20,20,20, 0.7);
+  border-radius: 2%;
+  padding: 25px;
+  margin: 20px;
+  font-size: 24px;
+  width: 50%;
+  overflow-y: scroll;
 }
 
 .gameDetails {
@@ -525,3 +709,531 @@ header {
     align-self: center;
   }
 }
+
+// body {
+//   font-family: 'Audiowide', cursive;
+//   box-sizing: border-box;
+//   margin: 0;
+//   padding: 0;
+// }
+//
+//
+// //general styling
+//
+// //main is used to create the same background for login, register, error 404, viewprofile, createprofile
+// main {
+//   width: 100%;
+//   height: 80vh;
+//   background-image: url('./assets/backgroundImage.jpg');
+//   background-size: cover;
+//   display: flex;
+// }
+//
+// // HEADER STYLING
+//
+// header {
+//   background-color: black;
+//   color: whitesmoke;
+//   width: 100%;
+//   height: 15vh;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   .contains-loggedin {
+//     width: 30%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     .userloggedin {
+//       margin: 20px;
+//       align-self: center;
+//       a {
+//         text-decoration: none;
+//         color: #C24D2C;
+//         a:hover {
+//         text-decoration: underline;
+//         }
+//       }
+//     }
+//     .avatar {
+//       height: 100px;
+//       width: 100px;
+//       border-radius: 50%;
+//       align-self: center;
+//       margin: 20px;
+//     }
+//   }
+//   .navbar {
+//     width: 30%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     align-self: center;
+//     margin-right: 50px;
+//     font-size: 18px;
+//     a {
+//       text-decoration: none;
+//       text-shadow: 0.5px 0.5px 0.5px #404040;
+//       color: #1A2639;
+//     }
+//     a:hover {
+//       text-decoration: underline;
+//       color: #C24D2C;
+//     }
+//   }
+//   .contains-titleLogo {
+//     width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     img {
+//       height: 130px;
+//       width: 130px;
+//     }
+//     h1 {
+//       padding: 20px 20px 20px 70px;
+//       font-size: 40px;
+//       text-shadow:  4px 4px 2px #673AB7;
+//       margin: auto 0;
+//     }
+//   }
+// }
+//   //FOOTER STYLING
+//   footer {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   height: 5vh;
+//   background-color: black;
+//   color: whitesmoke;
+//   width: 100%;
+//   .socialMediaIcons {
+//     display: flex;
+//     justify-content: center;
+//     i {
+//       margin: auto 20px;
+//       font-size: 20px;
+//
+//     }
+//   }
+// }
+//
+//   //LOG IN STYLING
+//   .contains-loginForm, .contains-registerForm {
+//   align-self: center;
+//   background-color: rgba(50, 50, 50, 0.7);
+//   display: flex;
+//   margin: auto;
+//   height: 300px;
+//   width: 400px;
+//   flex-direction: column;
+//   border: 2px solid #C24D2C;
+//   border-radius: 5px;
+//   .registerInput {
+//     box-shadow: 2 2 2 white;
+//     height: 20px;
+//     width: 180px;
+//     margin: 10px;
+//   }
+//   p {
+//     color: whitesmoke;
+//     text-align: center;
+//     a {
+//       text-decoration: none;
+//       color: whitesmoke;
+//     }
+//     a:hover {
+//       text-decoration: underline;
+//     }
+//   }
+//   .loginForm, .registerForm {
+//     padding: 20px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-around;
+//     align-items: center;
+//     .loginFormInput, {
+//       height: 20px;
+//       width: 180px;
+//       margin: 15px;
+//
+//     }
+//   }
+// }
+// // ERROR HANDLING
+// .tinyError {
+//   font-size: 110%;
+//   color: red;
+// }
+//
+// .error {
+//     box-shadow:0 0 10px red;
+// }
+//
+// //NEWS AND SEARCH
+// .homeChange {
+//   height: 80vh;
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+//   align-self: flex-end;
+//   width: 10%;
+//   background-color: rgba(50, 50, 50, 0.9);
+//   h1 {
+//     color: #C24D2C;
+//     text-shadow:  1px 1px 1px black ;
+//     writing-mode: vertical-rl;
+//     text-orientation: upright;
+//     text-align: center;
+//     padding: auto;
+//   }
+// }
+//
+// .contains-news-gameSearch {
+//   align-self: flex-start;
+//   width: 95%;
+//   .contains-news {
+//     border-bottom: 1px dashed #C24D2C;
+//     background-color: rgba(50, 50, 50, 0.7);
+//     display: flex;
+//     flex-direction: row;
+//     height: 40vh;
+//     overflow-x: scroll;
+//     .newscard {
+//       font-family: inherit;
+//       min-width: 500px;
+//       height: 30vh;
+//       margin: auto;
+//       padding: 10px;
+//       text-align: center;
+//       border-left: 1px dashed #673AB7;
+//       h2, a, p {
+//         text-decoration: none;
+//         color: whitesmoke;
+//         margin: 0;
+//         padding: 20px;
+//       }
+//       img {
+//         float: right;
+//         width: 200px;
+//         height: 150px;
+//       }
+//     }
+//     h1 {
+//       color: whitesmoke;
+//       text-align: center;
+//     }
+//   }
+//   .main-gameSearch {
+//     display: flex;
+//     justify-content: center;
+//     background-color: rgba(50, 50, 70, 0.7);
+//     width: 100%;
+//     height: 40vh;
+//
+//     .gameSearchBar {
+//       width: 100%;
+//       outline: none;
+//       border-radius: 20px;
+//       height: 30px;
+//       border: 3px solid #673AB7;
+//       font-size: 20px;
+//       padding-left: 10px;
+//     }
+//
+//     .gameSearchButton {
+//       outline: none;
+//       border-radius: 20px;
+//       background: #C24D2C;
+//       border: 3px solid #C24D2C;
+//       font-size: 10px;
+//       cursor: pointer;
+//
+//     }
+//
+//     .contains-gameSearch {
+//       max-width: 30%;
+//       align-self: center;
+//       justify-content: center;
+//       button {
+//         margin: 20px 40%;;
+//       }
+//       h2 {
+//         margin: 20px;
+//         color: whitesmoke;
+//       }
+//       .popup {
+//         border: 1px solid #673AB7;
+//         border-radius: 20px;
+//         color: whitesmoke;
+//         overflow-y: scroll;
+//         overflow-x: hidden;
+//         height: 100px;
+//         width: 100%;
+//
+//       }
+//       li {
+//         cursor: pointer;
+//         list-style-type: none;
+//
+//       }
+//       li:hover {
+//         color: #C24D2C;
+//       }
+//
+//       .popup-close {
+//         display: flex;
+//         cursor: pointer;
+//
+//
+//       }
+//     }
+//   }
+// }
+// .embeddedVideos {
+//   height: 100%;
+//   iframe {
+//     display: flex;
+//     align-self: center;
+//     height: 100%;
+//     margin: 0 10px;
+//     border-left: 1px dashed #C24D2C;
+//   }
+// }
+//
+//
+//
+// //profile pages
+// .contains-createProfile {
+//   background-color: rgba(50, 50, 70, 0.7);
+//   width: 85%;
+//   margin: 0 auto;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+//   align-items: center;
+//   .userDetails {
+//     height: 80%;
+//     width: 20%;
+//     img {
+//       width: 200px;
+//       height: 200px;
+//     }
+//   }
+//   .chooseGame {
+//     height: 80%;
+//     margin: 20px 20px;
+//     display: flex;
+//     flex-direction: column;
+//     width: 40%;
+//     h2 {
+//       text-align: center;
+//       color: whitesmoke;
+//     }
+//     .chooseMyGames {
+//       margin: 20px;
+//     }
+//     .mygames {
+//       border-top: 1px dashed whitesmoke;
+//       display: flex;
+//       flex-flow: row wrap;
+//       justify-content: space-around;
+//       overflow-y: scroll;
+//       margin: 0 auto;
+//       .eachGame img {
+//         border-radius: 2px;
+//         height: 200px;
+//         width: 142px;
+//         margin: 10px;
+//         box-shadow: 1px 1px 1px black;
+//       }
+//     }
+//   }
+//   .comments-complete {
+//     height: 80%;
+//     width: 20%;
+//
+//     button {
+//       border-radius: 10px;
+//       margin: 10px auto;
+//       height: 30px;
+//       width: 80%;
+//
+//     }
+//     h3 {
+//       color: whitesmoke;
+//       text-align: left;
+//
+//     }
+//     .comments {
+//       align-self: center;
+//       height: 70%;
+//       overflow-y: scroll;
+//     }
+//   }
+// }
+//
+// .contains-gameForum {
+//   background-color: rgba(50, 50, 70, 0.7);
+//   height: 80vh;
+//   width: 90%;
+//   margin: 0 auto;
+//   display: flex;
+//   flex-direction: row;
+//   .gameForum-left {
+//     padding: 25px;
+//     display: flex;
+//     flex-direction: column;
+//     width: 50%;
+//     color: whitesmoke;
+//     .contains-gameInfo {
+//       height: 50%;
+//       display: flex;
+//       flex-direction: row;
+//       .gameDetails {
+//         display: flex;
+//         flex-direction: column;
+//         align-content: center;
+//         text-align: center;
+//       }
+//       .gameCover img {
+//         align-self: center;
+//         height: 240px;
+//         width: 150px;
+//       }
+//     }
+//     .contains-ratings {
+//       height: 25%;
+//       width: 100%;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-around;
+//       .yourRating, .ourRating {
+//         border: 2px solid whitesmoke;
+//         border-radius: 50%;
+//         height: 100px;
+//         width: 100px;
+//         color: whitesmoke;
+//         text-align: center;
+//
+//       }
+//     }
+//     .contains-screenshots {
+//       display: flex;
+//       flex-direction: row;
+//       height: 25%;
+//       width: 100%;
+//       border: 2px solid whitesmoke;
+//       img {
+//         width: 100%;
+//       }
+//     }
+//
+//   }
+//   .gameForum-right {
+//   padding: 25px;
+//   display: flex;
+//   flex-direction: column;
+//   width: 50%;
+//   color: whitesmoke;
+//   .starsRating {
+//     .checked {
+//       color: orange;
+//     }
+//   }
+//   .addcomment {
+//     height: 50%;
+//     display: flex;
+//     flex-direction: column;
+//     button {
+//       width: 50%;
+//       margin: 0 auto;
+//     }
+//     input {
+//       height: 40%;
+//       margin-bottom: 10%;
+//     }
+//   }
+//   .commentsfeed {
+//     height: 50%;
+//     border: 2px solid whitesmoke;
+//   }
+// }
+// .overlay {
+//   padding: 25px;
+//   display: flex;
+//   flex-direction: column;
+//   width: 50%;
+//   color: whitesmoke;
+//   background-color: rgba(255, 20, 60, 0.1);
+//   position: relative;
+//   .locked {
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     top: 0px;
+//     left: 0px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     .lock {
+//       font-size: 70px;
+//       color: black;
+//     }
+//   }
+//   .addcomment {
+//     height: 50%;
+//     display: flex;
+//     flex-direction: column;
+//     button {
+//       width: 50%;
+//       margin: 0 auto;
+//     }
+//     input {
+//       height: 40%;
+//       margin-bottom: 10%;
+//     }
+//   }
+//   .commentsfeed {
+//     height: 50%;
+//     border: 2px solid whitesmoke;
+//   }
+//
+// }
+// }
+//
+// .messages {
+//   span {
+//     color: white;
+//   }
+// }
+//
+// .chatBox {
+//   display: flex;
+//   flex-direction: column;
+// }
+//
+// .contains-registerForm {
+//   span {
+//     color: #C24D2C;
+//   }
+// }
+// .contains-loginForm{
+//   span {
+//     color: #C24D2C;
+//   }
+// }
+//
+// .gameDetails {
+//   display: flex;
+//     p {
+//     width: 600px;
+//     height: 200px;
+//     overflow-y: scroll;
+//     overflow-x: hidden;
+//     text-align: justify;
+//     max-width: 80%;
+//     align-self: center;
+//   }
+// }

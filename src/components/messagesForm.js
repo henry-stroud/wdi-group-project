@@ -3,6 +3,7 @@ import React from 'react'
 const MessagesForm = ({ handleChange, handleSubmit, data, errors }) => {
   return (
     <div className = "chat" >
+      <h1> CHAT ROOM </h1>
       <form onSubmit={handleSubmit}>
         <div className = "input">
           <textarea

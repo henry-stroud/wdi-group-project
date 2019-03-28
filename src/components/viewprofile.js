@@ -102,14 +102,14 @@ class ViewProfile extends React.Component {
     return(
       <main>
         {this.state.data &&
-        <div className="contains-createProfile animated zoomIn">
+        <div className="contains-createProfile animated fadeIn">
           <div className="userDetails">
             <img className="avatar" src={this.state.data.avatar} />
             <button
               onClick={this.handleClick}>
                 Change photo
             </button>
-            <h2 className="userName"> Welcome back, {this.state.data.username}. </h2>
+            <h3 className="userName"> Welcome back,<h2> {this.state.data.username}</h2> </h3>
           </div>
 
           <div className="chooseGame">
@@ -124,11 +124,11 @@ class ViewProfile extends React.Component {
           </div>
 
           <div className="comments-complete">
-            <h3> Your comments will appear here on you profile.</h3>
+            <h3> Your comments...</h3>
             <div className="comments">
               {(this.state.myComments && this.state.myComments.length !== 0) && this.state.myComments.map((comment, i) =>
                 <div className ="messages" key={i}>
-                  <small><span style={{color: `${comment.color}`}}>{comment.game}</span>: <span>{comment.comment.text}</span> </small>
+                  <small><span style={{color: `${comment.color}`}}>{comment.game}</span><span style={{color: 'white'}}> :</span> <span>{comment.comment.text}</span> </small>
                 </div>
               )}
             </div>
