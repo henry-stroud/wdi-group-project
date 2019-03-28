@@ -51,6 +51,7 @@ class Chat extends React.Component {
       .then(() => axios.get('/api/messages'))
       .then((res)=> this.setState({...this.state, messages: res.data}))
       .then(() => this.sendMessage(this.state.messages))
+      .then(() => this.setState({data: {}}))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
