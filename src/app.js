@@ -29,7 +29,7 @@ class App extends React.Component {
     return (
       <Browser>
         <div>
-          <Favicon url="./assets/logo-purple.png" />
+          <Favicon url="./assets/logoFinal.png" />
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
