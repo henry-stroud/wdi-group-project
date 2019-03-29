@@ -130,7 +130,13 @@ header {
   }
   .socialMediaIcons {
     display: flex;
+    i:hover {
+      text-shadow: 0.5px 0.5px 1px $orange;
+    }
     i {
+      text-decoration: none;
+      color: $white;
+      text-shadow: 0.5px 0.5px 1px $purple;
       margin: auto 20px;
       font-size: 20px;
 
@@ -252,25 +258,47 @@ header {
     overflow-x: scroll;
     overflow-y: hidden;
     .newscard {
+      display: flex;
+      justify-content: flex-start;
       font-family: inherit;
       min-width: 500px;
       height: 30vh;
       margin: auto;
-      padding: 10px;
+      padding: 0 10px;
       text-align: center;
       border-left: 1px dashed $white;
-      h2, a, p {
-        text-decoration: none;
-        color: whitesmoke;
-        margin: 0;
-        padding: 20px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      .newstext {
+        background-color: rgba(50, 50, 50, 0.3);
+        border-radius: 3%;
+        height: 100%;
+        width: 100%;
+        h2 {
+          text-shadow: .5px .5px .5px black;
+        }
+        h2, a, p {
+          text-decoration: none;
+          color: whitesmoke;
+          margin: 0;
+          padding: 20px;
+        }
+        p {
+          visibility: hidden;
+        }
       }
-      img {
-        float: right;
-        width: 200px;
-        height: 150px;
+      .newstext:hover {
+        background-color: rgba(50, 50, 50, 0.75);
+
+        p {
+          visibility: visible;
+          border-radius: 2%;
+
+        }
       }
     }
+
     h1 {
       color: whitesmoke;
       text-align: center;

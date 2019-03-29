@@ -120,7 +120,7 @@ class ViewOtherUserProfile extends React.Component {
         this.setState({gameData: game.data[0]})
       })
       .then(() => console.log(this.state.gameData))
-      .then(() => axios.post('/api/localgames', { gameId: cover.other.gameId}))
+      .then(() => axios.post('/api/localgames', { gameId: cover.other.gameId, name: cover.name}))
       .then((res) => this.setState({routedGame: res.data}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
   }
