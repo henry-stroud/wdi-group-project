@@ -544,12 +544,14 @@ header {
       background-color: rgba(50,50,50,0.7);
       border-radius: 2%;
       padding: 15px;
+
     }
   }
 }
 
 
 .contains-gameForum {
+
   display: flex;
   background-color: rgba(50, 50,50, 0.7);
   height:80vh;
@@ -603,9 +605,11 @@ header {
 }
     }
     .commentsfeed {
+
       display: flex;
       padding: 20px 20px 0 20px;
       height: 40%;
+      font-family: inherit;
       .chatBox {
         background-color: rgba(20,20,20, 0.7);
         height: 100%;
@@ -614,6 +618,7 @@ header {
         overflow-y: scroll;
         align-self: center;
         margin: 0 auto;
+        font-family: inherit;
       }
     }
     form {
@@ -649,10 +654,13 @@ header {
     width: 40%;
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
+
     .commentsfeed {
       display: flex;
       padding: 20px 20px 0 20px;
       height: 40%;
+
       .chatBox {
         background-color: rgba(20,20,20, 0.7);
         height: 100%;
@@ -680,6 +688,8 @@ header {
         width: 40%;
       }
       textarea {
+        font-family: inherit;
+        resize: none;
         width: 100%;
         outline: none;
         border-radius: 20px;
@@ -778,6 +788,7 @@ header {
     margin: 0 auto;
   }
   textarea {
+    resize: none;
     font-family: inherit;
     width: 500px;
     height: 200px;
