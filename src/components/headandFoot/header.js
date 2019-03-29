@@ -18,7 +18,13 @@ class Header extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    if(prevProps.location.pathname === '/login' && this.props.location.pathname === '/') {
+      this.getProfile()
+    }
     if(prevProps.location.pathname === '/register' && this.props.location.pathname === '/createprofile') {
+      this.getProfile()
+    }
+    if(prevProps.location.pathname === '/createprofile' && this.props.location.pathname === '/') {
       this.getProfile()
     }
   }

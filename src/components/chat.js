@@ -7,12 +7,15 @@ import io from 'socket.io-client'
 
 import MessagesForm from './messagesForm'
 
+import { Redirect } from 'react-router-dom'
+
+
 
 class Chat extends React.Component {
   constructor(){
     super()
 
-    this.state = { data: {}, errors: {} }
+    this.state = { redirect: false, data: {}, errors: {} }
 
     this.socket = io('localhost:4000')
 
@@ -51,6 +54,7 @@ class Chat extends React.Component {
       .then(() => axios.get('/api/messages'))
       .then((res)=> this.setState({...this.state, messages: res.data}))
       .then(() => this.sendMessage(this.state.messages))
+      .then(() => this.setState({data: {}}))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
@@ -59,9 +63,12 @@ class Chat extends React.Component {
       .then((res) => this.setState({...this.state, messages: res.data}))
   }
 
+  goToUserProfile(message) {
+    this.setState({user: message.user}, () => this.setState({redirect: !this.state.redirect}))
+  }
 
   render() {
-    {this.state.messages && console.log(this.state.messages)}
+    {this.state.user && console.log(this.state.user, 'thisneedstobesent')}
     return(
       <div className="contains-news  animated fadeIn">
         <MessagesForm
@@ -73,7 +80,15 @@ class Chat extends React.Component {
         <div className = "chatBox">
           {this.state.messages && this.state.messages.map((message, i) =>
             <div className ="messages" key={i}>
-              <small><span onClick={() => this.goToUserProfile()} style={{color: `${message.user.color}`}}>{message.user.username}</span><span style={{color: 'white'}}>: </span><span>{message.message}</span> </small>
+              <small><span id='userClicker' onClick={() => this.goToUserProfile(message)} style={{color: `${message.user.color}`}}>{message.user.username}
+                {this.state.redirect && <Redirect
+                  to={{
+                    pathname: '/viewotherprofile',
+                    state: {
+                      user: this.state.user
+                    }
+                  }}></Redirect>}
+              </span><span style={{color: 'white'}}>: </span><span>{message.message}</span> </small>
             </div>
           )}
         </div>

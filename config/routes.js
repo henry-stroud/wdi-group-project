@@ -44,6 +44,26 @@ router.post('/games', (req, res) => {
     .catch(err => console.error(err))
 })
 
+router.post('/games/onegame', (req, res) => {
+  axios({
+    url: 'https://api-v3.igdb.com/games',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'user-key': `${igdbApiKey}`,
+      'Content-Type': 'text/plain'
+    },
+    data: `search "${req.body.game}"; fields *; exclude age_ratings,alternative_names,collection,external_games,franchise,franchises,game_engines,game_modes,keywords,multiplayer_modes,rating,rating_count,tags,websites,category; limit 1;`
+
+  })
+    .then(games => {
+      res.json(games.data)
+    })
+    .catch(err => console.error(err))
+})
+
+
+
 router.post('/game-videos', (req, res) => {
   axios({
     url: 'https://api-v3.igdb.com/game_videos',
@@ -144,5 +164,6 @@ router.route('/localgames/comments')
 
 router.route('/localgames/ratings')
   .post(secureRoute, games.createRating)
+
 
 module.exports = router

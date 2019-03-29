@@ -1,27 +1,18 @@
 import React from 'react'
 import axios from 'axios'
 
-import Auth from '../lib/auth'
-
 import {Redirect } from 'react-router-dom'
 
 
-const fileStackKey = process.env.REACT_APP_FILE_STACK_API
-
-import * as filestack from 'filestack-js'
-const client = filestack.init(fileStackKey)
-
-let arrayMerger = []
-
-class ViewProfile extends React.Component {
+class ViewOtherUserProfile extends React.Component {
   constructor(){
     super()
 
     this.state = {
       favGames: [],
       favGamesCovers: [],
-      redirect: false,
       coverIds: [],
+      redirect: false,
       mergedCoverandId: null,
       gameNames: []
     }
@@ -30,8 +21,11 @@ class ViewProfile extends React.Component {
 
   }
 
+
   componentDidMount() {
-    this.getProfile()
+    this.setState({data: this.props.location.state.user}, () => {
+      this.getProfile()
+    })
   }
 
   componentDidUpdate() {
@@ -53,28 +47,16 @@ class ViewProfile extends React.Component {
   }
 
 
-  addUserImage() {
-    const options = {
-      accept: ['image/*'],
-      onFileUploadFinished: file => {
-        this.setState({...this.state, avatar: file.url}, () => this.pushAvatarToBackEnd(this.state))
-      }
-    }
-    client.picker(options).open()
-  }
-
-  pushAvatarToBackEnd (avatarLink) {
-    axios.post('api/users', avatarLink, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((res) => this.setState(res.data))
-  }
-
   getProfile() {
-    const array = []
-    axios.get('api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((user) => this.setState({...this.state, data: user.data}, () => this.state.data.favouriteGames.map(item => array.push(item.gameId))))
-      .then(() => this.getArray(array))
-      .then(() => this.setState({...this.state, favGames: arrayMerger}, this.getAllGames))
-      .then(() => this.state.favGames.map(game => this.getCoverPhoto(game)))
+    const newArray = this.state.data.favouriteGames.map(item => item.gameId)
+    console.log(newArray, 'THIS IS THE ARRAY')
+    const otherArray = this.state.data.favouriteGames.map(item => item.name)
+    const nameAndId = newArray.map(function (item, index) {
+      return {gameId: item, name: otherArray[index]}
+    })
+    console.log(nameAndId)
+    this.getAllGames()
+    this.setState({favGames: nameAndId}, () => this.state.favGames.map(game => this.getCoverPhoto(game)))
   }
 
   getAllGames() {
@@ -85,18 +67,6 @@ class ViewProfile extends React.Component {
       .catch((err) => console.log(err))
   }
 
-  getArray(array) {
-    const newArray = array
-    console.log(newArray, 'THIS IS THE ARRAY')
-    const otherArray = this.state.data.favouriteGames.map(item => item.name)
-    const nameAndId = newArray.map(function (item, index) {
-      return {gameId: item, name: otherArray[index]}
-    })
-    console.log(nameAndId, 'THIS IS THE MERGED ONE')
-    arrayMerger = nameAndId
-  }
-
-
 
   mappingFunction() {
     const myComments = []
@@ -104,24 +74,19 @@ class ViewProfile extends React.Component {
       const user = this.state.data._id
       const allGames = this.state.allGames
       const filteredGames = allGames.filter(games => games.userComment.length)
-      console.log('filteredGames', filteredGames)
       filteredGames.map(function(game) {
         game.userComment.map(function(item) {
           if (item.user._id === user) {
-            console.log(game, 'this is the game',item, 'thisis the item')
             myComments.push({game: game.name, comment: item, color: game.color, specificGame: game})
           }
         })
       })
-      this.setState({myComments}, () => console.log(this.state.myComments, 'BANANAS'))
+      this.setState({myComments})
     }
   }
 
-  // getGameInfoFromId(id) {
-  //   axios.get()
-  // }
-
   getCoverPhoto(game) {
+    console.log(game.name)
     axios.post('api/game-covers', { game: game.gameId})
       .then(cover => {
         if (cover.data && cover.data.length) {
@@ -140,10 +105,9 @@ class ViewProfile extends React.Component {
   }
 
   handleClickGame(game) {
-    console.log(game.name, 'GAME NAME')
     axios.post('/api/games/onegame', {game: game.name})
       .then(game => {
-        this.setState({gameData: game.data[0]}, () => console.log(this.state.gameData))
+        this.setState({gameData: game.data[0]})
       })
       .then(() => this.setState({routedGame: game}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
@@ -161,42 +125,44 @@ class ViewProfile extends React.Component {
       .catch(err => console.log(err))
   }
 
+  getUserComments() {
+    axios.post('/api/localgames', { gameId: this.props.location.state.specificGame.gameId})
+      .then((res) => this.setState({...this.state, gameComments: res.data.userComment}))
+  }
+
+
   render(){
+    {this.props.location.state.user && console.log(this.props.location.state.user, 'YA DONUT')}
     return(
       <main>
         {this.state.data &&
         <div className="contains-createProfile animated fadeIn">
           <div className="userDetails">
             <img className="avatar" src={this.state.data.avatar} />
-            <button
-              onClick={this.handleClick}>
-                Change photo
-            </button>
-            <h3 className="userName"> Welcome back, </h3>
-            <h2> {this.state.data.username}</h2>
+            <h2 className="userName"> {this.state.data.username}</h2>
           </div>
 
           <div className="chooseGame">
-            <h2> My top 6 games </h2>
+            <h2> {`${this.state.data.username}'s top 6 games`}</h2>
             <div className="mygames">
-            {this.state.mergedCoverandId && this.state.mergedCoverandId.map((cover, index) =>
-              <div className="eachGame" key={index}>
-                <img id="gameClicker" onClick={() => this.handleClickGameCover(cover)} src={cover.other.gameCovers} alt="gamecover"/>
-                {this.state.redirect && <Redirect
-                  to={{
-                    pathname: '/gameforum',
-                    state: {
-                      game: this.state.gameData,
-                      specificGame: this.state.routedGame
-                    }
-                  }}></Redirect>}
-              </div>
-            )}
+              {this.state.mergedCoverandId && this.state.mergedCoverandId.map((cover, index) =>
+                <div className="eachGame" key={index}>
+                  <img id="gameClicker" onClick={() => this.handleClickGameCover(cover)} src={cover.other.gameCovers} alt="gamecover"/>
+                  {this.state.redirect && <Redirect
+                    to={{
+                      pathname: '/gameforum',
+                      state: {
+                        game: this.state.gameData,
+                        specificGame: this.state.routedGame
+                      }
+                    }}></Redirect>}
+                </div>
+              )}
             </div>
           </div>
 
           <div className="comments-complete">
-            <h3> Your comments...</h3>
+            <h3>{`${this.state.data.username}'s comments`}</h3>
             <div className="comments">
               {(this.state.myComments && this.state.myComments.length !== 0) && this.state.myComments.map((comment, i) =>
                 <div className ="messages" key={i}>
@@ -221,4 +187,4 @@ class ViewProfile extends React.Component {
 }
 
 
-export default ViewProfile
+export default ViewOtherUserProfile

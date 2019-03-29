@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 
 const favouriteGamesSchema = new mongoose.Schema({
   gameId: { type: Number },
+  name: { type: String },
   user: { type: mongoose.Schema.ObjectId, ref: 'User' },
   createdAt: { type: Date, default: Date.now }
 })

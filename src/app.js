@@ -16,6 +16,7 @@ import NoMatch from './components/noMatch'
 import CreateProfile from './components/createprofile'
 import GameForum from './components/gameforum'
 import ViewProfile from './components/viewprofile'
+import ViewOtherUserProfile from './components/viewOtherUserProfile'
 
 
 class App extends React.Component {
@@ -28,7 +29,7 @@ class App extends React.Component {
     return (
       <Browser>
         <div>
-          <Favicon url="http://oflisback.github.io/react-favicon/public/img/github.ico" />
+          <Favicon url="./assets/logo-purple.png" />
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
@@ -37,6 +38,7 @@ class App extends React.Component {
             <Route path="/login" component={Login}/>
             <Route path="/createprofile" component={CreateProfile} />
             <Route path="/viewprofile" component={ViewProfile} />
+            <Route path="/viewotherprofile" component={ViewOtherUserProfile} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />

@@ -2,8 +2,17 @@ $white: whitesmoke;
 $orange: #C24D2C;
 $purple: #673AB7;
 
+
 * {
   text-decoration: none;
+}
+
+#userClicker {
+  cursor: pointer;
+}
+#gameClicker {
+  cursor: pointer;
+
 }
 
 body {
