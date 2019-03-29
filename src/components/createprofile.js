@@ -133,13 +133,14 @@ class CreateProfile extends React.Component {
             {this.state.favGames.length < 6 && <button className="gameSearchButton"
               onClick={this.handleClickButton}> Search
             </button>}
-            <PopupProfilePage
+            {this.state.favGames.length < 6 && <PopupProfilePage
               show={this.state.isOpen}
               favGames={this.state.favGames}
               games={this.state.results}
               handleClickGames={this.handleClickGames}
               onClose={this.closePopup}>
             </PopupProfilePage>
+            }
             <div className="mygames">
               {this.state.favGames && this.state.favGames.map((cover, index) =>
                 <div className="eachGame" key={index}>
