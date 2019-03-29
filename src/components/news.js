@@ -26,10 +26,11 @@ class News extends React.Component {
       <div className="contains-news animated fadeIn">
         {!this.state.articles && <h1> ...getting the news...</h1>}
         {this.state.articles && this.state.articles.map((article, i ) => (
-          <div key={i} className="newscard animated fadeIn">
-            <h2> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h2>
-            <img src={article.urlToImage} atl={article.title} />
-            <p> {article.description} </p>
+          <div key={i} className="newscard animated fadeIn" style = {{backgroundImage: `url(${article.urlToImage})`}}>
+            <div className="newstext">
+              <h2> <a target='_blank'  rel="noopener noreferrer" href={`${article.url}`}> {article.title} </a> </h2>
+              <p> {article.description} </p>
+            </div>
           </div>
         ))}
       </div>

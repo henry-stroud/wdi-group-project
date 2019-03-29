@@ -23,7 +23,6 @@ class Home extends React.Component {
 
     this.handleClick = this.handleClick.bind(this)
     this.handleClickLogin = this.handleClickLogin.bind(this)
-
   }
 
   handleClick() {
@@ -39,12 +38,12 @@ class Home extends React.Component {
       <div>
         <main>
           {this.state.toSocial === false ?
-            <div className="contains-news-gameSearch">
+            <div className="contains-news-gameSearch animated fadeIn">
               <News />
               <GameSearch />
             </div>
             :
-            <div className="contains-news-gameSearch">
+            <div className="contains-news-gameSearchfff">
               <Chat />
               <Videos />
             </div>
