@@ -94,7 +94,7 @@ class CreateProfile extends React.Component {
   }
 
   handleClickGames(item) {
-    this.setState({...this.state, gameId: item.id }, () => axios.post('api/users/favouritegames', this.state, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+    this.setState({...this.state, gameId: item.id, name: item.name }, () => axios.post('api/users/favouritegames', this.state, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((res) => this.setState({...this.state, newdata: res.data }, () => this.getCoverPhoto())))
   }
 

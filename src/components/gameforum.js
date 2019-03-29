@@ -8,6 +8,8 @@ import StarRatings from 'react-star-ratings'
 
 import Auth from '../lib/auth'
 
+import { Redirect } from 'react-router-dom'
+
 class GameForum extends React.Component {
   constructor() {
     super()
@@ -27,7 +29,7 @@ class GameForum extends React.Component {
     axios.post('api/game-covers', {game: this.state.game.id})
       .then(games => {
         this.setState({...this.state, results: games.data})
-      }, () => console.log(this.state.results))
+      })
       .catch(err => console.log(err))
   }
 
@@ -62,11 +64,22 @@ class GameForum extends React.Component {
 
   componentDidMount() {
     this.setState({...this.state, game: this.props.location.state.game}, () => {
+      this.userAggregateRating()
       this.getCoverPhoto()
       this.getGenres()
       this.getScreenshots()
       this.getUserComments()
     })
+  }
+
+  userAggregateRating() {
+    const ratings = this.props.location.state.specificGame.userRating
+    if (ratings.length) {
+      const mappedRatings = ratings.map(rating => rating.userRating)
+      const sum = mappedRatings.reduce((previous, current) => current += previous)
+      const avg = sum / mappedRatings.length
+      this.setState({rating: avg}, () => console.log(this.state))
+    }
   }
 
   handleSubmit(e) {
@@ -84,23 +97,27 @@ class GameForum extends React.Component {
   }
 
   changeRating( newRating ) {
-    this.setState({...this.state, rating: newRating}, () => this.pushUserRating())
+    this.setState({...this.state, rating: newRating}, this.pushUserRating )
   }
 
+
   pushUserRating() {
-    axios.post('/localgames/ratings', { userRating: this.state.rating, gameId: this.props.location.state.specificGame.gameId }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+    console.log(this.state.rating, this.props.location.state.specificGame.gameId, 'RATINGZ')
+    axios.post('api/localgames/ratings', { userRating: this.state.rating, gameId: this.props.location.state.specificGame.gameId }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }
 
+  goToUserProfile(comment) {
+    this.setState({user: comment.user}, () => this.setState({redirect: !this.state.redirect}))
+  }
+
   render() {
+    {this.props.location.state && console.log(this.props.location.state.specificGame.userRating)}
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
     const screenshots = this.state.screenshots
     const rating = this.props.location.state.game.aggregated_rating
-    {rating && console.log(rating, 'rating')}
-    {screenshots && console.log(screenshots)}
-    {this.state.gameComments && console.log(this.state.gameComments)}
     return(
       <main>
         <div className="contains-gameForum">
@@ -168,7 +185,13 @@ class GameForum extends React.Component {
                 <div className = "chatBox">
                   {this.state.gameComments && this.state.gameComments.map((comment, i) =>
                     <div className ="messages" key={i}>
-                      <small><span style={{color: `${comment.user.color}`}}>{comment.user.username}</span>: <span>{comment.text}</span> </small>
+                      <small><span id='userClicker' onClick={() => this.goToUserProfile(comment)} style={{color: `${comment.user.color}`}}>{comment.user.username}{this.state.redirect && <Redirect
+                        to={{
+                          pathname: '/viewotherprofile',
+                          state: {
+                            user: this.state.user
+                          }
+                        }}></Redirect>}</span>: <span>{comment.text}</span> </small>
                     </div>
                   )}
                 </div>

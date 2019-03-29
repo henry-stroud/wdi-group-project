@@ -3,6 +3,9 @@ import axios from 'axios'
 
 import Auth from '../lib/auth'
 
+import {Redirect } from 'react-router-dom'
+
+
 const fileStackKey = process.env.REACT_APP_FILE_STACK_API
 
 import * as filestack from 'filestack-js'
@@ -15,7 +18,8 @@ class ViewProfile extends React.Component {
 
     this.state = {
       favGames: [],
-      favGamesCovers: []
+      favGamesCovers: [],
+      redirect: false
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -59,6 +63,7 @@ class ViewProfile extends React.Component {
   }
 
 
+
   mappingFunction() {
     const myComments = []
     if (this.state.data && this.state.data._id) {
@@ -70,7 +75,7 @@ class ViewProfile extends React.Component {
         game.userComment.map(function(item) {
           if (item.user._id === user) {
             console.log(game, 'this is the game',item, 'thisis the item')
-            myComments.push({game: game.name, comment: item, color: game.color})
+            myComments.push({game: game.name, comment: item, color: game.color, specificGame: game})
           }
         })
       })
@@ -98,6 +103,16 @@ class ViewProfile extends React.Component {
     this.addUserImage()
   }
 
+  handleClickGame(game) {
+    console.log(game.name, 'GAME NAME')
+    axios.post('/api/games/onegame', {game: game.name})
+      .then(game => {
+        this.setState({gameData: game.data[0]}, () => console.log(this.state.gameData))
+      })
+      .then(() => this.setState({routedGame: game}, () => this.setState({redirect: !this.state.redirect})))
+      .catch(err => console.log(err))
+  }
+
   render(){
     return(
       <main>
@@ -109,7 +124,8 @@ class ViewProfile extends React.Component {
               onClick={this.handleClick}>
                 Change photo
             </button>
-            <h3 className="userName"> Welcome back,<h2> {this.state.data.username}</h2> </h3>
+            <h3 className="userName"> Welcome back, </h3>
+            <h2> {this.state.data.username}</h2>
           </div>
 
           <div className="chooseGame">
@@ -128,7 +144,14 @@ class ViewProfile extends React.Component {
             <div className="comments">
               {(this.state.myComments && this.state.myComments.length !== 0) && this.state.myComments.map((comment, i) =>
                 <div className ="messages" key={i}>
-                  <small><span style={{color: `${comment.color}`}}>{comment.game}</span><span style={{color: 'white'}}> :</span> <span>{comment.comment.text}</span> </small>
+                  <small><span id="gameClicker" onClick={() => this.handleClickGame(comment.specificGame)} style={{color: `${comment.color}`}}>{this.state.redirect && <Redirect
+                    to={{
+                      pathname: '/gameforum',
+                      state: {
+                        game: this.state.gameData,
+                        specificGame: this.state.routedGame
+                      }
+                    }}></Redirect>}{comment.game}</span><span style={{color: 'white'}}> :</span> <span>{comment.comment.text}</span> </small>
                 </div>
               )}
             </div>
