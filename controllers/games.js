@@ -49,13 +49,20 @@ function createComment(req, res) {
 }
 
 function createRating(req, res) {
-  console.log(req.body)
   req.body.user = req.currentUser
   Game
     .findOne({ gameId: req.body.gameId})
     .then(game => {
-      game.userRating.push(req.body)
-      return game.save()
+      const ratingArray = [...game.userRating]
+      const filteredArray = ratingArray.filter(rating => {
+        return (rating.user._id.equals(req.body.user._id))
+      })
+      if (!filteredArray.length) {
+        game.userRating.push(req.body)
+        return game.save()
+      } else {
+        return game
+      }
     })
     .then(game => res.json(game))
     .catch((err) => res.json(err))
