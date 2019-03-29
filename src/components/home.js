@@ -43,7 +43,7 @@ class Home extends React.Component {
               <GameSearch />
             </div>
             :
-            <div className="contains-news-gameSearchfff">
+            <div className="contains-news-gameSearch">
               <Chat />
               <Videos />
             </div>
