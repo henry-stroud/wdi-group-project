@@ -49,6 +49,7 @@ class ViewOtherUserProfile extends React.Component {
 
   getProfile() {
     const newArray = this.state.data.favouriteGames.map(item => item.gameId)
+    console.log(newArray, 'THIS IS THE ARRAY')
     const otherArray = this.state.data.favouriteGames.map(item => item.name)
     const nameAndId = newArray.map(function (item, index) {
       return {gameId: item, name: otherArray[index]}

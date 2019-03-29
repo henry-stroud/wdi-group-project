@@ -11,6 +11,7 @@ const fileStackKey = process.env.REACT_APP_FILE_STACK_API
 import * as filestack from 'filestack-js'
 const client = filestack.init(fileStackKey)
 
+let arrayMerger = []
 
 class ViewProfile extends React.Component {
   constructor(){
@@ -19,7 +20,10 @@ class ViewProfile extends React.Component {
     this.state = {
       favGames: [],
       favGamesCovers: [],
-      redirect: false
+      redirect: false,
+      coverIds: [],
+      mergedCoverandId: null,
+      gameNames: []
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -28,6 +32,24 @@ class ViewProfile extends React.Component {
 
   componentDidMount() {
     this.getProfile()
+  }
+
+  componentDidUpdate() {
+    if (this.state.favGamesCovers.length >= 6) {
+      // const mergedObject = this.state.coverIds.reduce((obj, k, i) => ({...obj, [k]: this.state.favGamesCovers[i] }), {})
+      const gameCovers = [...this.state.favGamesCovers]
+      const mergedObject = this.state.coverIds.map(function (gameId, index) {
+        return {gameId: gameId, gameCovers: gameCovers[index]}
+      })
+      const mergedAgain = this.state.gameNames.map(function(name, i) {
+        return {name: name, other: mergedObject[i]}
+      })
+      if (this.state.mergedCoverandId === null) {
+        this.setState({mergedCoverandId: mergedAgain}, () => console.log(this.state))
+      } else {
+        return
+      }
+    }
   }
 
 
@@ -50,8 +72,9 @@ class ViewProfile extends React.Component {
     const array = []
     axios.get('api/users', { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((user) => this.setState({...this.state, data: user.data}, () => this.state.data.favouriteGames.map(item => array.push(item.gameId))))
-      .then(() => this.setState({...this.state, favGames: array}, this.getAllGames))
-      .then(() => this.state.favGames.map(gameId => this.getCoverPhoto(gameId)))
+      .then(() => this.getArray(array))
+      .then(() => this.setState({...this.state, favGames: arrayMerger}, this.getAllGames))
+      .then(() => this.state.favGames.map(game => this.getCoverPhoto(game)))
   }
 
   getAllGames() {
@@ -60,6 +83,17 @@ class ViewProfile extends React.Component {
         this.setState({ allGames: res.data }, this.mappingFunction)
       })
       .catch((err) => console.log(err))
+  }
+
+  getArray(array) {
+    const newArray = array
+    console.log(newArray, 'THIS IS THE ARRAY')
+    const otherArray = this.state.data.favouriteGames.map(item => item.name)
+    const nameAndId = newArray.map(function (item, index) {
+      return {gameId: item, name: otherArray[index]}
+    })
+    console.log(nameAndId, 'THIS IS THE MERGED ONE')
+    arrayMerger = nameAndId
   }
 
 
@@ -87,12 +121,14 @@ class ViewProfile extends React.Component {
   //   axios.get()
   // }
 
-  getCoverPhoto(gameId) {
-    axios.post('api/game-covers', { game: gameId})
+  getCoverPhoto(game) {
+    axios.post('api/game-covers', { game: game.gameId})
       .then(cover => {
         if (cover.data && cover.data.length) {
-          this.setState({...this.state, cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.data[0].image_id}.jpg`}, () => this.setState(prevState => ({
-            favGamesCovers: [...prevState.favGamesCovers, this.state.cover]
+          this.setState({...this.state, cover: `https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.data[0].image_id}.jpg`, coverId: cover.data[0].game}, () => this.setState(prevState => ({
+            favGamesCovers: [...prevState.favGamesCovers, this.state.cover],
+            coverIds: [...prevState.coverIds, this.state.coverId],
+            gameNames: [...prevState.gameNames, game.name]
           })))
         } else return
       })
@@ -110,6 +146,18 @@ class ViewProfile extends React.Component {
         this.setState({gameData: game.data[0]}, () => console.log(this.state.gameData))
       })
       .then(() => this.setState({routedGame: game}, () => this.setState({redirect: !this.state.redirect})))
+      .catch(err => console.log(err))
+  }
+
+  handleClickGameCover(cover) {
+    console.log(cover)
+    axios.post('/api/games/onegame', {game: cover.name})
+      .then(game => {
+        this.setState({gameData: game.data[0]})
+      })
+      .then(() => console.log(this.state.gameData))
+      .then(() => axios.post('/api/localgames', { gameId: cover.other.gameId}))
+      .then((res) => this.setState({routedGame: res.data}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
   }
 
@@ -131,11 +179,19 @@ class ViewProfile extends React.Component {
           <div className="chooseGame">
             <h2> My top 6 games </h2>
             <div className="mygames">
-              {this.state.favGamesCovers && this.state.favGamesCovers.map((cover, index) =>
-                <div className="eachGame" key={index}>
-                  <img src={cover} alt="gamecover"/>
-                </div>
-              )}
+            {this.state.mergedCoverandId && this.state.mergedCoverandId.map((cover, index) =>
+              <div className="eachGame" key={index}>
+                <img id="gameClicker" onClick={() => this.handleClickGameCover(cover)} src={cover.other.gameCovers} alt="gamecover"/>
+                {this.state.redirect && <Redirect
+                  to={{
+                    pathname: '/gameforum',
+                    state: {
+                      game: this.state.gameData,
+                      specificGame: this.state.routedGame
+                    }
+                  }}></Redirect>}
+              </div>
+            )}
             </div>
           </div>
 
