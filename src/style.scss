@@ -2,6 +2,10 @@ $white: whitesmoke;
 $orange: #C24D2C;
 $purple: #673AB7;
 
+* {
+  text-decoration: none;
+}
+
 body {
   font-family: 'Audiowide', cursive;
   box-sizing: border-box;
@@ -350,6 +354,54 @@ header {
 
 //profile pages
 .contains-createProfile {
+  .chooseMyGames {
+    outline: none;
+    border-radius: 20px;
+    height: 30px;
+    border: 3px solid #673AB7;
+    font-size: 20px;
+    padding-left: 10px;
+    font-family: inherit;
+  }
+  .gameSearchButton {
+    margin-left: 42%;
+    font-family: inherit;
+    outline: none;
+    border-radius: 20px;
+    color: $white;
+    background: $purple;
+    border: 3px solid $purple;
+    font-size: 12px;
+    cursor: pointer;
+    width: 100px;
+  }
+  .popup {
+    margin-top: 20px;
+    border-radius: 20px;
+    color: whitesmoke;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100px;
+    width: 100%;
+  }
+  .popup-close {
+    margin-left: 46%;
+  }
+  li {
+    cursor: pointer;
+    list-style-type: none;
+
+  }
+  li:hover {
+    color: #C24D2C;
+  }
+
+  .popup-close {
+    display: flex;
+    cursor: pointer;
+
+
+  }
   background-color: rgba(50, 50, 70, 0.7);
   width: 85%;
   margin: 0 auto;
@@ -419,15 +471,27 @@ header {
     }
   }
   .comments-complete {
+    font-size: 22px;
     height: 80%;
     width: 20%;
 
     button {
+      font-family: 'Audiowide', cursive;
+      display: flex;
+      justify-content: center;
       border-radius: 10px;
       margin: 10px auto;
       height: 30px;
       width: 80%;
-
+      cursor: pointer;
+      text-decoration: none;
+      outline: none;
+    }
+    button:hover {
+      color: $white;
+      background: $purple;
+      border: 1px solid $purple;
+      text-decoration: none;
     }
     h3 {
       color: whitesmoke;
@@ -444,6 +508,7 @@ header {
     }
   }
 }
+
 
 .contains-gameForum {
   display: flex;
@@ -707,57 +772,5 @@ header {
     text-align: justify;
     max-width: 80%;
     align-self: center;
-  }
-}
-
-.contains-createProfile {
-  .chooseMyGames {
-    outline: none;
-    border-radius: 20px;
-    height: 30px;
-    border: 3px solid #673AB7;
-    font-size: 20px;
-    padding-left: 10px;
-    font-family: inherit;
-  }
-  .gameSearchButton {
-    margin-left: 42%;
-    font-family: inherit;
-    outline: none;
-    border-radius: 20px;
-    color: $white;
-    background: $purple;
-    border: 3px solid $purple;
-    font-size: 12px;
-    cursor: pointer;
-    width: 100px;
-  }
-  .popup {
-    margin-top: 20px;
-    border: 1px solid #673AB7;
-    border-radius: 20px;
-    color: whitesmoke;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 100px;
-    width: 100%;
-  }
-  .popup-close {
-    margin-left: 46%;
-  }
-  li {
-    cursor: pointer;
-    list-style-type: none;
-
-  }
-  li:hover {
-    color: #C24D2C;
-  }
-
-  .popup-close {
-    display: flex;
-    cursor: pointer;
-
-
   }
 }
