@@ -42,15 +42,15 @@ Player Connect is an application that performs as a social network for gamers. T
 
 We began the project by exchanging possible ideas for the application, we settled on the idea of a social network for computer gamers that used an external API, IGDB (Internet Game Database). We decided to partition the initial workload, using a Trello board to determine the tasks that needed to be done as well as assigning these tasks to each team member.
 
-![screenshot - Trello Board](https://github.com/henry-stroud/wdi-project-4/blob/master/img/Trello.png?raw=true)
+![screenshot - Trello Board](https://github.com/henry-stroud/wdi-group-project/blob/master/img/Trello.png?raw=true)
 
 After we had laid out the initial work to be done, we set about building the wireframes for the project. We decided on a multi-page layout with an option for login and exclusive content to logged in users.
 
-![screenshot - Login Page - WireFrame](https://github.com/henry-stroud/wdi-project-4/blob/master/img/wireframe2.png?raw=true)
+![screenshot - Login Page - WireFrame](https://github.com/henry-stroud/wdi-group-project/blob/master/img/wireframe2.png?raw=true)
 
-![screenshot - Home Page - WireFrame](https://github.com/henry-stroud/wdi-project-4/blob/master/img/wireframe4.png?raw=true)
+![screenshot - Home Page - WireFrame](https://github.com/henry-stroud/wdi-group-project/blob/master/img/wireframe3.png?raw=true)
 
-![screenshot - Game Page - WireFrame](https://github.com/henry-stroud/wdi-project-4/blob/master/img/wireframe3.png?raw=true)
+![screenshot - Game Page - WireFrame](https://github.com/henry-stroud/wdi-group-project/blob/master/img/wireframe4.png?raw=true)
 
 The project work was divided between the three of us, I focused mainly on the back-end models, the live chatbox powered by socket.io, as well as the relationship between our API, IGDB's API and the Front-End.
 
@@ -60,7 +60,15 @@ I studied the documentation for the IGDB API and quickly found that they used Ap
 
 I then set about building the back-end wireframes, before structuring the Mongo database out.
 
-![screenshot - Sign in](https://github.com/henry-stroud/wdi-project-2/blob/master/img/spotify-login.png?raw=true)
+![screenshot - Log In](https://github.com/henry-stroud/wdi-group-project/blob/master/img/login.png?raw=true)
+
+
+![screenshot - Game Forum](https://github.com/henry-stroud/wdi-group-project/blob/master/img/gameshow.png?raw=true)
+
+![screenshot - Social / Chatbox](https://github.com/henry-stroud/wdi-group-project/blob/master/img/chatroom.png?raw=true)
+
+![screenshot - User Profile](https://github.com/henry-stroud/wdi-group-project/blob/master/img/usershow.png?raw=true)
+
 
 Using axios to make API requests, as well promises, we chained together several API requests in an order that took the initial search from the user and parsed that data through each API to gather the correct result. We also had to encode the data into URL format, so the query could be read by the API request.
 
