@@ -7,7 +7,6 @@ function getGame( req, res ) {
     .then(game => {
       if (!game) {
         req.body.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
-        console.log(req.body)
         return Game
           .create(req.body)
       }

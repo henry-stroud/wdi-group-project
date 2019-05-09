@@ -25,11 +25,11 @@ You can find a hosted version here ----> [player-connect.herokuapp.com/](http://
 
 ### Overview
 
-Player Connect is an application that performs as a social network for gamers. The app allows for user register and login, once a user is logged in they choose their favourite 6 games, served from the IGDB database, as well as uploading a profile picture (via FileStack's API). Once user's have created their profile they are able to review and comment any game in the world, as well as chat live via the chatbox. The site also displays up to date gaming news via IGN's API as well as video recommendations.  
+Player Connect is a social network for gamers. The app allows for users to register and login. Once a user is logged in they choose their favourite 6 games, served from the IGDB database, as well as a profile picture (uploaded via FileStack's API). Once users have created their profiles they are able to review and comment on any game in the world, as well as chat live via the chatbox. The site also displays up to date gaming news from IGN via News API as well as video recommendations.  
 
 ### Brief
 - **Build a full-stack application** build both backend and front-end
-- **Use an Express API** to serve data from a Mongo database
+- **Use an Express API** serve data from a Mongo database
 - **Consume your API with a separate front-end** built with React
 - **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
 - Consume at least **one public API** to enhance the app
@@ -52,16 +52,75 @@ After we had laid out the initial work to be done, we set about building the wir
 
 ![screenshot - Game Page - WireFrame](https://github.com/henry-stroud/wdi-group-project/blob/master/img/wireframe4.png?raw=true)
 
-The project work was divided between the three of us, I focused mainly on the back-end models, the live chatbox powered by socket.io, as well as the relationship between our API, IGDB's API and the Front-End.
+The project work was divided between the three of us, I focused mainly on the back-end models, the live chatbox powered by socket.io, as well as the relationship between our API, IGDB's API and the React Front-End.
 
 I studied the documentation for the IGDB API and quickly found that they used Apicalypse, a minimalistic query language for RESTful APIs. I had to learn the basics of this before being able to execute GET requests to the API, which was a little time-consuming. Once I had figured this out, I delved into making a series of requests - finding that the API was structured in a way that meant I had to make multiple requests to achieve the data I needed.
 
 ![screenshot - Home Page](https://github.com/henry-stroud/wdi-group-project/blob/master/img/homepage.png?raw=true)
 
-I then set about building the back-end wireframes, before structuring the Mongo database out.
+I then set about building the back-end wireframes, before structuring the models using the ODM library for MongoDB, Mongoose. I decided to use three main models for the games, messages, and users. Below is a code snippet of the game model, which has user ratings and comments embedded, it also has a virtual field on the game for the average user rating over the whole site.
+
+```
+
+const userRatingSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true },
+  userRating: { type: Number, min: 0, max: 100}
+})
+
+
+const commentSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', autopopulate: true },
+  text: { type: String },
+  createdAt: { type: Date, default: Date.now }
+})
+
+const gameSchema = new mongoose.Schema({
+  gameId: { type: Number },
+  name: {type: String },
+  color: {type: String},
+  userRating: [ userRatingSchema ],
+  userComment: [ commentSchema ]
+})
+
+
+gameSchema.virtual('avgRating')
+  .get(function() {
+    return Math.round(this.userRating.reduce((acc, cv) => {
+      return acc + cv
+    }, 0) / this.userRating.length)
+  })
+
+gameSchema.set('toJSON', { virtuals: true })
+```
+
+Once the back-end had been built and I had successfully tested the routes in Insomnia, I began work on the front-end mapping out the data incoming from the News API as well as IGDB.
+
+My teammates were at this point focusing on building the framework of the site and displaying the data pulled in by the API in a readable and presentable way.
+
+I had to figure out a way to attach the external data from IGDB, to our own models - without scraping the entire database. I settled on the idea of only adding a reference to the game to our back-end once a user had clicked on it, and attaching our own ratings and comments to that reference, then displaying that to the user. This code is displayed below:
+
+```
+
+function getGame( req, res ) {
+  console.log(req.body.gameId)
+  Game
+    .findOne({ gameId: req.body.gameId})
+    .then(game => {
+      if (!game) {
+        req.body.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+        return Game
+          .create(req.body)
+      }
+      return game
+    })
+    .then(game => res.status(200).json(game))
+    .catch((err) => res.json(err))
+}
+```
+
+Once we had the back-end built, we focused on the front-end display of the information. Most of the data in our app is passed down through props via React-Router's Link component, allowing us to create a versatile multi-page site.
 
 ![screenshot - Log In](https://github.com/henry-stroud/wdi-group-project/blob/master/img/login.png?raw=true)
-
 
 ![screenshot - Game Forum](https://github.com/henry-stroud/wdi-group-project/blob/master/img/gameshow.png?raw=true)
 
@@ -70,71 +129,85 @@ I then set about building the back-end wireframes, before structuring the Mongo 
 ![screenshot - User Profile](https://github.com/henry-stroud/wdi-group-project/blob/master/img/usershow.png?raw=true)
 
 
-Using axios to make API requests, as well promises, we chained together several API requests in an order that took the initial search from the user and parsed that data through each API to gather the correct result. We also had to encode the data into URL format, so the query could be read by the API request.
-
-![screenshot - Spotify Login](https://github.com/henry-stroud/wdi-project-2/blob/master/img/sign-in.png?raw=true)
-
-This data was then mapped out into each component, and reset after each new search by the user.
-
 ### Challenges
 
-One of the main challenges was allowing a user to login via Spotify. This was actually completed after the project had finished, as I became aware of a React plugin that allowed for Implicit Grant Authorization access. After some research online I managed to apply the component to our site, as well as setting the temporary apiKey in state to be used by the user and site. This meant that any user worldwide can login with their account and receive all the data they need.
-
-We also went through some challenges with passing state down to child components. We figured out that it was much more convenient to hold the state in our main app.js file and then pass the props down from there rather than through unrelated components.
+One of the main challenges was displaying some of the data from the back-end in the front-end, especially the user comments on the user profile. I realised after I had built the back-end and structured the site around it, I should have made the comments referenced rather than embedded, as it gave me a host of problems displaying it, and I had to use a lot of map and filter methods to rectify the situation.
 
 ### Wins
 
-One of the biggest wins was adding the Spotify login auth as stated above. Beforehand we were manually generating a key to be used every hour with the app, that was not sufficient for a public website. Another win was getting the correct data to display from lastFM as we had some trouble navigating their API data.
-
-Another big win was getting the map to reset and re-load each time using previous props in the componentDidUpdate function, as we struggled with this initially.
-
-The below code is a snippet of the map.
+One of the biggest wins was getting socket.io to work on the chatbox, allowing for a live chat between users on the site. View the server-side code below:
 
 ```
-class Map extends React.Component {
-  constructor() {
+const server = app.listen(port, () => console.log(`App is listening on port ${port}`))
+
+const socket = require('socket.io')
+const io = socket(server)
+
+io.on('connection', (socket) => {
+  console.log(`socket is running, socket id: ${socket.id}`)
+
+  socket.on('sendMessage', function(data) {
+    io.emit('receiveMessage', data)
+  })
+})
+
+module.exports = app
+```
+
+Client-side code:
+
+```
+class Chat extends React.Component {
+  constructor(){
     super()
-    this.markers = null
-  }
-  componentDidMount() {
-    this.map = new mapboxgl.Map({
-      container: this.mapDiv,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      center: this.props.center,
-      zoom: 2
-    })
-    this.setMarkers()
-  }
 
-  setMarkers(){
-    this.marker =  new mapboxgl.Marker()
-      .setLngLat(this.props.center)
-      .addTo(this.map)
-    return this.marker
-  }
+    this.state = { redirect: false, data: {}, errors: {} }
 
-  componentDidUpdate(prev) {
-    if(this.props.center !== prev.center) {
-      this.map = new mapboxgl.Map({
-        container: this.mapDiv,
-        style: 'mapbox://styles/mapbox/streets-v9',
-        center: this.props.center,
-        zoom: 2
-      })
-      this.setMarkers()
+    this.socket = io('localhost:4000')
+
+    this.sendMessage = (allMessages) => {
+      this.socket.emit('sendMessage', (allMessages))
     }
+
+    this.socket.on('receiveMessage', function(data){
+      addMessage(data)
+    })
+
+    const addMessage = data => {
+      this.setState({ messages: data })
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.getMessages = this.getMessages.bind(this)
+
+  }
+
+  componentDidMount() {
+    this.getMessages()
+  }
+
+  handleChange({ target: { name, value }}) {
+    const data = {...this.state.data, [name]: value}
+    const errors = {...this.state.errors, [name]: ''}
+    this.setState({ data, errors })
   }
 
 
-  render() {
-    return(
-      <div className="map" ref={el => this.mapDiv = el}>
-      </div>
-    )
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post('/api/messages', this.state.data, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
+      .then(() => axios.get('/api/messages'))
+      .then((res)=> this.setState({...this.state, messages: res.data}))
+      .then(() => this.sendMessage(this.state.messages))
+      .then(() => this.setState({data: {}}))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
-}
+
 ```
 
 ## Future features
 
-At the moment the app is quite slow, due to the chaining of API calls. I think in order to make it faster I would do further research into an API that could provide all the data needed, rather than filtering through what ended up being four different APIs. If I had more time I would have liked to make the app more responsive on mobile.
+In retrospect the way that we passed down props to each component means that the site is not easily navigable, as users cannot simply go to a url for a game.
+
+I would like to have made the app much more responsive, as well as being responsive on mobile. Unfortunately due to time constraints we prioritised the functionality over responsiveness, which in hindsight may have been an oversight.
