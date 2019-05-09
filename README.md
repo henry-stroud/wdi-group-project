@@ -1,7 +1,7 @@
 # WDI-Project 3
 # General Assembly Project 3:  A MERN Stack App
 
-## Goal: To create a Full-Stack application using React.js and Flask
+## Goal: To create a Full-Stack application using Mongoose, Express, React and Node.js
 ### Timeframe
 1 week
 
@@ -11,34 +11,32 @@
 * HTML5
 * CSS
 * React.js
-* Flask
-* Python
-* SQLAlchemy
-* YouTube Data API v3
+* Mongoose, MongoDB
+* Express
+* Node.js
+* IGDB Data API v3
 * GitHub
 
 ## My Project - Player Connect
 
-![Player Connect](https://github.com/henry-stroud/wdi-project-4/blob/master/img/homepage.png?raw=true)
+![Player Connect](https://github.com/henry-stroud/wdi-group-project/blob/master/img/homepage.png?raw=true)
 
-You can find a hosted version here ----> [you-bet.herokuapp.com/](https://you-bet.herokuapp.com/)
+You can find a hosted version here ----> [player-connect.herokuapp.com/](http://player-connect.herokuapp.com/)
 
 ### Overview
 
-YouBet is an application that creates a game marketplace from the YouTube video network, adding a price to each YouTube video whilst giving users credits to purchase and sell these videos. The aim of the game is to become top of the user leaderboard, with the highest accumulative portfolio value.
-
-YouBet was a solo project, and my fourth and final project at General Assembly's Web Development Immersive Course, built in one week.
+Player Connect is an application that performs as a social network for gamers. The app allows for user register and login, once a user is logged in they choose their favourite 6 games, served from the IGDB database, as well as uploading a profile picture (via FileStack's API). Once user's have created their profile they are able to review and comment any game in the world, as well as chat live via the chatbox. The site also displays up to date gaming news via IGN's API as well as video recommendations.  
 
 ### Brief
-- **Build a full-stack application** by making your own backend and your own front-end
-- **Use an Express API** to serve your data from a Mongo database
+- **Build a full-stack application** build both backend and front-end
+- **Use an Express API** to serve data from a Mongo database
 - **Consume your API with a separate front-end** built with React
 - **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
-- Consume at least **one public API** to enchance your app
+- Consume at least **one public API** to enhance the app
 - **Implement thoughtful user stories/wireframes** that are significant enough to help you know which features are core MVP and which you can cut
-- **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers. **ALLOW** time for this.
+- **Have a visually impressive design**
 - **Be deployed online** so it's publicly accessible.
-- **Have automated tests** for _at least_ one RESTful resource on the back-end. Improve your employability by demonstrating a good understanding of testing principals.
+- **Have automated tests** for _at least_ one RESTful resource on the back-end.
 
 ### Process
 
@@ -54,13 +52,13 @@ After we had laid out the initial work to be done, we set about building the wir
 
 ![screenshot - Game Page - WireFrame](https://github.com/henry-stroud/wdi-project-4/blob/master/img/wireframe3.png?raw=true)
 
-The project work was divided between the three of us, I focused mainly on the back-end models, as well as the relationship between our API, IGDB's API and the Front-End.
+The project work was divided between the three of us, I focused mainly on the back-end models, the live chatbox powered by socket.io, as well as the relationship between our API, IGDB's API and the Front-End.
 
-I studied the documentation for the IGDB API and quickly found that they used Apicalypse, a minimalistic query language for RESTful APIs. I had to learn the basics of this before being able to execute GET requests to the API, which was a little time-consuming. Once I had figured this out, I delve into making a series of requests - finding that the API was structured in a way that meant I had to make multiple requests to achieve the data I needed.
+I studied the documentation for the IGDB API and quickly found that they used Apicalypse, a minimalistic query language for RESTful APIs. I had to learn the basics of this before being able to execute GET requests to the API, which was a little time-consuming. Once I had figured this out, I delved into making a series of requests - finding that the API was structured in a way that meant I had to make multiple requests to achieve the data I needed.
 
-![screenshot - Home Page](https://github.com/henry-stroud/wdi-project-4/blob/master/img/homepage.png?raw=true)
+![screenshot - Home Page](https://github.com/henry-stroud/wdi-group-project/blob/master/img/homepage.png?raw=true)
 
-I then set about building the back-end wireframes, before creating them with Mongoose / MongoDB
+I then set about building the back-end wireframes, before structuring the Mongo database out.
 
 ![screenshot - Sign in](https://github.com/henry-stroud/wdi-project-2/blob/master/img/spotify-login.png?raw=true)
 
