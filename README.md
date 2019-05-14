@@ -16,6 +16,10 @@
 * Node.js
 * IGDB Data API v3
 * GitHub
+* FileStack
+* SASS
+* Mocha
+
 
 ## My Project - Player Connect
 
@@ -25,11 +29,11 @@ You can find a hosted version here ----> [player-connect.herokuapp.com/](http://
 
 ### Overview
 
-Player Connect is a social network for gamers. The app allows for users to register and login. Once a user is logged in they choose their favourite 6 games, served from the IGDB database, as well as a profile picture (uploaded via FileStack's API). Once users have created their profiles they are able to review and comment on any game in the world, as well as chat live via the chatbox. The site also displays up to date gaming news from IGN via News API as well as video recommendations.  
+Player Connect is a social network for gamers. The app allows for users to register and login. Once a user is logged in they choose their favourite 6 games, (served from the IGDB (Internet Game DataBase)) API, as well as a profile picture (uploaded via FileStack's API). Once users have created their profiles they are able to review and comment on any game in the world, as well as chat live via the chatbox. The site also displays up to date gaming news from IGN via News API as well as videos to watch.  
 
 ### Brief
 - **Build a full-stack application** build both backend and front-end
-- **Use an Express API** serve data from a Mongo database
+- **Use an Express API** and serve data from a Mongo database
 - **Consume your API with a separate front-end** built with React
 - **Be a complete product** which most likely means multiple relationships and CRUD functionality for at least a couple of models
 - Consume at least **one public API** to enhance the app
@@ -95,7 +99,7 @@ gameSchema.set('toJSON', { virtuals: true })
 
 Once the back-end had been built and I had successfully tested the routes in Insomnia, I began work on the front-end mapping out the data incoming from the News API as well as IGDB.
 
-My teammates were at this point focusing on building the framework of the site and displaying the data pulled in by the API in a readable and presentable way.
+My teammates were at this point focusing on building the framework of the site, displaying the data pulled in by the API in a readable and presentable way and building tests for the chatbox routes.
 
 I had to figure out a way to attach the external data from IGDB, to our own models - without scraping the entire database. I settled on the idea of only adding a reference to the game to our back-end once a user had clicked on it, and attaching our own ratings and comments to that reference, then displaying that to the user. This code is displayed below:
 
@@ -119,6 +123,8 @@ function getGame( req, res ) {
 ```
 
 Once we had the back-end built, we focused on the front-end display of the information. Most of the data in our app is passed down through props via React-Router's Link component, allowing us to create a versatile multi-page site.
+
+Throughout the process we did daily standups in the morning, as we each explained the code we had committed in the evenings. During the day we sat in a group and coded on our individual components, coming together on any complex problems as well as communicating our goals for that day.
 
 ![screenshot - Log In](https://github.com/henry-stroud/wdi-group-project/blob/master/img/login.png?raw=true)
 
@@ -211,3 +217,7 @@ class Chat extends React.Component {
 In retrospect the way that we passed down props to each component means that the site is not easily navigable, as users cannot simply go to a url for a game.
 
 I would like to have made the app much more responsive, as well as being responsive on mobile. Unfortunately due to time constraints we prioritised the functionality over responsiveness, which in hindsight may have been an oversight.
+
+## Key Takeaways
+
+One of the key learnings from this project was the use of Git. We had to rectify several merge conflicts when we first began the project as we were all learning the basics of group based project work. Eventually we decided the partition work on separate components to avoid git conflicts as well as having one git master who controlled the commits to the master branch. I learnt a lot about back-end model structuring during the project, and also routing. It was probably the most challenging project we had to undertake, and a clear team plan and structure was essential for success.
