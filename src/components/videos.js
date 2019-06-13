@@ -10,10 +10,8 @@ class Videos extends React.Component {
   }
 
   getVideos() {
-    console.log('getting videos')
     axios.post('api/game-videos')
       .then(res => this.setState({ videos: res.data}))
-      .then(console.log(this.state))
       .catch(err => this.setState({ error: err.message }))
   }
 
@@ -22,7 +20,6 @@ class Videos extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
       <div className="contains-news animated fadeIn">
         {!this.state.videos && <p> ...getting video feed...</p>}

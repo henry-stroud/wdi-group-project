@@ -25,8 +25,6 @@ class Popup extends React.Component {
     if(!this.props.show) {
       return null
     }
-    {this.props.games && console.log(this.props.games)}
-    {this.state.game && console.log(this.state.game, 'its ya boit')}
     return (
       <div className="popup-backdrop">
         <div className="popup">

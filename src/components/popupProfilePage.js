@@ -14,7 +14,6 @@ class PopupProfilePage extends React.Component {
     if(!this.props.show) {
       return null
     }
-    console.log(this.props)
     return (
       <div className="popup-backdrop">
         <div className="popup">
