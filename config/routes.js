@@ -119,7 +119,6 @@ router.post('/game-genres', (req, res) => {
 })
 
 router.post('/game-screenshots', (req, res) => {
-  console.log(req.body.screenshotsId)
   axios({
     url: 'https://api-v3.igdb.com/screenshots',
     method: 'POST',

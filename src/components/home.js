@@ -26,11 +26,11 @@ class Home extends React.Component {
   }
 
   handleClick() {
-    this.setState({...this.state, toSocial: !this.state.toSocial}, console.log(this.state))
+    this.setState({...this.state, toSocial: !this.state.toSocial})
   }
 
   handleClickLogin() {
-    this.setState({...this.state, toLogin: !this.state.toLogin}, console.log(this.state))
+    this.setState({...this.state, toLogin: !this.state.toLogin})
   }
 
   render() {

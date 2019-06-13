@@ -43,7 +43,6 @@ class Header extends React.Component {
 
 
   render() {
-    {this.state && console.log(this.state.data)}
     return (
       <div>
         <header>

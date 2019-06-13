@@ -10,7 +10,6 @@ class News extends React.Component {
   }
 
   getNews() {
-    console.log('getting the news')
     axios.get('api/news')
       .then(res => this.setState({ articles: res.data.articles}))
       .catch(err => this.setState({ error: err.messsage }))
@@ -21,7 +20,6 @@ class News extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
       <div className="contains-news animated fadeIn">
         {!this.state.articles && <h1> ...getting the news...</h1>}

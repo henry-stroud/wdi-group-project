@@ -27,7 +27,6 @@ class GameSearch extends React.Component {
     e.preventDefault()
     axios.post('/api/games', {game: this.state.query})
       .then(games => {
-        console.log(games.data)
         this.setState({results: games.data})
         this.openPopup()
       })

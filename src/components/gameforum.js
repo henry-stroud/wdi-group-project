@@ -78,7 +78,7 @@ class GameForum extends React.Component {
       const mappedRatings = ratings.map(rating => rating.userRating)
       const sum = mappedRatings.reduce((previous, current) => current += previous)
       const avg = sum / mappedRatings.length
-      this.setState({rating: avg}, () => console.log(this.state))
+      this.setState({rating: avg})
     }
   }
 
@@ -102,9 +102,7 @@ class GameForum extends React.Component {
 
 
   pushUserRating() {
-    console.log(this.state.rating, this.props.location.state.specificGame.gameId, 'RATINGZ')
     axios.post('api/localgames/ratings', { userRating: this.state.rating, gameId: this.props.location.state.specificGame.gameId }, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
-      .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }
 
@@ -113,10 +111,8 @@ class GameForum extends React.Component {
   }
 
   render() {
-    {this.props.location.state && console.log(this.props.location.state.specificGame.userRating)}
     const game = this.props.location.state.game
     const releaseDate = new Date(this.props.location.state.game.first_release_date * 1000)
-    const screenshots = this.state.screenshots
     const rating = this.props.location.state.game.aggregated_rating
     return(
       <main>

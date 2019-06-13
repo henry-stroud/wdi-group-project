@@ -1,7 +1,6 @@
 const Game = require('../models/game')
 
 function getGame( req, res ) {
-  console.log(req.body.gameId)
   Game
     .findOne({ gameId: req.body.gameId})
     .then(game => {
@@ -17,7 +16,6 @@ function getGame( req, res ) {
 }
 
 function getAllGames(req, res) {
-  console.log(req.body)
   Game
     .find({gameId: req.body.gameId})
     .then(games => res.json(games))
@@ -25,7 +23,6 @@ function getAllGames(req, res) {
 }
 
 function gamesIndex(req, res) {
-  console.log(req.body)
   Game
     .find()
     .then(games => res.json(games))
@@ -33,9 +30,7 @@ function gamesIndex(req, res) {
 }
 
 function createComment(req, res) {
-  console.log(req.body)
   req.body.user = req.currentUser
-  console.log(req.body.user)
   Game
     .findOne({ gameId: req.body.gameId})
     .populate('user')

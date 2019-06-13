@@ -52,7 +52,6 @@ class CreateProfile extends React.Component {
   pushAvatarToBackEnd (avatarLink) {
     axios.post('api/users', avatarLink, { headers: { Authorization: `Bearer ${Auth.getToken()}`} } )
       .then((res) => this.setState(res.data))
-      .then(console.log(this.state))
   }
 
   handleChange({ target: { value } }) {
@@ -84,7 +83,6 @@ class CreateProfile extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     axios.post('api/register', this.state.data)
-      .then(res => console.log(res))
       .then(() => this.props.history.push('/login'))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
@@ -111,7 +109,6 @@ class CreateProfile extends React.Component {
 
 
   render(){
-    {this.state.favGames && console.log(this.state.favGames)}
     return(
       <main>
         <div className="contains-createProfile">

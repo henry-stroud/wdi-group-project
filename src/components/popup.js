@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import axios from 'axios'
 
@@ -15,9 +15,8 @@ class Popup extends React.Component {
   }
 
   handleClick(item) {
-    console.log('look here donut', item)
     axios.post('api/localgames', { gameId: item.id, name: item.name })
-      .then((res)=> this.setState({...this.state, specificGame: res.data, game: item }, () => this.setState({...this.state, redirect: !this.state.redirect}, () => console.log(this.state.game, 'MILES'))))
+      .then((res)=> this.setState({...this.state, specificGame: res.data, game: item }, () => this.setState({...this.state, redirect: !this.state.redirect})))
       .catch((err) => console.log(err))
   }
 

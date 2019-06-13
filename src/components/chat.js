@@ -68,7 +68,6 @@ class Chat extends React.Component {
   }
 
   render() {
-    {this.state.user && console.log(this.state.user, 'thisneedstobesent')}
     return(
       <div className="contains-news  animated fadeIn">
         <MessagesForm

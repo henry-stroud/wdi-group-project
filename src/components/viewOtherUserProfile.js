@@ -39,7 +39,7 @@ class ViewOtherUserProfile extends React.Component {
         return {name: name, other: mergedObject[i]}
       })
       if (this.state.mergedCoverandId === null) {
-        this.setState({mergedCoverandId: mergedAgain}, () => console.log(this.state))
+        this.setState({mergedCoverandId: mergedAgain})
       } else {
         return
       }
@@ -49,7 +49,6 @@ class ViewOtherUserProfile extends React.Component {
 
   getProfile() {
     const newArray = this.state.data.favouriteGames.map(item => item.gameId)
-    console.log(newArray, 'THIS IS THE ARRAY')
     const otherArray = this.state.data.favouriteGames.map(item => item.name)
     const nameAndId = newArray.map(function (item, index) {
       return {gameId: item, name: otherArray[index]}
@@ -86,7 +85,6 @@ class ViewOtherUserProfile extends React.Component {
   }
 
   getCoverPhoto(game) {
-    console.log(game.name)
     axios.post('api/game-covers', { game: game.gameId})
       .then(cover => {
         if (cover.data && cover.data.length) {
@@ -114,12 +112,10 @@ class ViewOtherUserProfile extends React.Component {
   }
 
   handleClickGameCover(cover) {
-    console.log(cover)
     axios.post('/api/games/onegame', {game: cover.name})
       .then(game => {
         this.setState({gameData: game.data[0]})
       })
-      .then(() => console.log(this.state.gameData))
       .then(() => axios.post('/api/localgames', { gameId: cover.other.gameId, name: cover.name}))
       .then((res) => this.setState({routedGame: res.data}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
@@ -132,7 +128,6 @@ class ViewOtherUserProfile extends React.Component {
 
 
   render(){
-    {this.props.location.state.user && console.log(this.props.location.state.user, 'YA DONUT')}
     return(
       <main>
         {this.state.data &&

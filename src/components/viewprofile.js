@@ -45,7 +45,7 @@ class ViewProfile extends React.Component {
         return {name: name, other: mergedObject[i]}
       })
       if (this.state.mergedCoverandId === null) {
-        this.setState({mergedCoverandId: mergedAgain}, () => console.log(this.state))
+        this.setState({mergedCoverandId: mergedAgain})
       } else {
         return
       }
@@ -87,12 +87,10 @@ class ViewProfile extends React.Component {
 
   getArray(array) {
     const newArray = array
-    console.log(newArray, 'THIS IS THE ARRAY')
     const otherArray = this.state.data.favouriteGames.map(item => item.name)
     const nameAndId = newArray.map(function (item, index) {
       return {gameId: item, name: otherArray[index]}
     })
-    console.log(nameAndId, 'THIS IS THE MERGED ONE')
     arrayMerger = nameAndId
   }
 
@@ -104,16 +102,14 @@ class ViewProfile extends React.Component {
       const user = this.state.data._id
       const allGames = this.state.allGames
       const filteredGames = allGames.filter(games => games.userComment.length)
-      console.log('filteredGames', filteredGames)
       filteredGames.map(function(game) {
         game.userComment.map(function(item) {
           if (item.user._id === user) {
-            console.log(game, 'this is the game',item, 'thisis the item')
             myComments.push({game: game.name, comment: item, color: game.color, specificGame: game})
           }
         })
       })
-      this.setState({myComments}, () => console.log(this.state.myComments, 'BANANAS'))
+      this.setState({myComments})
     }
   }
 
@@ -140,10 +136,9 @@ class ViewProfile extends React.Component {
   }
 
   handleClickGame(game) {
-    console.log(game.name, 'GAME NAME')
     axios.post('/api/games/onegame', {game: game.name})
       .then(game => {
-        this.setState({gameData: game.data[0]}, () => console.log(this.state.gameData))
+        this.setState({gameData: game.data[0]})
       })
       .then(() => this.setState({routedGame: game}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
@@ -152,12 +147,10 @@ class ViewProfile extends React.Component {
 
 
   handleClickGameCover(cover) {
-    console.log(cover)
     axios.post('/api/games/onegame', {game: cover.name})
       .then(game => {
         this.setState({gameData: game.data[0]})
       })
-      .then(() => console.log(this.state.gameData))
       .then(() => axios.post('/api/localgames', { gameId: cover.other.gameId, name: cover.name}))
       .then((res) => this.setState({routedGame: res.data}, () => this.setState({redirect: !this.state.redirect})))
       .catch(err => console.log(err))
@@ -181,19 +174,19 @@ class ViewProfile extends React.Component {
           <div className="chooseGame">
             <h2> My top 6 games </h2>
             <div className="mygames">
-            {this.state.mergedCoverandId && this.state.mergedCoverandId.map((cover, index) =>
-              <div className="eachGame" key={index}>
-                <img id="gameClicker" onClick={() => this.handleClickGameCover(cover)} src={cover.other.gameCovers} alt="gamecover"/>
-                {this.state.redirect && <Redirect
-                  to={{
-                    pathname: '/gameforum',
-                    state: {
-                      game: this.state.gameData,
-                      specificGame: this.state.routedGame
-                    }
-                  }}></Redirect>}
-              </div>
-            )}
+              {this.state.mergedCoverandId && this.state.mergedCoverandId.map((cover, index) =>
+                <div className="eachGame" key={index}>
+                  <img id="gameClicker" onClick={() => this.handleClickGameCover(cover)} src={cover.other.gameCovers} alt="gamecover"/>
+                  {this.state.redirect && <Redirect
+                    to={{
+                      pathname: '/gameforum',
+                      state: {
+                        game: this.state.gameData,
+                        specificGame: this.state.routedGame
+                      }
+                    }}></Redirect>}
+                </div>
+              )}
             </div>
           </div>
 
